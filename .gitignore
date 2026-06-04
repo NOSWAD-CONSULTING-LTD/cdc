@@ -14,6 +14,9 @@ temp/
 *.tmp
 *.bak
 
+# Local Superpowers planning/spec artifacts
+docs/superpowers/
+
 # Local databases
 *.sqlite
 *.sqlite3
