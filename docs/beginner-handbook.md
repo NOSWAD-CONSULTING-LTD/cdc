@@ -329,7 +329,7 @@ Each manifest row says:
 
 The manifest is not a regulatory source of truth. It is a controlled navigation aid for approved supporting context.
 
-In this project, the manifest does not turn the Laravel CDC agent into a general reference-architecture assistant. The agent is a consumer of the reference architecture. It answers approved CDC manufacturing evidence questions using Neo4j rows plus selected supporting context.
+In this project, the agent is a consumer of the reference architecture. It answers approved CDC manufacturing evidence questions using Neo4j rows plus selected supporting context.
 
 ## 12. Agent Harnesses
 

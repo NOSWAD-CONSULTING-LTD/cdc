@@ -8,7 +8,7 @@ Each line is one retrievable project source. The manifest does not store embeddi
 
 The manifest supports the CDC manufacturing evidence agent. It provides controlled explanatory context for CDC answers, such as glossary definitions, CDE interpretation, ontology relationship meaning, query-pack context, evidence limitations, and how to read graph answers.
 
-It should not be interpreted as making the Laravel CDC agent a general reference-architecture chatbot. The reference architecture is explained in the documentation. The CDC agent consumes selected graph evidence and supporting context to answer approved CDC manufacturing questions.
+The CDC agent uses selected graph evidence and supporting context to answer approved CDC manufacturing questions.
 
 ## Fields
 

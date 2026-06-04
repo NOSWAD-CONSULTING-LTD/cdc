@@ -194,11 +194,11 @@ Use the ontology files this way:
 
 Use the RAG and agent files this way:
 
-- `docs/rag-manifest.jsonl`: stable retrieval metadata for controlled supporting context. It helps CDC evidence answers retrieve approved explanatory docs; it is not a mandate for the CDC agent to answer general reference-architecture questions.
+- `docs/rag-manifest.jsonl`: stable retrieval metadata for controlled supporting context. It helps CDC evidence answers retrieve approved explanatory docs.
 - `docs/rag-manifest-readme.md`: schema, scope, and usage notes for the RAG manifest.
 - `laravel-agent/resources/cdc-agent/`: approved Laravel agent questions, expected answers, and Cypher templates for CDC manufacturing evidence questions.
 
-The Laravel agent is a **consumer of the reference architecture**, not the owner or explainer of the reference architecture. It should answer CDC manufacturing questions using approved graph evidence and controlled supporting context. Broader questions such as why the architecture uses Neo4j, how data products fit, or which enterprise roles are needed belong primarily in the documentation and workshop material.
+The Laravel agent is a **consumer of the reference architecture**. It answers CDC manufacturing evidence questions using approved graph evidence and controlled supporting context from the documentation.
 
 Typical enterprise creators for these models:
 

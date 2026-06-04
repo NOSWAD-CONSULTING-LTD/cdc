@@ -6,9 +6,9 @@ It uses PHP 8.5, Laravel 13, and Laravel Boost. The agent intentionally uses app
 
 ## Scope
 
-The Laravel agent is a consumer of the CDC reference architecture. It is not intended to be a general assistant for explaining the reference architecture itself.
+The Laravel agent is a consumer of the CDC reference architecture. It answers CDC manufacturing evidence questions using approved graph evidence and controlled supporting context.
 
-It should answer CDC manufacturing evidence questions, such as:
+It covers CDC manufacturing evidence questions, such as:
 
 - which material lots and suppliers contributed to a run;
 - which alarms, readings, and deviations affected a run;
@@ -17,8 +17,6 @@ It should answer CDC manufacturing evidence questions, such as:
 - which equipment and sensors were involved;
 - which QA decision released or rejected a run;
 - what a Neo4j relationship means in the CDC graph.
-
-It should not be treated as the primary interface for broad architecture questions such as why Neo4j was selected, how data products fit, whether vector databases are needed, or which enterprise roles are required. Those questions are answered by the repository documentation.
 
 The agent has two entry points:
 
