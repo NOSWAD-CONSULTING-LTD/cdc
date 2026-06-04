@@ -421,6 +421,14 @@ Organisations can use the public materials under the licence terms, with attribu
 
 See [docs/commercial-use-cases.md](docs/commercial-use-cases.md) for practical use cases.
 
+## Support This Work
+
+This reference architecture is maintained by NOSWAD CONSULTING LTD.
+
+If it helps your team, you can support continued public development, documentation, and example models through [GitHub Sponsors](https://github.com/sponsors/NOSWAD-CONSULTING-LTD).
+
+Commercial support, training, workshops, and client-specific implementation services are also available from NOSWAD CONSULTING LTD.
+
 ## Licence And Attribution
 
 Copyright (c) 2026 NOSWAD CONSULTING LTD.
