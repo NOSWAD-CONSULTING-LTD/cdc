@@ -6,7 +6,7 @@
 // Material lots consumed by the run
 // ---------------------------------------------------------------------------
 UNWIND [
-  {lotId: 'LOT-API-AZD-240501-A', lotNumber: 'API-AZD-240501-A', materialId: 'MAT-AZD-API-10', supplierId: 'SUP-AZ-API', coaStatus: 'Accepted', receivedAt: date('2026-05-10'), expiryDate: date('2028-05-01'), quantityKg: 6.0},
+  {lotId: 'LOT-API-NCL-240501-A', lotNumber: 'API-NCL-240501-A', materialId: 'MAT-NCL-API-10', supplierId: 'SUP-NCL-API', coaStatus: 'Accepted', receivedAt: date('2026-05-10'), expiryDate: date('2028-05-01'), quantityKg: 6.0},
   {lotId: 'LOT-MCC-260430-17', lotNumber: 'MCC-260430-17', materialId: 'MAT-MCC-DC-102', supplierId: 'SUP-DC-EXC', coaStatus: 'Accepted', receivedAt: date('2026-05-12'), expiryDate: date('2029-04-30'), quantityKg: 70.0},
   {lotId: 'LOT-LACTOSE-260415-09', lotNumber: 'LAC-260415-09', materialId: 'MAT-LACTOSE-SD', supplierId: 'SUP-DC-EXC', coaStatus: 'Accepted', receivedAt: date('2026-05-12'), expiryDate: date('2028-04-15'), quantityKg: 30.0},
   {lotId: 'LOT-CCS-260421-05', lotNumber: 'CCS-260421-05', materialId: 'MAT-CCS', supplierId: 'SUP-DC-EXC', coaStatus: 'Accepted', receivedAt: date('2026-05-13'), expiryDate: date('2028-04-21'), quantityKg: 8.0},
@@ -27,14 +27,14 @@ MERGE (lot)-[:SUPPLIED_BY]->(sup);
 // ---------------------------------------------------------------------------
 // Manufacturing run setup and batch record
 // ---------------------------------------------------------------------------
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 MATCH (site:ManufacturingSite {siteId: 'SITE-CDC-CAMBRIDGE-01'})
 MATCH (line:ManufacturingLine {lineId: 'LINE-CDC-01'})
 MERGE (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-01-001'})
 SET run.name = 'CDC demonstration run 2026-06-01',
     run.status = 'Released',
     run.mode = 'Continuous',
-    run.batchNumber = 'AZDCDC10-260601',
+    run.batchNumber = 'NCLCDC10-260601',
     run.startTime = datetime('2026-06-01T08:00:00+01:00'),
     run.endTime = datetime('2026-06-01T14:30:00+01:00'),
     run.targetTabletCount = 500000,
@@ -49,8 +49,8 @@ MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-01-001'})
 MATCH (op1:Operator {operatorId: 'OP-001'})
 MATCH (op2:Operator {operatorId: 'OP-002'})
 MATCH (clean:CleaningRecord {cleaningRecordId: 'CLEAN-CDC01-2026-05-31'})
-MERGE (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260601'})
-SET br.batchNumber = 'AZDCDC10-260601',
+MERGE (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260601'})
+SET br.batchNumber = 'NCLCDC10-260601',
     br.recordType = 'Electronic batch record',
     br.status = 'Reviewed',
     br.createdAt = datetime('2026-06-01T07:45:00+01:00'),
@@ -63,7 +63,7 @@ MERGE (br)-[:REFERENCES_CLEANING]->(clean);
 
 MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-01-001'})
 UNWIND [
-  {lotId: 'LOT-API-AZD-240501-A', quantityKg: 5.08, purpose: 'API input stream'},
+  {lotId: 'LOT-API-NCL-240501-A', quantityKg: 5.08, purpose: 'API input stream'},
   {lotId: 'LOT-MCC-260430-17', quantityKg: 63.12, purpose: 'MCC excipient stream'},
   {lotId: 'LOT-LACTOSE-260415-09', quantityKg: 25.05, purpose: 'Lactose excipient stream'},
   {lotId: 'LOT-CCS-260421-05', quantityKg: 5.01, purpose: 'Disintegrant excipient stream'},
@@ -151,10 +151,10 @@ MERGE (dev)-[:INVESTIGATES]->(alarm)
 MERGE (dev)-[:CONSIDERS_READING]->(rhReading)
 MERGE (dev)-[:APPROVED_BY]->(qa);
 
-MATCH (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260601'})
+MATCH (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260601'})
 MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-01-001'})
 MATCH (qa:Operator {operatorId: 'OP-003'})
-MERGE (decision:QAReleaseDecision {decisionId: 'QA-REL-AZDCDC10-260601'})
+MERGE (decision:QAReleaseDecision {decisionId: 'QA-REL-NCLCDC10-260601'})
 SET decision.decision = 'Release',
     decision.status = 'Approved',
     decision.decidedAt = datetime('2026-06-02T11:00:00+01:00'),
@@ -168,14 +168,14 @@ MERGE (decision)-[:DECIDED_BY]->(qa);
 // This creates contrast for impact analysis and keeps both RELEASES and REJECTS
 // relationship types present for Neo4j Browser visualisation examples.
 // ---------------------------------------------------------------------------
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 MATCH (site:ManufacturingSite {siteId: 'SITE-CDC-CAMBRIDGE-01'})
 MATCH (line:ManufacturingLine {lineId: 'LINE-CDC-01'})
 MERGE (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-02-002'})
 SET run.name = 'CDC demonstration run 2026-06-02',
     run.status = 'Rejected',
     run.mode = 'Continuous',
-    run.batchNumber = 'AZDCDC10-260602',
+    run.batchNumber = 'NCLCDC10-260602',
     run.startTime = datetime('2026-06-02T08:00:00+01:00'),
     run.endTime = datetime('2026-06-02T11:40:00+01:00'),
     run.targetTabletCount = 250000,
@@ -190,8 +190,8 @@ MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-02-002'})
 MATCH (op1:Operator {operatorId: 'OP-001'})
 MATCH (op3:Operator {operatorId: 'OP-003'})
 MATCH (clean:CleaningRecord {cleaningRecordId: 'CLEAN-CDC01-2026-05-31'})
-MERGE (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260602'})
-SET br.batchNumber = 'AZDCDC10-260602',
+MERGE (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260602'})
+SET br.batchNumber = 'NCLCDC10-260602',
     br.recordType = 'Electronic batch record',
     br.status = 'Rejected',
     br.createdAt = datetime('2026-06-02T07:45:00+01:00'),
@@ -204,7 +204,7 @@ MERGE (br)-[:REFERENCES_CLEANING]->(clean);
 
 MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-02-002'})
 UNWIND [
-  {lotId: 'LOT-API-AZD-240501-A', quantityKg: 2.15, purpose: 'API input stream'},
+  {lotId: 'LOT-API-NCL-240501-A', quantityKg: 2.15, purpose: 'API input stream'},
   {lotId: 'LOT-MCC-260430-17', quantityKg: 26.20, purpose: 'MCC excipient stream'},
   {lotId: 'LOT-LACTOSE-260415-09', quantityKg: 10.42, purpose: 'Lactose excipient stream'},
   {lotId: 'LOT-CCS-260421-05', quantityKg: 2.08, purpose: 'Disintegrant excipient stream'},
@@ -276,10 +276,10 @@ MERGE (dev)-[:INVESTIGATES]->(alarm)
 MERGE (dev)-[:CONSIDERS_READING]->(rhReading)
 MERGE (dev)-[:APPROVED_BY]->(qa);
 
-MATCH (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260602'})
+MATCH (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260602'})
 MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-02-002'})
 MATCH (qa:Operator {operatorId: 'OP-003'})
-MERGE (decision:QAReleaseDecision {decisionId: 'QA-REJ-AZDCDC10-260602'})
+MERGE (decision:QAReleaseDecision {decisionId: 'QA-REJ-NCLCDC10-260602'})
 SET decision.decision = 'Reject',
     decision.status = 'Approved',
     decision.decidedAt = datetime('2026-06-02T17:00:00+01:00'),

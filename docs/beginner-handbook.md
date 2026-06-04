@@ -6,7 +6,7 @@ This handbook is for someone new to the project, Neo4j, pharmaceutical manufactu
 
 This project is a demo knowledge graph for pharmaceutical Continuous Direct Compression (CDC) manufacturing.
 
-It models how a fictional tablet product moves from upstream drug substance processing through continuous tablet manufacture, powder coating, quality review, and regulatory evidence. The product name is `AZD-CDC-Tablet-10mg`; `AZD` is fictional demo naming, not a real company or medicine.
+It models how a fictional tablet product moves from upstream drug substance processing through continuous tablet manufacture, powder coating, quality review, and regulatory evidence. The product name is `NCL-CDC-Tablet-10mg`; `NCL` is the NOSWAD CONSULTING LTD reference-architecture prefix, not a real medicine identifier.
 
 The graph is designed for architecture discussions. It shows how manufacturing, quality, regulatory, ontology, and AI-readiness concepts can connect. It is not a validated GxP system, not a real batch record, and not a regulatory submission.
 

@@ -1,14 +1,14 @@
 // CMC, ISO/GMP, and QMS extension queries.
 
 // 1. Show the CMC package connected to product, filing, and included evidence.
-MATCH path = (:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})-[:HAS_CMC_PACKAGE]->(:CMCPackage)<-[:SUBMITS]-(:RegulatoryFiling)
+MATCH path = (:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})-[:HAS_CMC_PACKAGE]->(:CMCPackage)<-[:SUBMITS]-(:RegulatoryFiling)
 RETURN path;
 
-MATCH path = (:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})-[:INCLUDES|REFERENCES_SOP]->()
+MATCH path = (:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})-[:INCLUDES|REFERENCES_SOP]->()
 RETURN path;
 
 // 2. Show the control strategy: CMAs, CPPs, CQAs, and recipe governed.
-MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})
+MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})
 OPTIONAL MATCH cmaPath = (strategy)-[:CONTROLS_MATERIAL_ATTRIBUTE]->(:CriticalMaterialAttribute)-[:CHARACTERIZES]->(:Material)
 OPTIONAL MATCH cppPath = (strategy)-[:CONTROLS]->(:CPP)-[:CONTROLS]->(:ProcessStep)
 OPTIONAL MATCH cqaPath = (strategy)-[:PROTECTS]->(:CQA)-[:HAS_SPECIFICATION]->(:Specification)
@@ -82,7 +82,7 @@ RETURN person.name AS person,
 ORDER BY person, sop;
 
 // 8. Graph-friendly CMC/QMS visualisation.
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 OPTIONAL MATCH packagePath = (cmc)-[:INCLUDES|REFERENCES_SOP]->()
 OPTIONAL MATCH productPath = (:Product)-[:HAS_CMC_PACKAGE]->(cmc)<-[:SUBMITS]-(:RegulatoryFiling)
 OPTIONAL MATCH controlPath = (cmc)-[:INCLUDES]->(:ControlStrategy)-[:CONTROLS|PROTECTS|CONTROLS_MATERIAL_ATTRIBUTE]->()

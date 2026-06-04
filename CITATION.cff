@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "CDC Pharmaceutical Manufacturing Knowledge Graph Reference Architecture"
+message: "If you use this reference architecture, please credit NOSWAD CONSULTING LTD."
+type: software
+authors:
+  - name: "NOSWAD CONSULTING LTD"
+date-released: "2026-06-04"
+license: "Apache-2.0 AND CC-BY-4.0"
+abstract: "A Neo4j and Laravel reference architecture for a pharmaceutical Continuous Direct Compression manufacturing knowledge graph, including CDC process data, CDEs, ontology artifacts, AI-readiness checks, and an evidence-grounded agent."

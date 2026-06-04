@@ -245,7 +245,7 @@ UNWIND [
   {cdeId: 'CDE-CDC-COMPRESSION-FORCE', conceptLabel: 'CPP', conceptId: 'CPP-COMPRESSION-FORCE'},
   {cdeId: 'CDE-CDC-TABLET-WEIGHT', conceptLabel: 'CQA', conceptId: 'CQA-TABLET-WEIGHT'},
   {cdeId: 'CDE-MILL-API-PSD', conceptLabel: 'CriticalMaterialAttribute', conceptId: 'CMA-API-PSD'},
-  {cdeId: 'CDE-QA-DISPOSITION', conceptLabel: 'QAReleaseDecision', conceptId: 'QA-REL-AZDCDC10-260601'}
+  {cdeId: 'CDE-QA-DISPOSITION', conceptLabel: 'QAReleaseDecision', conceptId: 'QA-REL-NCLCDC10-260601'}
 ] AS row
 MATCH (cde:CriticalDataElement {cdeId: row.cdeId})
 CALL {
@@ -329,11 +329,11 @@ MATCH (mapping:StandardMapping {mappingId: cde.cdeId + '-STD-CTD-M3'})
 MERGE (mapping)-[:TO_REGULATORY_SECTION]->(section);
 
 // Connect to the CMC package and control strategy already seeded by the CMC/QMS extension.
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 MATCH (cde:CriticalDataElement)
 MERGE (cmc)-[:GOVERNS_CDE]->(cde);
 
-MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})
+MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})
 MATCH (cde:CriticalDataElement)
 WHERE cde.domain IN ['CPP', 'CQA', 'CQA/PAT', 'CQA/IPC', 'CPP/CMA', 'CMA']
 MERGE (strategy)-[:USES_CDE]->(cde);

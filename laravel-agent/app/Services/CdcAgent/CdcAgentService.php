@@ -10,6 +10,7 @@ class CdcAgentService
         private readonly AgentRegistry $registry,
         private readonly CypherRunner $cypherRunner,
         private readonly RagManifest $ragManifest,
+        private readonly AiAnswerComposer $aiAnswerComposer,
     ) {}
 
     /**
@@ -47,11 +48,17 @@ class CdcAgentService
 
         $rows = $this->cypherRunner->run($root, $template['cypher'], $question['parameters'] ?? []);
         $documents = $this->ragManifest->retrieve($root, $questionText.' '.$question['question'], 4);
-        $answer = $this->buildAnswer($questionText, $question, $template, $rows, $documents);
+        $answerContract = $this->buildAnswerContract($rows);
+        $aiContext = $this->buildAiContext($questionText, $question, $template, $rows, $documents, $answerContract);
+        $deterministicAnswer = $this->buildAnswer($questionText, $question, $template, $rows, $documents);
+        $answer = $this->aiAnswerComposer->compose($aiContext, $deterministicAnswer);
         $evaluation = $this->evaluateAnswer($answer, $expectations[$question['id']] ?? []);
 
         return [
             'answer' => $answer,
+            'ai_mode' => $this->aiAnswerComposer->mode(),
+            'answer_contract' => $answerContract,
+            'ai_context' => $aiContext,
             'question_id' => $question['id'],
             'matched_question' => $question['question'],
             'intent' => $question['intent'],
@@ -65,6 +72,68 @@ class CdcAgentService
                 'This is not a validated GxP system or real regulatory evidence.',
                 'Only approved Cypher templates are used; arbitrary Cypher generation is disabled.',
             ],
+        ];
+    }
+
+    /**
+     * @param  array<int, array<string, string>>  $rows
+     * @return array{status: string, confidence: string, guardrails: array<int, string>, limitations: array<int, string>}
+     */
+    private function buildAnswerContract(array $rows): array
+    {
+        return [
+            'status' => $rows === [] ? 'insufficient_evidence' : 'answered',
+            'confidence' => $rows === [] ? 'low' : 'medium',
+            'guardrails' => [
+                'Use only returned Neo4j evidence rows and retrieved project documents.',
+                'Do not generate arbitrary Cypher.',
+                'Say insufficient evidence when graph rows are empty.',
+                'Do not present demo data as validated GxP or real regulatory evidence.',
+            ],
+            'limitations' => [
+                'Fictional CDC reference architecture data.',
+                'Not a validated GxP system.',
+                'Not a real product, regulatory filing, or manufacturing record.',
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $question
+     * @param  array<string, mixed>  $template
+     * @param  array<int, array<string, string>>  $rows
+     * @param  array<int, array<string, mixed>>  $documents
+     * @param  array<string, mixed>  $answerContract
+     * @return array<string, mixed>
+     */
+    private function buildAiContext(string $questionText, array $question, array $template, array $rows, array $documents, array $answerContract): array
+    {
+        return [
+            'question' => $questionText,
+            'matched_question' => [
+                'id' => $question['id'],
+                'question' => $question['question'],
+                'intent' => $question['intent'],
+            ],
+            'approved_template' => [
+                'template_id' => $template['template_id'],
+                'description' => $template['description'] ?? null,
+                'params' => $template['params'] ?? [],
+            ],
+            'graph_evidence' => [
+                'row_count' => count($rows),
+                'rows' => $rows,
+            ],
+            'retrieved_documents' => array_map(
+                fn (array $document): array => [
+                    'chunk_id' => $document['chunk_id'] ?? null,
+                    'path' => $document['path'] ?? null,
+                    'title' => $document['title'] ?? null,
+                    'summary' => $document['summary'] ?? null,
+                ],
+                $documents,
+            ),
+            'answer_contract' => $answerContract,
         ];
     }
 

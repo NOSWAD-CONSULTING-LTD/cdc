@@ -2,7 +2,7 @@
   {
     "question_id": "q001_material_genealogy",
     "must_include": [
-      "LOT-API-AZD-240501-A",
+      "LOT-API-NCL-240501-A",
       "LOT-MCC-260430-17",
       "LOT-LACTOSE-260415-09",
       "LOT-CCS-260421-05",
@@ -87,8 +87,8 @@
   {
     "question_id": "q007_regulatory_evidence",
     "must_include": [
-      "AZD-CDC-Tablet-10mg",
-      "REG-FILING-AZD-CDC-DEMO-001",
+      "NCL-CDC-Tablet-10mg",
+      "REG-FILING-NCL-CDC-DEMO-001",
       "VAL-PAT-NIR-001",
       "VAL-PPQ-CDC-001",
       "fictional"

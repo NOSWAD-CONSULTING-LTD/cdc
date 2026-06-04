@@ -1,4 +1,4 @@
-# CDC Manufacturing Knowledge Graph Data Flow
+# Reference Architecture for CDC Manufacturing Data Flow
 
 This diagram shows how data flows into and through the CDC manufacturing knowledge graph. It separates source systems and governed master/reference data from manufacturing execution evidence, quality review, and CMC/regulatory use.
 
@@ -10,7 +10,7 @@ For printing or review on a single page, use the A4 landscape version:
 flowchart LR
   %% Source and governance domains
   subgraph MD["Master And Reference Data"]
-    P["Product<br/>AZD-CDC-Tablet-10mg"]
+    P["Product<br/>NCL-CDC-Tablet-10mg"]
     F["Formulation<br/>API + excipients"]
     R["Recipe<br/>CDC process definition"]
     M["Material Master<br/>API, excipients, lubricant"]

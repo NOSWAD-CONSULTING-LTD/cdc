@@ -145,7 +145,7 @@ UNWIND [
   {cdeId: 'CDE-API-HOLD-TIME', conceptLabel: 'IntermediateProduct', conceptId: 'IP-MILLED-API'},
   {cdeId: 'CDE-COAT-POWDER-LOT', conceptLabel: 'IntermediateProduct', conceptId: 'IP-CORE-TABLET'},
   {cdeId: 'CDE-COATED-CONTAINER-ID', conceptLabel: 'IntermediateProduct', conceptId: 'IP-POWDER-COATED-TABLET'},
-  {cdeId: 'CDE-CMC-SECTION-MAPPING', conceptLabel: 'CMCPackage', conceptId: 'CMC-AZD-CDC-10MG-001'}
+  {cdeId: 'CDE-CMC-SECTION-MAPPING', conceptLabel: 'CMCPackage', conceptId: 'CMC-NCL-CDC-10MG-001'}
 ] AS row
 MATCH (cde:CriticalDataElement {cdeId: row.cdeId})
 CALL {
@@ -189,7 +189,7 @@ MERGE (approval)-[:APPROVED_BY_OWNER]->(owner);
 UNWIND [
   {cdeId: 'CDE-CRYST-SOLVENT-COMP', value: 70.2, text: null, ts: '2026-06-01T03:00:00+01:00', status: 'In specification'},
   {cdeId: 'CDE-CRYST-SUPERSAT', value: 18.6, text: null, ts: '2026-06-01T03:10:00+01:00', status: 'In specification'},
-  {cdeId: 'CDE-CRYST-SEED-LOT', value: null, text: 'SEED-AZD-260501-A', ts: '2026-06-01T03:12:00+01:00', status: 'Verified'},
+  {cdeId: 'CDE-CRYST-SEED-LOT', value: null, text: 'SEED-NCL-260501-A', ts: '2026-06-01T03:12:00+01:00', status: 'Verified'},
   {cdeId: 'CDE-CRYST-PSD', value: 74.0, text: null, ts: '2026-06-01T04:15:00+01:00', status: 'In specification'},
   {cdeId: 'CDE-CRYST-POLYMORPH', value: null, text: 'Form A', ts: '2026-06-01T04:30:00+01:00', status: 'Conforms'},
   {cdeId: 'CDE-ISO-WASH-VOLUME', value: 121.5, text: null, ts: '2026-06-01T05:00:00+01:00', status: 'In specification'},
@@ -322,12 +322,12 @@ SET mapping.mappingConfidence = coalesce(mapping.mappingConfidence, prov.confide
 // These are fictional demo document records, not validated GxP evidence.
 // ---------------------------------------------------------------------------
 UNWIND [
-  {id: 'EVDOC-BMR-RUN-260601', title: 'Demo electronic batch record extract for AZDCDC10-260601', type: 'Batch record extract', status: 'Demo reviewed', system: 'MES demo', uri: 'demo://ebr/AZDCDC10-260601', summary: 'Fictional batch record extract covering genealogy, CPP review, deviation closure, and QA release.'},
+  {id: 'EVDOC-BMR-RUN-260601', title: 'Demo electronic batch record extract for NCLCDC10-260601', type: 'Batch record extract', status: 'Demo reviewed', system: 'MES demo', uri: 'demo://ebr/NCLCDC10-260601', summary: 'Fictional batch record extract covering genealogy, CPP review, deviation closure, and QA release.'},
   {id: 'EVDOC-NIR-BU-260601', title: 'Demo NIR blend uniformity trend extract', type: 'PAT trend extract', status: 'Demo reviewed', system: 'PAT historian demo', uri: 'demo://pat/nir-blend-uniformity/RUN-CDC-2026-06-01-001', summary: 'Fictional trend evidence for inline NIR blend uniformity and associated alarm investigation.'},
   {id: 'EVDOC-COAT-WG-260601', title: 'Demo coating weight gain in-process check sheet', type: 'IPC record extract', status: 'Demo reviewed', system: 'MES demo', uri: 'demo://ipc/coating-weight-gain/RUN-CDC-2026-06-01-001', summary: 'Fictional in-process check evidence for semi-continuous powder coating weight gain.'},
   {id: 'EVDOC-CTD-3234-MAP', title: 'Demo CTD 3.2.P.3.4 CDE traceability matrix', type: 'CMC traceability matrix', status: 'Reference architecture reviewed', system: 'Regulatory information management demo', uri: 'demo://cmc/ctd-3.2.p.3.4/cde-traceability', summary: 'Fictional matrix linking selected CDEs to CTD Module 3 controls of critical steps and intermediates.'},
   {id: 'EVDOC-STD-PROV-MAP', title: 'Demo standards provenance review pack', type: 'Standards provenance pack', status: 'Reference architecture reviewed', system: 'Data governance demo', uri: 'demo://governance/standards-provenance', summary: 'Fictional pack showing why CDEs map to ICH, ISO, ISA-95, and CTD reference concepts.'},
-  {id: 'EVDOC-REJECT-RUN-260602', title: 'Demo rejected run QA disposition extract for AZDCDC10-260602', type: 'QA disposition extract', status: 'Demo reviewed', system: 'QMS demo', uri: 'demo://qa-disposition/AZDCDC10-260602', summary: 'Fictional QA decision evidence for a rejected/quarantined demonstration run.'}
+  {id: 'EVDOC-REJECT-RUN-260602', title: 'Demo rejected run QA disposition extract for NCLCDC10-260602', type: 'QA disposition extract', status: 'Demo reviewed', system: 'QMS demo', uri: 'demo://qa-disposition/NCLCDC10-260602', summary: 'Fictional QA decision evidence for a rejected/quarantined demonstration run.'}
 ] AS row
 MERGE (doc:EvidenceDocument {documentId: row.id})
 SET doc.title = row.title,
@@ -340,8 +340,8 @@ SET doc.title = row.title,
     doc.effectiveDate = date('2026-06-03');
 
 MATCH (doc:EvidenceDocument {documentId: 'EVDOC-BMR-RUN-260601'})
-MATCH (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260601'})
-MATCH (decision:QAReleaseDecision {decisionId: 'QA-REL-AZDCDC10-260601'})
+MATCH (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260601'})
+MATCH (decision:QAReleaseDecision {decisionId: 'QA-REL-NCLCDC10-260601'})
 MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-01-001'})
 MERGE (doc)-[:DOCUMENTS_BATCH_RECORD]->(br)
 MERGE (doc)-[:DOCUMENTS_QA_DECISION]->(decision)
@@ -370,15 +370,15 @@ MATCH (mapping:StandardMapping)-[:TO_REGULATORY_SECTION]->(:RegulatorySection {s
 MERGE (doc)-[:SUPPORTS_MAPPING]->(mapping);
 
 MATCH (doc:EvidenceDocument {documentId: 'EVDOC-STD-PROV-MAP'})
-MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-AZD-CDC-DEMO-001'})
+MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-NCL-CDC-DEMO-001'})
 MERGE (doc)-[:SUPPORTS_FILING]->(filing)
 WITH doc
 MATCH (mapping:StandardMapping)
 MERGE (doc)-[:SUPPORTS_MAPPING]->(mapping);
 
 MATCH (doc:EvidenceDocument {documentId: 'EVDOC-REJECT-RUN-260602'})
-MATCH (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260602'})
-MATCH (decision:QAReleaseDecision {decisionId: 'QA-REJ-AZDCDC10-260602'})
+MATCH (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260602'})
+MATCH (decision:QAReleaseDecision {decisionId: 'QA-REJ-NCLCDC10-260602'})
 MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-02-002'})
 MERGE (doc)-[:DOCUMENTS_BATCH_RECORD]->(br)
 MERGE (doc)-[:DOCUMENTS_QA_DECISION]->(decision)
@@ -501,28 +501,28 @@ SET rel.neo4jType = row.neo4jType,
     rel.description = row.description,
     rel.cardinalityNote = 'Reference architecture guidance';
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 MATCH (rel:RelationshipDefinition)
 MERGE (cmc)-[:REFERENCES_RELATIONSHIP_DEFINITION]->(rel);
 
 // Anchor reference catalog nodes that are useful for architecture discussion
 // but may not be used by the current representative CDE subset.
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 WITH cmc
 MATCH (standard:DataStandard)
 MERGE (cmc)-[:REFERENCES_STANDARD]->(standard);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 WITH cmc
 MATCH (section:RegulatorySection)
 MERGE (cmc)-[:REFERENCES_CMC_SECTION]->(section);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 WITH cmc
 MATCH (owner:DataOwner)
 MERGE (cmc)-[:HAS_DATA_OWNER]->(owner);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 WITH cmc
 MATCH (unit:UnitOfMeasure)
 MERGE (cmc)-[:REFERENCES_UNIT]->(unit);

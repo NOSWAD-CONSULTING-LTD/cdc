@@ -1,4 +1,4 @@
-# CDC Manufacturing Knowledge Graph Ubiquitous Language
+# Reference Architecture for CDC Manufacturing: Ubiquitous Language
 
 This glossary defines the shared domain language for the Continuous Direct Compression (CDC) Neo4j demo. It is intended for information architects, ontology modelers, manufacturing data architects, quality teams, and regulatory stakeholders.
 
@@ -12,7 +12,7 @@ The definitions are production-inspired but simplified for demo use. They are no
 | AI | Artificial Intelligence | Intended consumer of the AI-ready graph, RAG manifest, provenance, and CDE metadata. |
 | ALCOA+ | Attributable, Legible, Contemporaneous, Original, Accurate, plus Complete, Consistent, Enduring, and Available | Data integrity principle represented through audit trail, source system, and review evidence. |
 | API | Active Pharmaceutical Ingredient | Active material in the tablet formulation. |
-| AZD | Fictional development-code prefix | Demo-only product prefix; not a real product or company identifier. |
+| NCL | NOSWAD CONSULTING LTD reference-architecture prefix | Demo product prefix used to avoid resemblance to a real medicine sponsor code. |
 | CAPA | Corrective and Preventive Action | Deviation follow-up concept represented as text in this demo. |
 | CDC | Continuous Direct Compression | Continuous tablet manufacturing route using direct compression. |
 | CDE | Critical Data Element | Governed data element important to quality, genealogy, CMC, disposition, or data integrity. |
@@ -66,24 +66,24 @@ The definitions are production-inspired but simplified for demo use. They are no
 
 | Term | Meaning In This Model | Example |
 | --- | --- | --- |
-| Product | The medicinal product being manufactured and controlled. | `AZD-CDC-Tablet-10mg` |
-| AZD | Fictional development-code prefix used only for this demo. It is not a real product identifier. | `AZD-CDC-Tablet-10mg` |
-| Formulation | Versioned composition of API and excipients for a product. | `FORM-AZD-CDC-10MG-F001` |
-| Recipe | Versioned manufacturing process definition used to execute a run. | `REC-AZD-CDC-DC-001` |
+| Product | The medicinal product being manufactured and controlled. | `NCL-CDC-Tablet-10mg` |
+| NCL | NOSWAD CONSULTING LTD reference-architecture prefix used for demo product and batch identifiers. It is not a real medicine identifier. | `NCL-CDC-Tablet-10mg` |
+| Formulation | Versioned composition of API and excipients for a product. | `FORM-NCL-CDC-10MG-F001` |
+| Recipe | Versioned manufacturing process definition used to execute a run. | `REC-NCL-CDC-DC-001` |
 | ProcessStep | Ordered unit of work within the recipe. | API feeding, continuous blending, tablet compression |
 | CDC | Continuous Direct Compression; a continuous tablet manufacturing route using direct compression rather than wet granulation. | Direct compression tablet process |
 | ManufacturingRun | Executed manufacturing event using a recipe, line, material lots, equipment, and batch record. | `RUN-CDC-2026-06-01-001` |
-| Batch Number | Business identifier for the output batch or run disposition unit. | `AZDCDC10-260601` |
+| Batch Number | Business identifier for the output batch or run disposition unit. | `NCLCDC10-260601` |
 
 ## Materials And Genealogy
 
 | Term | Meaning In This Model | Example |
 | --- | --- | --- |
 | Material | Material master record for API, excipient, or lubricant. | Microcrystalline cellulose PH102 |
-| MaterialLot | Physical lot of material received, released, and consumed. | `LOT-API-AZD-240501-A` |
+| MaterialLot | Physical lot of material received, released, and consumed. | `LOT-API-NCL-240501-A` |
 | Supplier | Qualified source of material or lot supply. | DirectComp Excipients Ltd |
 | Material Genealogy | Traceability from product/run back to consumed lots, materials, and suppliers. | Run consumes API lot supplied by internal API network |
-| API | Active pharmaceutical ingredient. | AZD active pharmaceutical ingredient |
+| API | Active pharmaceutical ingredient. | NCL active pharmaceutical ingredient |
 | Excipient | Non-API formulation component with a functional role. | MCC, lactose, croscarmellose sodium |
 | Lubricant | Excipient used to support compression and ejection. | Magnesium stearate |
 | CMA | Critical Material Attribute; material attribute that can affect process performance or product quality. | API particle size distribution |
@@ -120,7 +120,7 @@ The definitions are production-inspired but simplified for demo use. They are no
 | Alarm | System-generated event triggered by a reading or condition. | NIR blend uniformity high alarm |
 | Deviation | Quality investigation for an unexpected event, excursion, or nonconformance. | Humidity drift and PAT excursion |
 | CAPA | Corrective and Preventive Action. In this demo it is represented as deviation `capa` text, not a full CAPA workflow. | Tightened humidity alarm response |
-| BatchRecord | Electronic batch record summary containing execution and review evidence. | `BR-AZDCDC10-260601` |
+| BatchRecord | Electronic batch record summary containing execution and review evidence. | `BR-NCLCDC10-260601` |
 | QAReleaseDecision | QA disposition decision after batch record and deviation review. | Release |
 | CleaningRecord | Evidence that line or equipment cleaning/clearance was performed. | Post-run product-contact clean |
 | CalibrationRecord | Evidence that instrument or equipment calibration was acceptable. | NIR calibration in tolerance |
@@ -130,8 +130,8 @@ The definitions are production-inspired but simplified for demo use. They are no
 
 | Term | Meaning In This Model | Example |
 | --- | --- | --- |
-| CMC | Chemistry, Manufacturing, and Controls; regulatory body of information covering product composition, process, controls, analytical methods, validation, stability, facilities, and evidence. | `CMC-AZD-CDC-10MG-001` |
-| CMCPackage | Graph node representing the product's CMC knowledge package. | AZD-CDC 10 mg CMC package |
+| CMC | Chemistry, Manufacturing, and Controls; regulatory body of information covering product composition, process, controls, analytical methods, validation, stability, facilities, and evidence. | `CMC-NCL-CDC-10MG-001` |
+| CMCPackage | Graph node representing the product's CMC knowledge package. | NCL-CDC 10 mg CMC package |
 | RegulatoryFiling | Filing or evidence package that covers the product and submits/supports CMC information. | Module 3 demo filing |
 | ValidationEvidence | Evidence artifact supporting filing, validation, control strategy, or data integrity claims. | NIR model validation |
 | ProcessValidation | Validation package connecting recipe, run evidence, and PPQ/control strategy. | CDC PPQ demo package |

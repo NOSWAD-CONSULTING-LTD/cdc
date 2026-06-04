@@ -4,27 +4,27 @@
 // ---------------------------------------------------------------------------
 // Product, formulation, materials, and suppliers
 // ---------------------------------------------------------------------------
-MERGE (product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})
-SET product.name = 'AZD-CDC-Tablet-10mg',
+MERGE (product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})
+SET product.name = 'NCL-CDC-Tablet-10mg',
     product.dosageForm = 'Immediate release tablet',
     product.strength = '10 mg',
     product.route = 'Oral',
     product.lifecycleStage = 'Process performance qualification demo',
     product.description = 'Demo continuous direct compression tablet product';
 
-MERGE (formulation:Formulation {formulationId: 'FORM-AZD-CDC-10MG-F001'})
-SET formulation.name = 'AZD-CDC 10 mg direct compression formulation',
+MERGE (formulation:Formulation {formulationId: 'FORM-NCL-CDC-10MG-F001'})
+SET formulation.name = 'NCL-CDC 10 mg direct compression formulation',
     formulation.version = 'F001',
     formulation.batchBasis = '100 kg theoretical blend',
     formulation.unitDoseTargetMg = 200.0,
     formulation.status = 'Approved for demonstration';
 
-MATCH (product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})
-MATCH (formulation:Formulation {formulationId: 'FORM-AZD-CDC-10MG-F001'})
+MATCH (product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})
+MATCH (formulation:Formulation {formulationId: 'FORM-NCL-CDC-10MG-F001'})
 MERGE (product)-[:HAS_FORMULATION {effectiveFrom: date('2026-01-01')}]->(formulation);
 
 UNWIND [
-  {id: 'SUP-AZ-API', name: 'AstraZeneca API Supply Network', type: 'Internal', country: 'GB', qualificationStatus: 'Qualified'},
+  {id: 'SUP-NCL-API', name: 'NOSWAD Consulting demo API supply network', type: 'Internal', country: 'GB', qualificationStatus: 'Qualified'},
   {id: 'SUP-DC-EXC', name: 'DirectComp Excipients Ltd', type: 'External', country: 'IE', qualificationStatus: 'Qualified'},
   {id: 'SUP-LUBE', name: 'Pharma Lubricants GmbH', type: 'External', country: 'DE', qualificationStatus: 'Qualified'}
 ] AS row
@@ -35,13 +35,13 @@ SET s.name = row.name,
     s.qualificationStatus = row.qualificationStatus;
 
 UNWIND [
-  {id: 'MAT-AZD-API-10', name: 'AZD active pharmaceutical ingredient', role: 'API', grade: 'Micronized direct compression grade', compendialStatus: 'In-house specification', percentWw: 5.0},
+  {id: 'MAT-NCL-API-10', name: 'NCL active pharmaceutical ingredient', role: 'API', grade: 'Micronized direct compression grade', compendialStatus: 'In-house specification', percentWw: 5.0},
   {id: 'MAT-MCC-DC-102', name: 'Microcrystalline cellulose PH102', role: 'Filler/binder', grade: 'Direct compression', compendialStatus: 'Ph. Eur./USP', percentWw: 63.0},
   {id: 'MAT-LACTOSE-SD', name: 'Spray dried lactose monohydrate', role: 'Filler', grade: 'Direct compression', compendialStatus: 'Ph. Eur./USP', percentWw: 25.0},
   {id: 'MAT-CCS', name: 'Croscarmellose sodium', role: 'Disintegrant', grade: 'Pharmaceutical', compendialStatus: 'Ph. Eur./USP', percentWw: 5.0},
   {id: 'MAT-MG-STEARATE', name: 'Magnesium stearate', role: 'Lubricant', grade: 'Vegetable origin', compendialStatus: 'Ph. Eur./USP', percentWw: 2.0}
 ] AS row
-MATCH (formulation:Formulation {formulationId: 'FORM-AZD-CDC-10MG-F001'})
+MATCH (formulation:Formulation {formulationId: 'FORM-NCL-CDC-10MG-F001'})
 MERGE (m:Material {materialId: row.id})
 SET m.name = row.name,
     m.materialRole = row.role,
@@ -52,7 +52,7 @@ MERGE (formulation)-[r:USES_MATERIAL]->(m)
 SET r.targetPercentWw = row.percentWw,
     r.function = row.role;
 
-MATCH (api:Material {materialId: 'MAT-AZD-API-10'}), (apiSup:Supplier {supplierId: 'SUP-AZ-API'})
+MATCH (api:Material {materialId: 'MAT-NCL-API-10'}), (apiSup:Supplier {supplierId: 'SUP-NCL-API'})
 MERGE (api)-[:QUALIFIED_SUPPLIER]->(apiSup);
 MATCH (mcc:Material {materialId: 'MAT-MCC-DC-102'}), (excSup:Supplier {supplierId: 'SUP-DC-EXC'})
 MERGE (mcc)-[:QUALIFIED_SUPPLIER]->(excSup);
@@ -140,15 +140,15 @@ MERGE (eq)-[:HAS_SENSOR]->(s);
 // ---------------------------------------------------------------------------
 // Recipe and ordered process steps
 // ---------------------------------------------------------------------------
-MERGE (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MERGE (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 SET recipe.name = 'Direct compression tablet process',
     recipe.version = '1.0',
     recipe.processType = 'Continuous Direct Compression',
     recipe.status = 'Approved',
     recipe.nominalThroughputKgPerHour = 25.0;
 
-MATCH (product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MATCH (product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 MERGE (product)-[:HAS_RECIPE]->(recipe);
 
 UNWIND [
@@ -160,7 +160,7 @@ UNWIND [
   {id: 'STEP-006-WEIGHT-CTRL', order: 6, name: 'In-process weight control', description: 'Monitor tablet weight and support press control actions.', equipmentIds: ['EQ-CHECK-001']},
   {id: 'STEP-007-COLLECT', order: 7, name: 'Finished tablet collection', description: 'Collect accepted tablets into labelled bulk containers.', equipmentIds: ['EQ-CHECK-001']}
 ] AS row
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 MERGE (step:ProcessStep {stepId: row.id})
 SET step.name = row.name,
     step.stepOrder = row.order,
@@ -294,15 +294,15 @@ SET cal.status = row.status,
     cal.dueDate = row.dueDate
 MERGE (cal)-[:CALIBRATES]->(eq);
 
-MERGE (filing:RegulatoryFiling {filingId: 'REG-FILING-AZD-CDC-DEMO-001'})
-SET filing.name = 'AZD-CDC-Tablet-10mg Module 3 demo filing',
+MERGE (filing:RegulatoryFiling {filingId: 'REG-FILING-NCL-CDC-DEMO-001'})
+SET filing.name = 'NCL-CDC-Tablet-10mg Module 3 demo filing',
     filing.region = 'Demo global',
     filing.status = 'Reference architecture evidence package',
     filing.submissionType = 'CMC continuous manufacturing demonstration',
     filing.submissionDate = date('2026-05-15');
 
-MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-AZD-CDC-DEMO-001'})
-MATCH (product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})
+MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-NCL-CDC-DEMO-001'})
+MATCH (product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})
 MERGE (filing)-[:COVERS]->(product);
 
 UNWIND [
@@ -311,7 +311,7 @@ UNWIND [
   {id: 'VAL-CS-CDC-001', name: 'CDC control strategy report', type: 'Control strategy', status: 'Approved', summary: 'Links CPP monitoring, CQA risk, alarms, and disposition evidence.'},
   {id: 'VAL-DATA-INTEG-001', name: 'Manufacturing data integrity assessment', type: 'Data integrity', status: 'Approved', summary: 'Defines traceability from historian readings to batch record review.'}
 ] AS row
-MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-AZD-CDC-DEMO-001'})
+MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-NCL-CDC-DEMO-001'})
 MERGE (ev:ValidationEvidence {evidenceId: row.id})
 SET ev.name = row.name,
     ev.evidenceType = row.type,

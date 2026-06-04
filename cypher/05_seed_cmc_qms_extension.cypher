@@ -5,10 +5,10 @@
 // ---------------------------------------------------------------------------
 // CMC package and control strategy
 // ---------------------------------------------------------------------------
-MATCH (product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})
-MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-AZD-CDC-DEMO-001'})
-MERGE (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
-SET cmc.name = 'AZD-CDC-Tablet-10mg CMC knowledge package',
+MATCH (product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})
+MATCH (filing:RegulatoryFiling {filingId: 'REG-FILING-NCL-CDC-DEMO-001'})
+MERGE (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
+SET cmc.name = 'NCL-CDC-Tablet-10mg CMC knowledge package',
     cmc.lifecycleStage = 'Clinical manufacturing demonstration',
     cmc.scope = 'Chemistry, Manufacturing, and Controls for continuous direct compression demo',
     cmc.status = 'Reference architecture',
@@ -16,23 +16,23 @@ SET cmc.name = 'AZD-CDC-Tablet-10mg CMC knowledge package',
 MERGE (product)-[:HAS_CMC_PACKAGE]->(cmc)
 MERGE (filing)-[:SUBMITS]->(cmc);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
-MERGE (strategy:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
+MERGE (strategy:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})
 SET strategy.name = 'CDC integrated control strategy',
     strategy.strategyType = 'ICH Q8/Q9/Q10-inspired control strategy',
     strategy.summary = 'Links material attributes, CPPs, PAT monitoring, CQA specifications, alarms, deviations, and QA disposition.',
     strategy.status = 'Approved for demonstration'
 MERGE (cmc)-[:INCLUDES]->(strategy);
 
-MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 MERGE (strategy)-[:GOVERNS_RECIPE]->(recipe);
 
-MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})
+MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})
 MATCH (cpp:CPP)
 MERGE (strategy)-[:CONTROLS]->(cpp);
 
-MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})
+MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})
 MATCH (cqa:CQA)
 MERGE (strategy)-[:PROTECTS]->(cqa);
 
@@ -40,8 +40,8 @@ MERGE (strategy)-[:PROTECTS]->(cqa);
 // Critical material attributes, material controls, and risk assessment
 // ---------------------------------------------------------------------------
 UNWIND [
-  {id: 'CMA-API-PSD', name: 'API particle size distribution', materialId: 'MAT-AZD-API-10', unit: 'um', lower: 10.0, upper: 90.0, rationale: 'Particle size can influence feeding, blending, content uniformity, and dissolution.'},
-  {id: 'CMA-API-POTENCY', name: 'API potency', materialId: 'MAT-AZD-API-10', unit: '% label claim', lower: 98.0, upper: 102.0, rationale: 'Potency correction is required for accurate formulation input.'},
+  {id: 'CMA-API-PSD', name: 'API particle size distribution', materialId: 'MAT-NCL-API-10', unit: 'um', lower: 10.0, upper: 90.0, rationale: 'Particle size can influence feeding, blending, content uniformity, and dissolution.'},
+  {id: 'CMA-API-POTENCY', name: 'API potency', materialId: 'MAT-NCL-API-10', unit: '% label claim', lower: 98.0, upper: 102.0, rationale: 'Potency correction is required for accurate formulation input.'},
   {id: 'CMA-MCC-BD', name: 'MCC bulk density', materialId: 'MAT-MCC-DC-102', unit: 'g/mL', lower: 0.25, upper: 0.40, rationale: 'Bulk density affects feeder refill behavior and blend density.'},
   {id: 'CMA-LACTOSE-MOISTURE', name: 'Lactose moisture', materialId: 'MAT-LACTOSE-SD', unit: '% w/w', lower: 0.0, upper: 5.0, rationale: 'Moisture can influence flow, compaction, and stability.'},
   {id: 'CMA-MGST-SSA', name: 'Magnesium stearate surface area', materialId: 'MAT-MG-STEARATE', unit: 'm2/g', lower: 4.0, upper: 10.0, rationale: 'Lubricant surface area can influence dissolution and tablet hardness.'}
@@ -56,30 +56,30 @@ SET cma.name = row.name,
     cma.status = 'Controlled'
 MERGE (cma)-[:CHARACTERIZES]->(material);
 
-MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})
+MATCH (strategy:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})
 MATCH (cma:CriticalMaterialAttribute)
 MERGE (strategy)-[:CONTROLS_MATERIAL_ATTRIBUTE]->(cma);
 
-MERGE (risk:RiskAssessment {riskAssessmentId: 'RA-AZD-CDC-FMEA-001'})
+MERGE (risk:RiskAssessment {riskAssessmentId: 'RA-NCL-CDC-FMEA-001'})
 SET risk.name = 'CDC process and product quality FMEA',
     risk.method = 'FMEA',
     risk.status = 'Approved for demonstration',
     risk.summary = 'Assesses relationships among CMAs, CPPs, CQAs, control actions, and quality event handling.',
     risk.reviewDate = date('2026-05-05');
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
-MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-AZD-CDC-FMEA-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
+MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-NCL-CDC-FMEA-001'})
 MERGE (cmc)-[:INCLUDES]->(risk);
 
-MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-AZD-CDC-FMEA-001'})
+MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-NCL-CDC-FMEA-001'})
 MATCH (cpp:CPP)
 MERGE (risk)-[:ASSESSES]->(cpp);
 
-MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-AZD-CDC-FMEA-001'})
+MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-NCL-CDC-FMEA-001'})
 MATCH (cqa:CQA)
 MERGE (risk)-[:ASSESSES]->(cqa);
 
-MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-AZD-CDC-FMEA-001'})
+MATCH (risk:RiskAssessment {riskAssessmentId: 'RA-NCL-CDC-FMEA-001'})
 MATCH (cma:CriticalMaterialAttribute)
 MERGE (risk)-[:ASSESSES]->(cma);
 
@@ -103,24 +103,24 @@ UNWIND row.cqaIds AS cqaId
 MATCH (cqa:CQA {cqaId: cqaId})
 MERGE (method)-[:MEASURES]->(cqa);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 MATCH (method:AnalyticalMethod)
 MERGE (cmc)-[:INCLUDES]->(method);
 
-MATCH (product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})
-MERGE (stability:StabilityStudy {stabilityStudyId: 'STAB-AZD-CDC-10MG-001'})
-SET stability.name = 'AZD-CDC-Tablet-10mg accelerated and long-term stability protocol',
+MATCH (product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})
+MERGE (stability:StabilityStudy {stabilityStudyId: 'STAB-NCL-CDC-10MG-001'})
+SET stability.name = 'NCL-CDC-Tablet-10mg accelerated and long-term stability protocol',
     stability.studyType = 'ICH stability protocol demo',
     stability.conditions = '25C/60%RH long-term; 40C/75%RH accelerated',
     stability.status = 'Ongoing demo',
     stability.startDate = date('2026-05-20')
 MERGE (stability)-[:STUDIES]->(product);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
-MATCH (stability:StabilityStudy {stabilityStudyId: 'STAB-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
+MATCH (stability:StabilityStudy {stabilityStudyId: 'STAB-NCL-CDC-10MG-001'})
 MERGE (cmc)-[:INCLUDES]->(stability);
 
-MATCH (stability:StabilityStudy {stabilityStudyId: 'STAB-AZD-CDC-10MG-001'})
+MATCH (stability:StabilityStudy {stabilityStudyId: 'STAB-NCL-CDC-10MG-001'})
 MATCH (cqa:CQA)
 WHERE cqa.cqaId IN ['CQA-DISSOLUTION', 'CQA-CONTENT-UNIFORMITY', 'CQA-FRIABILITY']
 MERGE (stability)-[:MONITORS]->(cqa);
@@ -141,11 +141,11 @@ SET sop.title = row.title,
     sop.effectiveDate = date('2026-05-01'),
     sop.standardContext = 'ISO 9001/Q10/GMP-inspired demo control'
 WITH sop, row
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 MERGE (cmc)-[:REFERENCES_SOP]->(sop);
 
 MATCH (sop:SOP {sopId: 'SOP-CDC-LINE-001'})
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 MERGE (sop)-[:GOVERNS_RECIPE]->(recipe);
 
 MATCH (sop:SOP {sopId: 'SOP-CDC-DEVIATION-001'})
@@ -153,7 +153,7 @@ MATCH (dev:Deviation {deviationId: 'DEV-CDC-20260601-001'})
 MERGE (dev)-[:HANDLED_UNDER]->(sop);
 
 MATCH (sop:SOP {sopId: 'SOP-CDC-DATA-001'})
-MATCH (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260601'})
+MATCH (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260601'})
 MERGE (br)-[:REVIEWED_UNDER]->(sop);
 
 UNWIND [
@@ -187,7 +187,7 @@ UNWIND row.equipmentIds AS equipmentId
 MATCH (equipment:Equipment {equipmentId: equipmentId})
 MERGE (qualification)-[:QUALIFIES]->(equipment);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 MATCH (qualification:EquipmentQualification)
 MERGE (cmc)-[:INCLUDES]->(qualification);
 
@@ -203,7 +203,7 @@ SET csv.name = row.name,
     csv.status = 'Validated for demonstration',
     csv.approvedAt = date('2026-05-19');
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 MATCH (csv:ComputerSystemValidation)
 MERGE (cmc)-[:INCLUDES]->(csv);
 
@@ -228,7 +228,7 @@ MATCH (evidence:ValidationEvidence {evidenceId: 'VAL-PAT-NIR-001'})
 MERGE (change)-[:CHANGES]->(method)
 MERGE (change)-[:SUPPORTED_BY]->(evidence);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 MATCH (change:ChangeControl {changeControlId: 'CC-CDC-NIR-MODEL-2026-001'})
 MERGE (cmc)-[:INCLUDES]->(change);
 
@@ -236,7 +236,7 @@ UNWIND [
   {id: 'AUD-CDC-20260601-001', entityType: 'SensorReading', entityId: 'READ-NIR-BU-1020', action: 'Historian value captured', timestamp: '2026-06-01T10:20:00+01:00'},
   {id: 'AUD-CDC-20260601-002', entityType: 'Alarm', entityId: 'ALM-NIR-BU-20260601-001', action: 'Major alarm acknowledged', timestamp: '2026-06-01T10:24:00+01:00'},
   {id: 'AUD-CDC-20260601-003', entityType: 'Deviation', entityId: 'DEV-CDC-20260601-001', action: 'Deviation opened', timestamp: '2026-06-01T10:35:00+01:00'},
-  {id: 'AUD-CDC-20260602-001', entityType: 'QAReleaseDecision', entityId: 'QA-REL-AZDCDC10-260601', action: 'QA release decision approved', timestamp: '2026-06-02T11:00:00+01:00'}
+  {id: 'AUD-CDC-20260602-001', entityType: 'QAReleaseDecision', entityId: 'QA-REL-NCLCDC10-260601', action: 'QA release decision approved', timestamp: '2026-06-02T11:00:00+01:00'}
 ] AS row
 MERGE (event:AuditTrailEvent {auditTrailEventId: row.id})
 SET event.entityType = row.entityType,
@@ -259,20 +259,20 @@ MATCH (dev:Deviation {deviationId: 'DEV-CDC-20260601-001'})
 MERGE (event)-[:DOCUMENTS]->(dev);
 
 MATCH (event:AuditTrailEvent {auditTrailEventId: 'AUD-CDC-20260602-001'})
-MATCH (decision:QAReleaseDecision {decisionId: 'QA-REL-AZDCDC10-260601'})
+MATCH (decision:QAReleaseDecision {decisionId: 'QA-REL-NCLCDC10-260601'})
 MERGE (event)-[:DOCUMENTS]->(decision);
 
-MATCH (br:BatchRecord {batchRecordId: 'BR-AZDCDC10-260601'})
+MATCH (br:BatchRecord {batchRecordId: 'BR-NCLCDC10-260601'})
 MATCH (event:AuditTrailEvent)
 MERGE (br)-[:HAS_AUDIT_TRAIL_EVENT]->(event);
 
 // ---------------------------------------------------------------------------
 // Process validation connects recipe, run, and validation evidence
 // ---------------------------------------------------------------------------
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})
 MATCH (run:ManufacturingRun {runId: 'RUN-CDC-2026-06-01-001'})
 MATCH (evidence:ValidationEvidence {evidenceId: 'VAL-PPQ-CDC-001'})
-MERGE (pv:ProcessValidation {processValidationId: 'PV-AZD-CDC-PPQ-001'})
+MERGE (pv:ProcessValidation {processValidationId: 'PV-NCL-CDC-PPQ-001'})
 SET pv.name = 'CDC process validation and PPQ demo package',
     pv.validationStage = 'PPQ demo',
     pv.status = 'Approved for demonstration',
@@ -281,6 +281,6 @@ MERGE (pv)-[:VALIDATES]->(recipe)
 MERGE (pv)-[:USES_RUN_EVIDENCE]->(run)
 MERGE (pv)-[:SUPPORTED_BY]->(evidence);
 
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
-MATCH (pv:ProcessValidation {processValidationId: 'PV-AZD-CDC-PPQ-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
+MATCH (pv:ProcessValidation {processValidationId: 'PV-NCL-CDC-PPQ-001'})
 MERGE (cmc)-[:INCLUDES]->(pv);

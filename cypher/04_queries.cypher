@@ -9,7 +9,7 @@ MATCH path =
 RETURN path;
 
 // 2. Trace finished product back to consumed material lots and suppliers.
-MATCH (product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})-[:HAS_RECIPE]->(:Recipe)<-[:EXECUTES]-(run:ManufacturingRun)
+MATCH (product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})-[:HAS_RECIPE]->(:Recipe)<-[:EXECUTES]-(run:ManufacturingRun)
 MATCH (run)-[consumes:CONSUMES]->(lot:MaterialLot)-[:INSTANCE_OF]->(material:Material)
 MATCH (lot)-[:SUPPLIED_BY]->(supplier:Supplier)
 RETURN product.name AS product,
@@ -89,7 +89,7 @@ RETURN run.batchNumber AS batchNumber,
 ORDER BY stepOrder, equipment;
 
 // 7. Show regulatory filing evidence connected to the product.
-MATCH (filing:RegulatoryFiling)-[:COVERS]->(product:Product {productId: 'PROD-AZD-CDC-TAB-10MG'})
+MATCH (filing:RegulatoryFiling)-[:COVERS]->(product:Product {productId: 'PROD-NCL-CDC-TAB-10MG'})
 OPTIONAL MATCH (evidence:ValidationEvidence)-[:SUPPORTS]->(filing)
 RETURN product.name AS product,
        filing.name AS filing,
@@ -104,7 +104,7 @@ RETURN product.name AS product,
        }) AS evidence;
 
 // 8. Show process step order from recipe to finished tablet.
-MATCH (recipe:Recipe {recipeId: 'REC-AZD-CDC-DC-001'})-[defines:DEFINES_STEP]->(step:ProcessStep)
+MATCH (recipe:Recipe {recipeId: 'REC-NCL-CDC-DC-001'})-[defines:DEFINES_STEP]->(step:ProcessStep)
 OPTIONAL MATCH (step)-[:USES_EQUIPMENT]->(equipment:Equipment)
 RETURN recipe.name AS recipe,
        defines.stepOrder AS stepOrder,
@@ -118,7 +118,7 @@ MATCH path = (:ProcessStep {stepId: 'STEP-001-API-FEED'})-[:NEXT_STEP*0..6]->(:P
 RETURN path;
 
 // 9. Identify all runs affected by a specific material lot.
-MATCH (lot:MaterialLot {lotId: 'LOT-API-AZD-240501-A'})<-[:CONSUMES]-(run:ManufacturingRun)
+MATCH (lot:MaterialLot {lotId: 'LOT-API-NCL-240501-A'})<-[:CONSUMES]-(run:ManufacturingRun)
 OPTIONAL MATCH (run)-[:HAS_DEVIATION]->(dev:Deviation)
 OPTIONAL MATCH (decision:QAReleaseDecision)-[:RELEASES]->(run)
 RETURN lot.lotNumber AS lotNumber,

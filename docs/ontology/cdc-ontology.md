@@ -1,4 +1,4 @@
-# CDC Manufacturing Knowledge Graph Ontology
+# Reference Architecture for CDC Manufacturing Ontology
 
 This ontology is the semantic contract for the CDC Neo4j demo. It defines what the graph concepts mean, which relationships are allowed, and which constraints should hold for a well-formed graph.
 

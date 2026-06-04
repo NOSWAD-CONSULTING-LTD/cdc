@@ -73,8 +73,8 @@ RETURN rule.dimension AS dataQualityDimension,
 ORDER BY dataQualityDimension, rule;
 
 // 7. Show CDEs governed by the CMC package and used by the control strategy.
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})-[:GOVERNS_CDE]->(cde:CriticalDataElement)
-OPTIONAL MATCH (:ControlStrategy {controlStrategyId: 'CS-AZD-CDC-10MG-001'})-[:USES_CDE]->(cde)
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})-[:GOVERNS_CDE]->(cde:CriticalDataElement)
+OPTIONAL MATCH (:ControlStrategy {controlStrategyId: 'CS-NCL-CDC-10MG-001'})-[:USES_CDE]->(cde)
 WITH cmc, cde, count(*) > 0 AS usedByControlStrategy
 RETURN cmc.name AS cmcPackage,
        cde.domain AS domain,
@@ -106,7 +106,7 @@ RETURN uo.operationOrder AS operationOrder,
 ORDER BY operationOrder;
 
 // 10. Graph-friendly end-to-end CDE model visualisation.
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 OPTIONAL MATCH operationPath = (:UnitOperation {unitOperationId: 'UO-001-CRYSTALLISATION'})-[:NEXT_OPERATION*0..11]->(:UnitOperation {unitOperationId: 'UO-012-QA-CMC-REVIEW'})
 OPTIONAL MATCH cdePath = (cmc)-[:GOVERNS_CDE]->(:CriticalDataElement)-[:OBSERVED_AT]->(:UnitOperation)
 OPTIONAL MATCH standardPath = (:CriticalDataElement)-[:MAPS_TO_STANDARD]->(:DataStandard)

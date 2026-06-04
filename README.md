@@ -1,10 +1,26 @@
-# Neo4j CDC Manufacturing Knowledge Graph
+# Reference Architecture for CDC Manufacturing Knowledge Graphs
 
-This project is a Neo4j 5 reference architecture for a pharmaceutical Continuous Direct Compression (CDC) manufacturing knowledge graph. It is production-inspired demo data for information architecture, ontology, manufacturing data architecture, and traceability discussions.
+This project is a Neo4j 5 reference architecture for pharmaceutical Continuous Direct Compression (CDC) manufacturing knowledge graphs. It is production-inspired demo data for information architecture, ontology, manufacturing data architecture, AI-readiness, and traceability discussions.
 
-It models a realistic CDC tablet process around `AZD-CDC-Tablet-10mg`: product and formulation master data, ordered recipe steps, materials and suppliers, equipment and sensors, CPPs, CQAs and specifications, material lot genealogy, manufacturing runs, process readings, alarms, deviation investigations, batch record review, QA release/rejection, regulatory evidence, CDE governance, and AI-readiness evidence.
+It models a realistic CDC tablet process around `NCL-CDC-Tablet-10mg`: product and formulation master data, ordered recipe steps, materials and suppliers, equipment and sensors, CPPs, CQAs and specifications, material lot genealogy, manufacturing runs, process readings, alarms, deviation investigations, batch record review, QA release/rejection, regulatory evidence, CDE governance, and AI-readiness evidence.
 
-`AZD-CDC-Tablet-10mg` is a fictional safe demo product name. In this project, `AZD` is only a fictional development-code prefix, `CDC` means Continuous Direct Compression, `Tablet` is the dosage form, and `10mg` is the strength. It is not intended to identify a real medicine or real company product.
+`NCL-CDC-Tablet-10mg` is a fictional safe demo product name. In this project, `NCL` is the NOSWAD CONSULTING LTD reference-architecture prefix, `CDC` means Continuous Direct Compression, `Tablet` is the dosage form, and `10mg` is the strength. It is not intended to identify a real medicine or real commercial product.
+
+## Why Neo4j?
+
+Neo4j was chosen because CDC manufacturing knowledge is naturally connected data. The important questions are rarely about one table in isolation; they are about paths across product definitions, recipes, equipment, sensors, material lots, process readings, deviations, QA decisions, CMC evidence, standards, and ontology concepts.
+
+Neo4j is useful for this reference architecture because it can:
+
+- trace genealogy from finished batch back to consumed material lots and suppliers;
+- show process topology from crystallisation through compression and powder coating;
+- connect CPPs, CQAs, CDEs, specifications, alarms, deviations, and QA disposition evidence;
+- support ontology and ubiquitous-language discussions using explicit node labels and relationship types;
+- make regulatory and validation evidence traversable instead of hidden in disconnected documents;
+- provide graph paths that are easy to inspect in Neo4j Browser during architecture workshops;
+- ground AI/RAG answers in explicit evidence paths rather than untraceable text-only summaries.
+
+This does not mean all source data should live only in Neo4j. In a real enterprise architecture, MES, LIMS, QMS, ERP, historians, document systems, and regulatory systems remain systems of record. Neo4j is used here as a connected knowledge layer that links those records into an explainable manufacturing and quality context.
 
 ## Start Neo4j
 
@@ -154,7 +170,7 @@ RETURN path;
 ```
 
 ```cypher
-MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-AZD-CDC-10MG-001'})
+MATCH (cmc:CMCPackage {cmcPackageId: 'CMC-NCL-CDC-10MG-001'})
 OPTIONAL MATCH operationPath = (:UnitOperation {unitOperationId: 'UO-001-CRYSTALLISATION'})-[:NEXT_OPERATION*0..11]->(:UnitOperation {unitOperationId: 'UO-012-QA-CMC-REVIEW'})
 OPTIONAL MATCH cdePath = (cmc)-[:GOVERNS_CDE]->(:CriticalDataElement)-[:OBSERVED_AT]->(:UnitOperation)
 OPTIONAL MATCH standardPath = (:CriticalDataElement)-[:MAPS_TO_STANDARD]->(:DataStandard)
@@ -264,7 +280,7 @@ Important relationship patterns include:
 
 ## Labels
 
-- `Product`: Commercial or development product, such as `AZD-CDC-Tablet-10mg`.
+- `Product`: Commercial or development product, such as `NCL-CDC-Tablet-10mg`.
 - `Formulation`: Versioned composition and dose basis for the product.
 - `Recipe`: Versioned manufacturing recipe for the CDC process.
 - `Material`: Material master data for API, excipients, and lubricant.
@@ -367,7 +383,7 @@ The included query file answers:
 
 The released example run `RUN-CDC-2026-06-01-001` includes:
 
-- A fictional product named `AZD-CDC-Tablet-10mg`; `AZD` is a demo development-code prefix, not a real product identifier.
+- A fictional product named `NCL-CDC-Tablet-10mg`; `NCL` is the NOSWAD CONSULTING LTD reference-architecture prefix, not a real medicine identifier.
 - Five consumed material lots for API, MCC, lactose, croscarmellose sodium, and magnesium stearate.
 - CDC process readings from feeders, blender, NIR PAT, compression force, checkweigher, and room humidity.
 - One blend uniformity alarm caused by an out-of-spec NIR reading.
@@ -386,3 +402,22 @@ The rejected example run `RUN-CDC-2026-06-02-002` includes:
 ## Limitations
 
 This is a reference architecture and demonstration model. It is not a validated GxP system, not an electronic batch record implementation, not a process control system, and not suitable for regulated decision-making without formal validation, security controls, audit trails, data integrity controls, change control, and quality approval.
+
+## Licence And Attribution
+
+Copyright (c) 2026 NOSWAD CONSULTING LTD.
+
+This repository uses a dual licence:
+
+- Software code: Apache License 2.0.
+- Documentation, diagrams, Cypher seed data, ontology files, glossary content, conceptual models, reference architecture materials, and demo data: Creative Commons Attribution 4.0 International.
+
+Anyone using, adapting, distributing, publishing, presenting, or commercially applying this reference architecture must credit NOSWAD CONSULTING LTD.
+
+Suggested attribution:
+
+```text
+Based on the CDC Pharmaceutical Manufacturing Knowledge Graph Reference Architecture by NOSWAD CONSULTING LTD.
+```
+
+See [LICENSE](LICENSE), [NOTICE](NOTICE), and [CITATION.cff](CITATION.cff).

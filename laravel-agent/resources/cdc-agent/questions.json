@@ -94,17 +94,17 @@
   },
   {
     "id": "q007_regulatory_evidence",
-    "question": "What regulatory evidence is connected to AZD-CDC-Tablet-10mg?",
+    "question": "What regulatory evidence is connected to NCL-CDC-Tablet-10mg?",
     "intent": "regulatory_evidence_traceability",
     "template_id": "product_regulatory_evidence",
     "parameters": {
-      "productId": "PROD-AZD-CDC-TAB-10MG"
+      "productId": "PROD-NCL-CDC-TAB-10MG"
     },
     "answer_requirements": [
       "Return product and filing.",
       "Return validation evidence.",
       "Return CMC package context where available.",
-      "Mention that AZD is fictional demo naming."
+      "Mention that NCL is the NOSWAD CONSULTING LTD reference-architecture prefix."
     ],
     "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
   },

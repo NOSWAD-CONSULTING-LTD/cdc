@@ -1,0 +1,38 @@
+CDC Pharmaceutical Manufacturing Knowledge Graph Reference Architecture
+
+Copyright (c) 2026 NOSWAD CONSULTING LTD
+
+This repository is dual licensed:
+
+1. Software code is licensed under the Apache License, Version 2.0.
+2. Documentation, diagrams, Cypher seed data, ontology files, glossary content,
+   conceptual models, reference architecture materials, and demo data are licensed
+   under the Creative Commons Attribution 4.0 International License.
+
+Attribution requirement:
+
+Any use, copy, modification, distribution, publication, derivative work, training
+material, presentation, implementation, consulting deliverable, or commercial use
+that includes, adapts, or is materially based on this reference architecture must
+give appropriate credit to:
+
+NOSWAD CONSULTING LTD
+
+Suggested attribution:
+
+"Based on the CDC Pharmaceutical Manufacturing Knowledge Graph Reference
+Architecture by NOSWAD CONSULTING LTD."
+
+License references:
+
+- Apache License 2.0: https://www.apache.org/licenses/LICENSE-2.0
+- Creative Commons Attribution 4.0 International:
+  https://creativecommons.org/licenses/by/4.0/
+
+No trademark rights, endorsement, regulatory approval, validation status, or
+quality-system approval are granted by these licences.
+
+This repository is a reference architecture and demo model only. It is not a
+validated GxP system, not a real regulatory filing, not a real product control
+strategy, and not suitable for regulated decision-making without appropriate
+validation, governance, security, audit trail, and quality approval controls.
