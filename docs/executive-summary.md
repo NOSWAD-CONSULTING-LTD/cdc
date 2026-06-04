@@ -34,16 +34,16 @@ The diagram below shows the business-level flow. Source systems continue to own 
 ```mermaid
 flowchart LR
     sources["Operational And Governance Sources<br/>MES, LIMS, QMS, ERP, historian,<br/>documents, data catalog"]
-    graph["Manufacturing Knowledge Graph<br/>Product, process, lots, equipment,<br/>readings, CDEs, quality, evidence"]
+    kg["Manufacturing Knowledge Graph<br/>Product, process, lots, equipment,<br/>readings, CDEs, quality, evidence"]
     context["Shared Meaning<br/>Glossary, semantic model,<br/>ontology, standards, value domains"]
     evidence["Traceable Evidence<br/>Batch records, deviations,<br/>QA decisions, validation, CMC support"]
     decisions["Better Decisions<br/>Impact assessment, batch review,<br/>regulatory readiness, AI-assisted analysis"]
 
-    sources --> graph
-    context --> graph
-    graph --> evidence
+    sources --> kg
+    context --> kg
+    kg --> evidence
     evidence --> decisions
-    graph --> decisions
+    kg --> decisions
 ```
 
 ## What The Reference Architecture Demonstrates
@@ -72,14 +72,14 @@ flowchart TD
     semantics["Shared Meaning<br/>Glossary, semantic model,<br/>ontology, standards mapping"]
     ai["AI-Assisted Analysis<br/>RAG manifest, approved Cypher,<br/>Laravel agent, cited evidence"]
 
-    graph["Neo4j Knowledge Graph<br/>Connected manufacturing and evidence layer"]
+    kg["Neo4j Knowledge Graph<br/>Connected manufacturing and evidence layer"]
 
-    trace --> graph
-    quality --> graph
-    data --> graph
-    semantics --> graph
-    ai --> graph
-    graph --> exec
+    trace --> kg
+    quality --> kg
+    data --> kg
+    semantics --> kg
+    ai --> kg
+    kg --> exec
 ```
 
 ## What Makes This Different From A Dashboard

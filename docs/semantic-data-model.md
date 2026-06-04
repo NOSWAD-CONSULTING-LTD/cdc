@@ -373,19 +373,19 @@ flowchart LR
     sources["Source Systems<br/>ERP, MES, historian, PAT, LIMS, QMS,<br/>documents and data catalog"]
     canonical["Canonical Data Objects<br/>Shared exchange records"]
     validate["Validation And Mapping<br/>IDs, units, quality rules and provenance"]
-    graph["Neo4j Knowledge Graph<br/>Connected manufacturing and quality context"]
+    kg["Neo4j Knowledge Graph<br/>Connected manufacturing and quality context"]
     evidence["Evidence And Provenance<br/>Batch records, deviations, QA decisions,<br/>documents and provenance statements"]
     retrieval["RAG Manifest And Approved Templates<br/>Documentation context and safe Cypher"]
     agent["Laravel Agent / User Queries<br/>Evidence-grounded answers"]
 
     sources --> canonical
     canonical --> validate
-    validate --> graph
-    graph --> evidence
+    validate --> kg
+    kg --> evidence
     evidence --> retrieval
-    graph --> retrieval
+    kg --> retrieval
     retrieval --> agent
-    graph --> agent
+    kg --> agent
 ```
 
 An agent should interpret answers through this chain:
