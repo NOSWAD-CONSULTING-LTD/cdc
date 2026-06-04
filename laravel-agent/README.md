@@ -1,8 +1,24 @@
 # CDC Laravel Agent
 
-This Laravel app is the CDC Neo4j agent implementation.
+This Laravel app is the CDC Neo4j evidence agent implementation.
 
 It uses PHP 8.5, Laravel 13, and Laravel Boost. The agent intentionally uses approved Cypher templates from `resources/cdc-agent/query_templates.json` rather than generating arbitrary Cypher.
+
+## Scope
+
+The Laravel agent is a consumer of the CDC reference architecture. It is not intended to be a general assistant for explaining the reference architecture itself.
+
+It should answer CDC manufacturing evidence questions, such as:
+
+- which material lots and suppliers contributed to a run;
+- which alarms, readings, and deviations affected a run;
+- which CDEs support a CMC section;
+- which evidence supports a CDE value;
+- which equipment and sensors were involved;
+- which QA decision released or rejected a run;
+- what a Neo4j relationship means in the CDC graph.
+
+It should not be treated as the primary interface for broad architecture questions such as why Neo4j was selected, how data products fit, whether vector databases are needed, or which enterprise roles are required. Those questions are answered by the repository documentation.
 
 The agent has two entry points:
 
@@ -112,7 +128,7 @@ The response includes:
 - `answer`: deterministic evidence-grounded answer text.
 - `template_id`: approved Cypher template used.
 - `evidence`: Neo4j rows returned by the template.
-- `documents`: relevant RAG manifest records.
+- `documents`: relevant RAG manifest records used as controlled supporting context.
 - `evaluation`: required/prohibited answer checks.
 - `warnings`: demo and safety limitations.
 

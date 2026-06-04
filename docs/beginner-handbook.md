@@ -327,11 +327,13 @@ Each manifest row says:
 - which tags describe it;
 - how important it is for retrieval.
 
-The manifest is not a regulatory source of truth. It is a navigation aid for agents and humans.
+The manifest is not a regulatory source of truth. It is a controlled navigation aid for approved supporting context.
+
+In this project, the manifest does not turn the Laravel CDC agent into a general reference-architecture assistant. The agent is a consumer of the reference architecture. It answers approved CDC manufacturing evidence questions using Neo4j rows plus selected supporting context.
 
 ## 12. Agent Harnesses
 
-The project has a deterministic Laravel agent in `laravel-agent/`.
+The project has a deterministic CDC evidence agent in `laravel-agent/`.
 
 It does not let the agent generate arbitrary Cypher. Instead, it uses approved templates from `laravel-agent/resources/cdc-agent/query_templates.json`.
 
@@ -346,7 +348,7 @@ Question
 -> expected-answer checks
 ```
 
-This tests whether an AI-style workflow can answer useful questions without inventing unsupported claims.
+This tests whether an AI-style workflow can answer useful CDC manufacturing questions without inventing unsupported claims.
 
 ## 13. How To Explore The Project
 
