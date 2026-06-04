@@ -205,11 +205,13 @@ The definitions are production-inspired but simplified for demo use. They are no
 | JSONL | JSON Lines format: one JSON object per line. Useful for manifests and retrieval catalogs. | One RAG manifest record per line |
 | RAG | Retrieval-Augmented Generation: retrieving relevant project context before asking an AI model to answer. | Retrieve glossary and query pack before answering |
 | Ontology | Formal semantic model of classes, relationships, meanings, and constraints. | CDC ontology guide and Turtle file |
+| Semantic Data Model | Business-facing model that explains the meaning of concepts and relationships before they are formalized in the ontology or implemented in Neo4j. | `docs/semantic-data-model.md` |
 | Semantics | The meaning of data and relationships, not just their storage format. | `VALUE_OF` means an observed value instantiates a CDE definition |
 | Knowledge Graph | Graph that connects data with meaning, lineage, governance, and evidence. | CDC manufacturing graph |
 | Conceptual Model | Business-level model explaining important concepts and relationships. | Crystallisation-to-coating process model |
 | Logical Model | More structured model of entities, identifiers, relationships, and rules. | CDE catalog and relationship matrix |
 | Physical Model | Implemented database structure and scripts. | Neo4j labels, relationships, constraints, and Cypher seeds |
+| Model Stack | Ordered set of modeling layers from glossary and conceptual model through semantic model, ontology, physical graph, and agent/RAG interpretation. | Glossary -> semantic model -> ontology -> Neo4j |
 
 ## Standards Used In The CDE Model
 

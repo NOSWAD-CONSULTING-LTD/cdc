@@ -133,16 +133,17 @@ Recommended reading path:
 
 1. [docs/beginner-handbook.md](docs/beginner-handbook.md) for the beginner-friendly explanation of the domain, graph, ontology, AI-ready data, RAG, Cypher, and the Laravel agent.
 2. [docs/domain-glossary.md](docs/domain-glossary.md) for the ubiquitous language.
-3. [docs/commercial-use-cases.md](docs/commercial-use-cases.md) for practical commercial, consulting, and training scenarios.
-4. [docs/cdc-a4-diagram.html](docs/cdc-a4-diagram.html) for the one-page graph overview.
-5. [docs/cdc-data-flow-a4.html](docs/cdc-data-flow-a4.html) for the CDC manufacturing data flow.
-6. [docs/end-to-end-cdc-conceptual-data-model.md](docs/end-to-end-cdc-conceptual-data-model.md) for the crystallisation-to-coated-tablet model.
-7. [docs/end-to-end-cdc-cde-catalog.md](docs/end-to-end-cdc-cde-catalog.md) for the CDE catalog.
-8. [docs/end-to-end-cdc-data-model-a4.html](docs/end-to-end-cdc-data-model-a4.html) for the printable end-to-end conceptual data model.
-9. [docs/ai-readiness-evidence-a4.html](docs/ai-readiness-evidence-a4.html) for the printable AI-readiness evidence pattern.
-10. [docs/how-to-read-graph-answers.md](docs/how-to-read-graph-answers.md) for interpreting Neo4j Browser and agent answers.
-11. [docs/ontology/cdc-ontology.md](docs/ontology/cdc-ontology.md) for the formal semantic model, class hierarchy, relationship matrix, controlled vocabularies, RDF/OWL Turtle, SHACL validation shapes, and relationship map.
-12. [laravel-agent/README.md](laravel-agent/README.md) for the constrained Laravel agent CLI and API.
+3. [docs/semantic-data-model.md](docs/semantic-data-model.md) for how the glossary, conceptual model, semantic model, ontology, Neo4j graph, and RAG/agent layer relate.
+4. [docs/commercial-use-cases.md](docs/commercial-use-cases.md) for practical commercial, consulting, and training scenarios.
+5. [docs/cdc-a4-diagram.html](docs/cdc-a4-diagram.html) for the one-page graph overview.
+6. [docs/cdc-data-flow-a4.html](docs/cdc-data-flow-a4.html) for the CDC manufacturing data flow.
+7. [docs/end-to-end-cdc-conceptual-data-model.md](docs/end-to-end-cdc-conceptual-data-model.md) for the crystallisation-to-coated-tablet model.
+8. [docs/end-to-end-cdc-cde-catalog.md](docs/end-to-end-cdc-cde-catalog.md) for the CDE catalog.
+9. [docs/end-to-end-cdc-data-model-a4.html](docs/end-to-end-cdc-data-model-a4.html) for the printable end-to-end conceptual data model.
+10. [docs/ai-readiness-evidence-a4.html](docs/ai-readiness-evidence-a4.html) for the printable AI-readiness evidence pattern.
+11. [docs/how-to-read-graph-answers.md](docs/how-to-read-graph-answers.md) for interpreting Neo4j Browser and agent answers.
+12. [docs/ontology/cdc-ontology.md](docs/ontology/cdc-ontology.md) for the formal semantic model, class hierarchy, relationship matrix, controlled vocabularies, RDF/OWL Turtle, SHACL validation shapes, and relationship map.
+13. [laravel-agent/README.md](laravel-agent/README.md) for the constrained Laravel agent CLI and API.
 
 Use the query files this way:
 
@@ -156,6 +157,7 @@ Use the query files this way:
 
 Use the ontology files this way:
 
+- `docs/semantic-data-model.md`: business-facing explanation of meanings, model layers, master/reference/transactional/evidence data, and how the semantic model relates to ontology and Neo4j.
 - `docs/ontology/cdc-ontology.md`: human-readable ontology guide.
 - `docs/ontology/cdc-class-hierarchy.mmd`: Mermaid class hierarchy.
 - `docs/ontology/cdc-relationship-matrix.md`: allowed subject-predicate-object relationship patterns.

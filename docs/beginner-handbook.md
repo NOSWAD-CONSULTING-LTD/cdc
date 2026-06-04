@@ -188,13 +188,29 @@ WHERE reading.value < reading.lowerLimit OR reading.value > reading.upperLimit
 RETURN reading.readingId, reading.value, reading.unit, reading.status;
 ```
 
-## 8. Conceptual, Logical, Physical, And Ontology Models
+## 8. Conceptual, Semantic, Logical, Physical, And Ontology Models
 
 These words often get mixed together, but they serve different purposes.
+
+The simple stack is:
+
+```text
+Glossary / ubiquitous language
+-> conceptual data model
+-> semantic data model
+-> logical model
+-> ontology
+-> physical Neo4j graph
+-> RAG / agent interpretation
+```
 
 **Conceptual model**
 
 This explains the business concepts and how they relate, without worrying too much about database implementation. In this repo, see `docs/end-to-end-cdc-conceptual-data-model.md`.
+
+**Semantic data model**
+
+This explains what the concepts and relationships mean across manufacturing, quality, CMC, governance, and AI/RAG interpretation. It is the bridge between plain business language and the formal ontology. In this repo, see `docs/semantic-data-model.md`.
 
 **Logical model**
 
