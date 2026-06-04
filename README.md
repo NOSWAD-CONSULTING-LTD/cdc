@@ -139,23 +139,24 @@ Recommended reading path:
 4. [docs/semantic-data-model.md](docs/semantic-data-model.md) for how the glossary, conceptual model, logical model, canonical model, information architecture, integration model, provenance/evidence model, ontology, Neo4j graph, and RAG/agent layer relate.
 5. [docs/logical-data-model.md](docs/logical-data-model.md) for entities, identifiers, relationships, required attributes, and rules.
 6. [docs/canonical-data-model.md](docs/canonical-data-model.md) for common exchange objects that can map from source systems into Neo4j.
-7. [docs/information-architecture-model.md](docs/information-architecture-model.md) for information domains, ownership, stewardship, navigation, and lifecycle.
-8. [docs/integration-model.md](docs/integration-model.md) for how MES, LIMS, QMS, ERP, historians, documents, Neo4j, and the Laravel agent fit together.
-9. [docs/provenance-evidence-model.md](docs/provenance-evidence-model.md) for evidence chains, provenance, QA disposition support, and agent answer traceability.
-10. [docs/commercial-use-cases.md](docs/commercial-use-cases.md) for practical commercial, consulting, and training scenarios.
-11. [docs/cdc-a4-diagram.html](docs/cdc-a4-diagram.html) for the one-page graph overview.
-12. [docs/cdc-data-flow-a4.html](docs/cdc-data-flow-a4.html) for the CDC manufacturing data flow.
-13. [docs/end-to-end-cdc-conceptual-data-model.md](docs/end-to-end-cdc-conceptual-data-model.md) for the crystallisation-to-coated-tablet model.
-14. [docs/end-to-end-cdc-cde-catalog.md](docs/end-to-end-cdc-cde-catalog.md) for the CDE catalog.
-15. [docs/end-to-end-cdc-data-model-a4.html](docs/end-to-end-cdc-data-model-a4.html) for the printable end-to-end conceptual data model.
-16. [docs/ai-readiness-evidence-a4.html](docs/ai-readiness-evidence-a4.html) for the printable AI-readiness evidence pattern.
-17. [docs/how-to-read-graph-answers.md](docs/how-to-read-graph-answers.md) for interpreting Neo4j Browser and agent answers.
-18. [docs/ontology/cdc-ontology.md](docs/ontology/cdc-ontology.md) for the formal semantic model, class hierarchy, relationship matrix, controlled vocabularies, RDF/OWL Turtle, SHACL validation shapes, and relationship map.
-19. [laravel-agent/README.md](laravel-agent/README.md) for the constrained Laravel agent CLI and API.
-20. [docs/model-stack.mmd](docs/model-stack.mmd) for a Mermaid diagram of how the modeling layers relate.
-21. [docs/model-audience-creator-matrix.mmd](docs/model-audience-creator-matrix.mmd) for a Mermaid diagram of who typically creates and uses each model.
-22. [docs/data-to-evidence-flow.mmd](docs/data-to-evidence-flow.mmd) for a Mermaid diagram of source data to evidence-grounded agent answers.
-23. [docs/ontology-relationship-flow.mmd](docs/ontology-relationship-flow.mmd) for a Mermaid diagram of how semantic meaning becomes ontology, Neo4j relationships, validation, and agent interpretation.
+7. [docs/data-products.md](docs/data-products.md) for how governed data products fit between source systems, canonical models, Neo4j, evidence, and AI/RAG consumers.
+8. [docs/information-architecture-model.md](docs/information-architecture-model.md) for information domains, ownership, stewardship, navigation, and lifecycle.
+9. [docs/integration-model.md](docs/integration-model.md) for how MES, LIMS, QMS, ERP, historians, documents, Neo4j, and the Laravel agent fit together.
+10. [docs/provenance-evidence-model.md](docs/provenance-evidence-model.md) for evidence chains, provenance, QA disposition support, and agent answer traceability.
+11. [docs/commercial-use-cases.md](docs/commercial-use-cases.md) for practical commercial, consulting, and training scenarios.
+12. [docs/cdc-a4-diagram.html](docs/cdc-a4-diagram.html) for the one-page graph overview.
+13. [docs/cdc-data-flow-a4.html](docs/cdc-data-flow-a4.html) for the CDC manufacturing data flow.
+14. [docs/end-to-end-cdc-conceptual-data-model.md](docs/end-to-end-cdc-conceptual-data-model.md) for the crystallisation-to-coated-tablet model.
+15. [docs/end-to-end-cdc-cde-catalog.md](docs/end-to-end-cdc-cde-catalog.md) for the CDE catalog.
+16. [docs/end-to-end-cdc-data-model-a4.html](docs/end-to-end-cdc-data-model-a4.html) for the printable end-to-end conceptual data model.
+17. [docs/ai-readiness-evidence-a4.html](docs/ai-readiness-evidence-a4.html) for the printable AI-readiness evidence pattern.
+18. [docs/how-to-read-graph-answers.md](docs/how-to-read-graph-answers.md) for interpreting Neo4j Browser and agent answers.
+19. [docs/ontology/cdc-ontology.md](docs/ontology/cdc-ontology.md) for the formal semantic model, class hierarchy, relationship matrix, controlled vocabularies, RDF/OWL Turtle, SHACL validation shapes, and relationship map.
+20. [laravel-agent/README.md](laravel-agent/README.md) for the constrained Laravel agent CLI and API.
+21. [docs/model-stack.mmd](docs/model-stack.mmd) for a Mermaid diagram of how the modeling layers relate.
+22. [docs/model-audience-creator-matrix.mmd](docs/model-audience-creator-matrix.mmd) for a Mermaid diagram of who typically creates and uses each model.
+23. [docs/data-to-evidence-flow.mmd](docs/data-to-evidence-flow.mmd) for a Mermaid diagram of source data to evidence-grounded agent answers.
+24. [docs/ontology-relationship-flow.mmd](docs/ontology-relationship-flow.mmd) for a Mermaid diagram of how semantic meaning becomes ontology, Neo4j relationships, validation, and agent interpretation.
 
 Use the query files this way:
 
@@ -172,6 +173,7 @@ Use the architecture and model files this way:
 - `docs/semantic-data-model.md`: for information architects, ontology modelers, manufacturing data architects, quality/regulatory stakeholders, and AI/RAG teams who need the business meaning of the graph.
 - `docs/logical-data-model.md`: for data architects, solution architects, ontology modelers, integration engineers, and AI/RAG engineers who need entities, identifiers, relationships, and rules.
 - `docs/canonical-data-model.md`: for integration architects, API/event designers, data platform teams, enterprise architects, and client implementation teams who need common exchange objects.
+- `docs/data-products.md`: for executives, data product owners, data architects, data governance leads, graph engineers, and AI/RAG teams who need to understand reusable governed data products.
 - `docs/information-architecture-model.md`: for information architects, data governance leads, quality/regulatory stakeholders, enterprise architects, and workshop participants who need domains, ownership, stewardship, lifecycle, and navigation.
 - `docs/integration-model.md`: for integration architects, platform engineers, data engineers, security architects, and application teams who need source-system and runtime flow context.
 - `docs/provenance-evidence-model.md`: for quality stakeholders, CMC/regulatory stakeholders, data governance leads, AI/RAG engineers, auditors, and reviewers who need evidence paths and provenance patterns.
