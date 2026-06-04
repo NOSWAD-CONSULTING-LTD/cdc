@@ -1,5 +1,11 @@
 # Reference Architecture for CDC Manufacturing Knowledge Graphs
 
+[![Neo4j 5](https://img.shields.io/badge/Neo4j-5-4581C3)](https://neo4j.com/)
+[![Laravel](https://img.shields.io/badge/Laravel-Agent-FF2D20)](https://laravel.com/)
+[![Laravel Herd](https://img.shields.io/badge/Laravel-Herd-6B7280)](https://herd.laravel.com/)
+[![Licence](https://img.shields.io/badge/Licence-Apache--2.0%20%2B%20CC--BY--4.0-blue)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/Sponsor-NOSWAD%20CONSULTING%20LTD-0E7A5F)](https://github.com/sponsors/NOSWAD-CONSULTING-LTD)
+
 This project is a Neo4j 5 reference architecture for pharmaceutical Continuous Direct Compression (CDC) manufacturing knowledge graphs. It is production-inspired demo data for information architecture, ontology, manufacturing data architecture, AI-readiness, and traceability discussions.
 
 It models a realistic CDC tablet process around `NCL-CDC-Tablet-10mg`: product and formulation master data, ordered recipe steps, materials and suppliers, equipment and sensors, CPPs, CQAs and specifications, material lot genealogy, manufacturing runs, process readings, alarms, deviation investigations, batch record review, QA release/rejection, regulatory evidence, CDE governance, and AI-readiness evidence.
@@ -21,6 +27,19 @@ Neo4j is useful for this reference architecture because it can:
 - ground AI/RAG answers in explicit evidence paths rather than untraceable text-only summaries.
 
 This does not mean all source data should live only in Neo4j. In a real enterprise architecture, MES, LIMS, QMS, ERP, historians, document systems, and regulatory systems remain systems of record. Neo4j is used here as a connected knowledge layer that links those records into an explainable manufacturing and quality context.
+
+## Keywords And Discoverability
+
+This repository is intended for people searching for practical examples of:
+
+- pharmaceutical manufacturing knowledge graphs;
+- Continuous Direct Compression (CDC) manufacturing data architecture;
+- Neo4j manufacturing genealogy and batch traceability;
+- AI-ready manufacturing data and graph-grounded RAG;
+- Critical Data Element (CDE) governance;
+- CMC evidence traceability and regulatory knowledge management;
+- ontology, semantic modeling, and ubiquitous language for pharma manufacturing;
+- Laravel AI agents using approved Cypher templates and Neo4j evidence.
 
 ## Start Neo4j
 
@@ -162,6 +181,22 @@ curl -X POST http://localhost:8000/api/agent/ask \
   -H "Content-Type: application/json" \
   -d '{"question":"What does REJECTS mean?","question_id":"q013_relationship_definition"}'
 ```
+
+If using [Laravel Herd](https://herd.laravel.com) as a parked site, open:
+
+```text
+http://laravel-agent.test/agent
+```
+
+Or call the API at:
+
+```bash
+curl -X POST http://laravel-agent.test/api/agent/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question":"What does REJECTS mean?","question_id":"q013_relationship_definition"}'
+```
+
+See [laravel-agent/README.md](laravel-agent/README.md) for full Herd setup notes.
 
 The easiest Neo4j Browser visualisation queries are:
 
@@ -427,11 +462,11 @@ This reference architecture is maintained by NOSWAD CONSULTING LTD.
 
 If it helps your team, you can support continued public development, documentation, and example models through [GitHub Sponsors](https://github.com/sponsors/NOSWAD-CONSULTING-LTD).
 
-Commercial support, training, workshops, and client-specific implementation services are also available from NOSWAD CONSULTING LTD.
+Commercial support, training, workshops, and client-specific implementation services are also available from [NOSWAD CONSULTING LTD](https://noswad.co.uk).
 
 ## Licence And Attribution
 
-Copyright (c) 2026 NOSWAD CONSULTING LTD.
+Copyright (c) 2026 [NOSWAD CONSULTING LTD](https://noswad.co.uk).
 
 This repository uses a dual licence:
 

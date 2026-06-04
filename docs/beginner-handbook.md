@@ -348,6 +348,18 @@ curl -X POST http://localhost:8000/api/agent/ask \
   -d '{"question":"What does REJECTS mean?","question_id":"q013_relationship_definition"}'
 ```
 
+If you are using [Laravel Herd](https://herd.laravel.com) and the `Herd` folder is parked, open the browser UI at:
+
+```text
+http://laravel-agent.test/agent
+```
+
+The equivalent Herd API URL is:
+
+```text
+http://laravel-agent.test/api/agent/ask
+```
+
 ## 15. What Not To Assume
 
 Do not assume:

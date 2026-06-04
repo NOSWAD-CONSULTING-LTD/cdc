@@ -7,9 +7,63 @@ It uses PHP 8.5, Laravel 13, and Laravel Boost. The agent intentionally uses app
 The agent has two entry points:
 
 - CLI: `php85 artisan cdc-agent:evaluate`
+- Browser UI: `/agent`
 - HTTP API: `POST /api/agent/ask`
 
-## Run
+## Run With Laravel Herd
+
+This project is designed to work from a [Laravel Herd](https://herd.laravel.com) workspace on macOS.
+
+The repository root is expected to be inside Herd, for example:
+
+```text
+/Users/simondawson/Herd/cdc
+```
+
+The Laravel app lives one level down:
+
+```text
+/Users/simondawson/Herd/cdc/laravel-agent
+```
+
+### Option 1: Herd Parked Site
+
+If Herd is serving the `Herd` folder, the app should be available using a Herd local domain based on the folder name:
+
+```text
+http://laravel-agent.test/agent
+```
+
+If that URL does not resolve, open Herd and check that:
+
+- the `Herd` directory is parked;
+- the `laravel-agent` folder is visible as a site;
+- the site is using PHP 8.5;
+- Docker Desktop is running;
+- the parent Neo4j container is running with `docker compose up -d` from the repository root.
+
+### Option 2: Herd PHP CLI
+
+From the Laravel app directory:
+
+```bash
+cd /Users/simondawson/Herd/cdc/laravel-agent
+php85 artisan serve
+```
+
+Then open:
+
+```text
+http://localhost:8000/agent
+```
+
+The API endpoint will be:
+
+```text
+http://localhost:8000/api/agent/ask
+```
+
+## Run The CLI Agent
 
 From this directory:
 
@@ -37,7 +91,15 @@ php85 artisan cdc-agent:evaluate --question=q009_cde_value_series --show-answer
 
 ## API
 
-Ask a question through the Laravel API:
+If using Herd parked sites:
+
+```bash
+curl -X POST http://laravel-agent.test/api/agent/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question":"What does REJECTS mean?","question_id":"q013_relationship_definition"}'
+```
+
+If using `php85 artisan serve`:
 
 ```bash
 curl -X POST http://localhost:8000/api/agent/ask \

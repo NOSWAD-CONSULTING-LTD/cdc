@@ -4,6 +4,7 @@ message: "If you use this reference architecture, please credit NOSWAD CONSULTIN
 type: software
 authors:
   - name: "NOSWAD CONSULTING LTD"
+    website: "https://noswad.co.uk"
 date-released: "2026-06-04"
 license: "Apache-2.0 AND CC-BY-4.0"
 abstract: "A Neo4j and Laravel reference architecture for a pharmaceutical Continuous Direct Compression manufacturing knowledge graph, including CDC process data, CDEs, ontology artifacts, AI-readiness checks, and an evidence-grounded agent."

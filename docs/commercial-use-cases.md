@@ -90,7 +90,7 @@ The project can support short training sessions for:
 
 ## Services NOSWAD CONSULTING LTD Can Provide
 
-NOSWAD CONSULTING LTD can use this reference architecture as a baseline for:
+[NOSWAD CONSULTING LTD](https://noswad.co.uk) can use this reference architecture as a baseline for:
 
 - executive briefings;
 - architecture workshops;
