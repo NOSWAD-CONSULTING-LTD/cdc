@@ -12,6 +12,24 @@ It models a realistic CDC tablet process around `NCL-CDC-Tablet-10mg`: product a
 
 `NCL-CDC-Tablet-10mg` is a fictional safe demo product name. In this project, `NCL` is the NOSWAD CONSULTING LTD reference-architecture prefix, `CDC` means Continuous Direct Compression, `Tablet` is the dosage form, and `10mg` is the strength. It is not intended to identify a real medicine or real commercial product.
 
+## Table Of Contents
+
+- [Why Neo4j?](#why-neo4j)
+- [Keywords And Discoverability](#keywords-and-discoverability)
+- [Start Neo4j](#start-neo4j)
+- [Load The Graph](#load-the-graph)
+- [How To Read This Project](#how-to-read-this-project)
+- [Model Overview](#model-overview)
+- [Master, Reference, And Transactional Data](#master-reference-and-transactional-data)
+- [AI-Ready Data Pattern](#ai-ready-data-pattern)
+- [Labels](#labels)
+- [Example Questions](#example-questions)
+- [Demo Data Notes](#demo-data-notes)
+- [Limitations](#limitations)
+- [Commercial Use And Services](#commercial-use-and-services)
+- [Support This Work](#support-this-work)
+- [Licence And Attribution](#licence-and-attribution)
+
 ## Why Neo4j?
 
 Neo4j was chosen because CDC manufacturing knowledge is naturally connected data. The important questions are rarely about one table in isolation; they are about paths across product definitions, recipes, equipment, sensors, material lots, process readings, deviations, QA decisions, CMC evidence, standards, and ontology concepts.
@@ -463,6 +481,11 @@ This reference architecture is maintained by NOSWAD CONSULTING LTD.
 If it helps your team, you can support continued public development, documentation, and example models through [GitHub Sponsors](https://github.com/sponsors/NOSWAD-CONSULTING-LTD).
 
 Commercial support, training, workshops, and client-specific implementation services are also available from [NOSWAD CONSULTING LTD](https://noswad.co.uk).
+
+Contact:
+
+- Email: [admin@noswad.co.uk](mailto:admin@noswad.co.uk)
+- LinkedIn: [Simon Dawson](https://www.linkedin.com/in/simon-dawson-70517931/)
 
 ## Licence And Attribution
 
