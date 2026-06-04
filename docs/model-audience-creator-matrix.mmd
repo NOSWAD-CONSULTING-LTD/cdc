@@ -1,0 +1,74 @@
+flowchart LR
+    subgraph creators["Typical Creators"]
+        ba["Business Analyst / Domain SME"]
+        ia["Information Architect"]
+        da["Data Architect"]
+        ea["Enterprise Architect"]
+        intArch["Integration Architect"]
+        ont["Ontology Modeler / Semantic Architect"]
+        qreg["Quality / Regulatory / CMC"]
+        graphEng["Graph / Data / Application Engineer"]
+    end
+
+    subgraph models["Reference Architecture Models"]
+        glossary["Glossary / Ubiquitous Language"]
+        conceptual["Conceptual Data Model"]
+        semantic["Semantic Data Model"]
+        logical["Logical Data Model"]
+        canonical["Canonical Data Model"]
+        info["Information Architecture Model"]
+        integration["Integration Model"]
+        evidence["Provenance And Evidence Model"]
+        ontology["Ontology"]
+        physical["Physical Neo4j Graph Model"]
+    end
+
+    subgraph users["Primary Users / Reviewers"]
+        workshop["Workshop Participants"]
+        manu["Manufacturing / MSAT"]
+        quality["Quality / QA / QC"]
+        regulatory["Regulatory / CMC"]
+        governance["Data Governance"]
+        platform["Platform / Integration / Data Engineering"]
+        ai["AI / RAG / Agent Teams"]
+        reviewers["Auditors / Reviewers"]
+    end
+
+    ba --> glossary
+    ba --> conceptual
+    ia --> glossary
+    ia --> conceptual
+    ia --> semantic
+    ia --> info
+    da --> semantic
+    da --> logical
+    da --> canonical
+    ea --> info
+    ea --> canonical
+    intArch --> canonical
+    intArch --> integration
+    ont --> semantic
+    ont --> ontology
+    qreg --> evidence
+    qreg --> semantic
+    graphEng --> physical
+
+    glossary --> workshop
+    conceptual --> workshop
+    semantic --> manu
+    semantic --> quality
+    semantic --> regulatory
+    logical --> platform
+    canonical --> platform
+    info --> governance
+    info --> workshop
+    integration --> platform
+    integration --> ai
+    evidence --> quality
+    evidence --> regulatory
+    evidence --> ai
+    evidence --> reviewers
+    ontology --> governance
+    ontology --> ai
+    physical --> platform
+    physical --> ai

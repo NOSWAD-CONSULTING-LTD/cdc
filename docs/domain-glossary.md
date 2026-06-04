@@ -210,8 +210,12 @@ The definitions are production-inspired but simplified for demo use. They are no
 | Knowledge Graph | Graph that connects data with meaning, lineage, governance, and evidence. | CDC manufacturing graph |
 | Conceptual Model | Business-level model explaining important concepts and relationships. | Crystallisation-to-coating process model |
 | Logical Model | More structured model of entities, identifiers, relationships, and rules. | CDE catalog and relationship matrix |
+| Canonical Data Model | Common exchange model used to map different source-system records into shared objects. | SensorMeasurementRecord maps to SensorReading |
+| Information Architecture Model | Model explaining domains, ownership, stewardship, source-system boundaries, navigation, and lifecycle. | Product knowledge, quality evidence, data governance |
+| Integration Model | Model explaining how data moves between source systems, canonical objects, Neo4j, documents, and agents. | MES -> canonical object -> Neo4j |
+| Provenance And Evidence Model | Model explaining how values, decisions, mappings, and answers are supported by traceable evidence. | Deviation -> Alarm -> SensorReading |
 | Physical Model | Implemented database structure and scripts. | Neo4j labels, relationships, constraints, and Cypher seeds |
-| Model Stack | Ordered set of modeling layers from glossary and conceptual model through semantic model, ontology, physical graph, and agent/RAG interpretation. | Glossary -> semantic model -> ontology -> Neo4j |
+| Model Stack | Ordered set of modeling layers from glossary and conceptual model through semantic, logical, canonical, information, integration, provenance, ontology, physical graph, and agent/RAG interpretation. | Glossary -> semantic model -> ontology -> Neo4j |
 
 ## Standards Used In The CDE Model
 

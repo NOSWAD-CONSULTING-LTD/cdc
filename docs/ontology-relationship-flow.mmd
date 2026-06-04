@@ -1,0 +1,25 @@
+flowchart TD
+    semantic["Semantic Data Model<br/>Business meaning of concepts and relationships"]
+    ontologyGuide["Ontology Guide<br/>Class groups and semantic patterns"]
+    relationshipMatrix["Relationship Matrix<br/>Allowed subject-predicate-object patterns"]
+    controlledVocab["Controlled Vocabularies<br/>Allowed values and classifications"]
+    relationshipMap["Relationship Map JSON<br/>Neo4j relationship to ontology predicate mapping"]
+    turtle["RDF / OWL Turtle<br/>Machine-readable ontology terms"]
+    shacl["SHACL Shapes<br/>Validation expectations"]
+    neo4j["Neo4j Physical Graph<br/>Labels, relationships, properties and constraints"]
+    queries["Cypher Checks And Queries<br/>Integrity checks, AI-readiness checks and browser queries"]
+    agent["Agent / RAG Answers<br/>Evidence-grounded interpretation"]
+
+    semantic --> ontologyGuide
+    ontologyGuide --> relationshipMatrix
+    ontologyGuide --> controlledVocab
+    ontologyGuide --> turtle
+    relationshipMatrix --> relationshipMap
+    relationshipMatrix --> neo4j
+    controlledVocab --> neo4j
+    relationshipMap --> neo4j
+    turtle --> shacl
+    shacl --> queries
+    neo4j --> queries
+    queries --> agent
+    neo4j --> agent

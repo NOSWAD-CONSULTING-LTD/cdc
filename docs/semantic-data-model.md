@@ -14,6 +14,22 @@ The semantic data model helps information architects, ontology modelers, manufac
 - how CDC process knowledge connects to CMC, QMS, CDE, ontology, and agent evidence;
 - how the Neo4j graph should be interpreted during workshops, queries, and AI-assisted analysis.
 
+## Primary Audience
+
+| Audience | Why They Use This Model |
+| --- | --- |
+| Information architects | To align language, meaning, relationships, and information domains. |
+| Ontology modelers | To bridge business meaning into formal classes, predicates, and constraints. |
+| Manufacturing data architects | To connect process, quality, material, equipment, run, and CDE concepts. |
+| Quality and regulatory stakeholders | To understand how CMC, QMS, evidence, and disposition concepts fit together. |
+| AI/RAG teams | To understand which meanings and evidence paths should ground agent answers. |
+
+## Who Creates It In An Enterprise
+
+The semantic data model is usually created by an **information architect**, **ontology modeler**, or **enterprise data architect**.
+
+It should be co-created with domain SMEs from manufacturing, MSAT, quality, regulatory/CMC, data governance, and AI/RAG teams so that the model reflects both business meaning and machine interpretation needs.
+
 ## How This Relates To The Ontology
 
 The semantic data model and ontology are related, but they are not the same artifact.
@@ -45,6 +61,11 @@ The project uses several modeling layers. They should not be treated as duplicat
 | Glossary | What do the words and acronyms mean? | `docs/domain-glossary.md` |
 | Conceptual model | What business concepts and process stages matter? | `docs/end-to-end-cdc-conceptual-data-model.md` |
 | Semantic data model | What do the concepts and relationships mean across business, quality, regulatory, and data governance contexts? | This document |
+| Logical data model | Which entities, identifiers, attributes, relationships, and rules are needed before implementation? | `docs/logical-data-model.md` |
+| Canonical data model | Which common exchange objects can systems share? | `docs/canonical-data-model.md` |
+| Information architecture model | How is information organized, owned, governed, and navigated? | `docs/information-architecture-model.md` |
+| Integration model | How could data move between systems, Neo4j, and the agent? | `docs/integration-model.md` |
+| Provenance and evidence model | How are values, decisions, mappings, and answers supported by traceable evidence? | `docs/provenance-evidence-model.md` |
 | Ontology | What are the formal classes, predicates, allowed patterns, vocabularies, and constraints? | `docs/ontology/` |
 | Physical graph model | How is the model implemented in Neo4j? | `cypher/*.cypher` |
 | Agent/RAG layer | Which evidence can an agent retrieve and cite? | `docs/rag-manifest.jsonl`, `laravel-agent/resources/cdc-agent/` |
@@ -52,6 +73,39 @@ The project uses several modeling layers. They should not be treated as duplicat
 ## How The Models Fit Together
 
 The model stack moves from human language to executable graph data.
+
+The Mermaid source for this diagram is available at `docs/model-stack.mmd`.
+
+```mermaid
+flowchart TD
+    glossary["Glossary / Ubiquitous Language<br/>Shared words and acronyms"]
+    conceptual["Conceptual Data Model<br/>Business concepts and process stages"]
+    semantic["Semantic Data Model<br/>Business meaning of concepts and relationships"]
+    logical["Logical Data Model<br/>Entities, identifiers, attributes and rules"]
+    canonical["Canonical Data Model<br/>Common exchange objects across systems"]
+    info["Information Architecture Model<br/>Domains, ownership, stewardship and navigation"]
+    integration["Integration Model<br/>Source systems, data movement and runtime boundaries"]
+    evidence["Provenance And Evidence Model<br/>Traceable support for values, decisions and answers"]
+    ontology["Ontology<br/>Classes, predicates, vocabularies and constraints"]
+    physical["Physical Neo4j Graph Model<br/>Labels, relationships, constraints, indexes and seed data"]
+    agent["RAG / Agent Interpretation<br/>Approved queries, retrieval context and evidence-grounded answers"]
+
+    glossary --> conceptual
+    conceptual --> semantic
+    semantic --> logical
+    logical --> canonical
+    semantic --> info
+    canonical --> integration
+    info --> integration
+    semantic --> evidence
+    logical --> ontology
+    semantic --> ontology
+    ontology --> physical
+    integration --> physical
+    evidence --> physical
+    physical --> agent
+    evidence --> agent
+```
 
 ```text
 Ubiquitous language
@@ -71,6 +125,22 @@ Logical model
   Defines entities, identifiers, attributes, relationships, cardinality expectations,
   and reusable rules.
   Example: CriticalDataElement has owner, steward, source system, value domain, and standard mapping.
+
+Canonical data model
+  Defines common exchange objects that can be mapped from source systems into the graph.
+  Example: SensorMeasurementRecord can map to SensorReading, Sensor, CQA, CPP, and ManufacturingRun.
+
+Information architecture model
+  Explains ownership, stewardship, source-system boundaries, navigation, and lifecycle.
+  Example: QA owns disposition evidence; MSAT may own process CDE definitions.
+
+Integration model
+  Explains how source systems, canonical objects, Neo4j, documents, and agents fit together.
+  Example: QMS deviations and historian alarms remain in source systems but are linked in Neo4j.
+
+Provenance and evidence model
+  Explains how values, mappings, and decisions are supported by traceable evidence.
+  Example: StandardMapping is supported by ProvenanceStatement; CDEValue is evidenced by EvidenceDocument.
 
 Ontology
   Formalizes meaning as classes, predicates, controlled vocabularies, and constraints.
@@ -96,6 +166,10 @@ The same concept can appear in several layers. For example, `MaterialLot` is:
 - a retrievable concept for agent answers.
 
 The layers should stay aligned. If a label, relationship, or CDE is added to the graph, the glossary, semantic model, ontology, relationship matrix, and RAG manifest may also need updates.
+
+The Mermaid source for typical model creators and audiences is available at `docs/model-audience-creator-matrix.mmd`.
+
+The Mermaid source for how semantic meaning flows into ontology and Neo4j implementation is available at `docs/ontology-relationship-flow.mmd`.
 
 ## Core Business Concepts
 
@@ -291,6 +365,28 @@ These mappings support architecture discussion, CDE governance, and evidence tra
 ## AI, RAG, And Agent Interpretation
 
 The semantic data model helps AI-assisted workflows avoid unsupported answers.
+
+The Mermaid source for the data-to-evidence flow is available at `docs/data-to-evidence-flow.mmd`.
+
+```mermaid
+flowchart LR
+    sources["Source Systems<br/>ERP, MES, historian, PAT, LIMS, QMS,<br/>documents and data catalog"]
+    canonical["Canonical Data Objects<br/>Shared exchange records"]
+    validate["Validation And Mapping<br/>IDs, units, quality rules and provenance"]
+    graph["Neo4j Knowledge Graph<br/>Connected manufacturing and quality context"]
+    evidence["Evidence And Provenance<br/>Batch records, deviations, QA decisions,<br/>documents and provenance statements"]
+    retrieval["RAG Manifest And Approved Templates<br/>Documentation context and safe Cypher"]
+    agent["Laravel Agent / User Queries<br/>Evidence-grounded answers"]
+
+    sources --> canonical
+    canonical --> validate
+    validate --> graph
+    graph --> evidence
+    evidence --> retrieval
+    graph --> retrieval
+    retrieval --> agent
+    graph --> agent
+```
 
 An agent should interpret answers through this chain:
 

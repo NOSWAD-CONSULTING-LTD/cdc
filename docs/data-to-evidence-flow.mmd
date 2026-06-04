@@ -1,0 +1,35 @@
+flowchart LR
+    subgraph sources["Source Systems"]
+        erp["ERP / Material Management"]
+        mes["MES / EBR"]
+        hist["Historian / DCS / PLC"]
+        pat["PAT Platform"]
+        lims["LIMS"]
+        qms["QMS"]
+        docs["Document / Regulatory Systems"]
+        catalog["Data Catalog / Governance Tool"]
+    end
+
+    canonical["Canonical Data Objects<br/>ProductDefinition, MaterialLotRecord,<br/>SensorMeasurementRecord, CDEValueRecord,<br/>QualityEventRecord, EvidenceRecord"]
+    validate["Validation And Mapping<br/>IDs, units, source systems,<br/>quality rules and provenance checks"]
+    graph["Neo4j Knowledge Graph<br/>Products, recipes, runs, lots,<br/>equipment, readings, CDEs and evidence"]
+    evidence["Evidence And Provenance<br/>Batch records, deviations, QA decisions,<br/>evidence documents, audit events,<br/>provenance statements"]
+    retrieval["RAG Manifest And Approved Templates<br/>Documentation chunks and safe Cypher queries"]
+    agent["Laravel Agent / User Queries<br/>Evidence-grounded answers with caveats"]
+
+    erp --> canonical
+    mes --> canonical
+    hist --> canonical
+    pat --> canonical
+    lims --> canonical
+    qms --> canonical
+    docs --> canonical
+    catalog --> canonical
+
+    canonical --> validate
+    validate --> graph
+    graph --> evidence
+    evidence --> retrieval
+    graph --> retrieval
+    retrieval --> agent
+    graph --> agent

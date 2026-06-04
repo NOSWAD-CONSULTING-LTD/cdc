@@ -1,0 +1,28 @@
+flowchart TD
+    glossary["Glossary / Ubiquitous Language<br/>Shared words and acronyms"]
+    conceptual["Conceptual Data Model<br/>Business concepts and process stages"]
+    semantic["Semantic Data Model<br/>Business meaning of concepts and relationships"]
+    logical["Logical Data Model<br/>Entities, identifiers, attributes and rules"]
+    canonical["Canonical Data Model<br/>Common exchange objects across systems"]
+    info["Information Architecture Model<br/>Domains, ownership, stewardship and navigation"]
+    integration["Integration Model<br/>Source systems, data movement and runtime boundaries"]
+    evidence["Provenance And Evidence Model<br/>Traceable support for values, decisions and answers"]
+    ontology["Ontology<br/>Classes, predicates, vocabularies and constraints"]
+    physical["Physical Neo4j Graph Model<br/>Labels, relationships, constraints, indexes and seed data"]
+    agent["RAG / Agent Interpretation<br/>Approved queries, retrieval context and evidence-grounded answers"]
+
+    glossary --> conceptual
+    conceptual --> semantic
+    semantic --> logical
+    logical --> canonical
+    semantic --> info
+    canonical --> integration
+    info --> integration
+    semantic --> evidence
+    logical --> ontology
+    semantic --> ontology
+    ontology --> physical
+    integration --> physical
+    evidence --> physical
+    physical --> agent
+    evidence --> agent

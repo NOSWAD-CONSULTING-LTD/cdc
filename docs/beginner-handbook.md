@@ -194,11 +194,17 @@ These words often get mixed together, but they serve different purposes.
 
 The simple stack is:
 
+For a visual version, see `docs/model-stack.mmd`.
+
 ```text
 Glossary / ubiquitous language
 -> conceptual data model
 -> semantic data model
 -> logical model
+-> canonical data model
+-> information architecture model
+-> integration model
+-> provenance and evidence model
 -> ontology
 -> physical Neo4j graph
 -> RAG / agent interpretation
@@ -214,7 +220,23 @@ This explains what the concepts and relationships mean across manufacturing, qua
 
 **Logical model**
 
-This starts to define entities, attributes, relationships, identifiers, and rules. The CDE catalog and ontology relationship matrix are closer to logical model artifacts.
+This starts to define entities, attributes, relationships, identifiers, and rules. It is mainly for data architects, solution architects, ontology modelers, integration engineers, and AI/RAG engineers. In this repo, see `docs/logical-data-model.md`.
+
+**Canonical data model**
+
+This defines shared exchange objects that can move between systems, such as material lot records, sensor measurement records, quality event records, and evidence records. It is mainly for integration architects, API/event designers, data platform teams, and enterprise architects. In this repo, see `docs/canonical-data-model.md`.
+
+**Information architecture model**
+
+This explains how information is organized, owned, governed, navigated, and reused. It is mainly for information architects, data governance leads, quality/regulatory stakeholders, enterprise architects, and workshop participants. In this repo, see `docs/information-architecture-model.md`.
+
+**Integration model**
+
+This explains how source systems such as MES, LIMS, QMS, ERP, historians, documents, Neo4j, and the Laravel agent fit together. It is mainly for integration architects, platform engineers, data engineers, security architects, and application teams. In this repo, see `docs/integration-model.md`.
+
+**Provenance and evidence model**
+
+This explains how values, deviations, QA decisions, standard mappings, and agent answers are supported by evidence. It is mainly for quality stakeholders, CMC/regulatory stakeholders, data governance leads, AI/RAG engineers, auditors, and reviewers. In this repo, see `docs/provenance-evidence-model.md`.
 
 **Physical model**
 
@@ -228,6 +250,24 @@ An ontology defines domain meaning more formally: classes, predicates, allowed r
 - `docs/ontology/cdc-ontology.ttl` is an RDF/OWL-style ontology file.
 - `docs/ontology/cdc-shacl-shapes.ttl` shows SHACL-style validation rules.
 - `docs/ontology/relationship-map.json` maps Neo4j relationship types to ontology predicates.
+- `docs/ontology-relationship-flow.mmd` shows how semantic meaning flows into ontology, Neo4j implementation, validation, and agent interpretation.
+
+### Who Usually Creates These Models?
+
+For a visual version, see `docs/model-audience-creator-matrix.mmd`.
+
+| Model | Typical Creator In An Enterprise | Main Reviewers / Users |
+| --- | --- | --- |
+| Glossary / ubiquitous language | Business analyst, information architect, domain SME | Everyone using the domain language |
+| Conceptual data model | Business analyst, domain architect, information architect | Business SMEs, architects, data teams |
+| Semantic data model | Information architect, ontology modeler, enterprise data architect | Manufacturing, MSAT, quality, regulatory, AI/RAG teams |
+| Logical data model | Data architect or solution data architect | Integration teams, ontology modelers, source-system owners |
+| Canonical data model | Integration architect, enterprise data architect, platform data architect | API/event designers, data platform teams, implementation teams |
+| Information architecture model | Information architect, enterprise architect, data governance lead | Business owners, quality/regulatory, system owners |
+| Integration model | Integration architect, solution architect, platform architect | Data engineers, security, application teams, source-system owners |
+| Provenance and evidence model | Data governance lead, quality representative, regulatory/CMC representative, data architect | AI/RAG teams, auditors, reviewers, compliance stakeholders |
+| Ontology | Ontology modeler, semantic architect, enterprise data architect | Data governance, AI/RAG, architecture, domain SMEs |
+| Physical Neo4j graph model | Graph engineer, data engineer, application engineer | Architects, developers, operations teams |
 
 ## 9. Semantics
 
@@ -274,6 +314,8 @@ The goal is not to make the AI "magically know pharma." The goal is to give it e
 RAG means **Retrieval-Augmented Generation**.
 
 Instead of asking an AI model to answer from memory, a RAG workflow retrieves relevant project documents first, then asks the model to answer using those documents and graph query results.
+
+For a visual explanation of how source data becomes evidence-grounded answers, see `docs/data-to-evidence-flow.mmd`.
 
 `docs/rag-manifest.jsonl` is a manifest of useful retrieval chunks. JSONL means **JSON Lines**: one JSON object per line.
 
