@@ -14,21 +14,23 @@ It models a realistic CDC tablet process around `NCL-CDC-Tablet-10mg`: product a
 
 ## Table Of Contents
 
-- [Why Neo4j?](#why-neo4j)
-- [Keywords And Discoverability](#keywords-and-discoverability)
-- [Start Neo4j](#start-neo4j)
-- [Load The Graph](#load-the-graph)
-- [How To Read This Project](#how-to-read-this-project)
-- [Model Overview](#model-overview)
-- [Master, Reference, And Transactional Data](#master-reference-and-transactional-data)
-- [AI-Ready Data Pattern](#ai-ready-data-pattern)
-- [Labels](#labels)
-- [Example Questions](#example-questions)
-- [Demo Data Notes](#demo-data-notes)
-- [Limitations](#limitations)
-- [Commercial Use And Services](#commercial-use-and-services)
-- [Support This Work](#support-this-work)
-- [Licence And Attribution](#licence-and-attribution)
+- [Reference Architecture for CDC Manufacturing Knowledge Graphs](#reference-architecture-for-cdc-manufacturing-knowledge-graphs)
+  - [Table Of Contents](#table-of-contents)
+  - [Why Neo4j?](#why-neo4j)
+  - [Keywords And Discoverability](#keywords-and-discoverability)
+  - [Start Neo4j](#start-neo4j)
+  - [Load The Graph](#load-the-graph)
+  - [How To Read This Project](#how-to-read-this-project)
+  - [Model Overview](#model-overview)
+  - [Master, Reference, And Transactional Data](#master-reference-and-transactional-data)
+  - [AI-Ready Data Pattern](#ai-ready-data-pattern)
+  - [Labels](#labels)
+  - [Example Questions](#example-questions)
+  - [Demo Data Notes](#demo-data-notes)
+  - [Limitations](#limitations)
+  - [Commercial Use And Services](#commercial-use-and-services)
+  - [Support This Work](#support-this-work)
+  - [Licence And Attribution](#licence-and-attribution)
 
 ## Why Neo4j?
 
@@ -479,8 +481,6 @@ See [docs/commercial-use-cases.md](docs/commercial-use-cases.md) for practical u
 This reference architecture is maintained by NOSWAD CONSULTING LTD.
 
 If it helps your team, you can support continued public development, documentation, and example models through [GitHub Sponsors](https://github.com/sponsors/NOSWAD-CONSULTING-LTD).
-
-Commercial support, training, workshops, and client-specific implementation services are also available from [NOSWAD CONSULTING LTD](https://noswad.co.uk).
 
 Contact:
 
