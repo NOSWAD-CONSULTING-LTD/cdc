@@ -463,16 +463,7 @@ This is a reference architecture and demonstration model. It is not a validated 
 
 This public repository is intended to demonstrate the reference architecture and create a shared language for CDC manufacturing knowledge graphs, CDE governance, CMC evidence traceability, ontology design, and AI-ready data.
 
-Organisations can use the public materials under the licence terms, with attribution to NOSWAD CONSULTING LTD. For client-specific or production-facing work, NOSWAD CONSULTING LTD can provide services such as:
-
-- AI-ready manufacturing data assessments;
-- CDE catalog and data governance design;
-- ontology and ubiquitous-language workshops;
-- Neo4j manufacturing knowledge graph proof-of-concepts;
-- CMC/QMS evidence traceability architecture;
-- Laravel/RAG/agent proof-of-concepts grounded in graph evidence;
-- training and executive education using the reference architecture;
-- client-specific extensions, integrations, and implementation roadmaps.
+Organisations can use the public materials under the licence terms, with attribution to NOSWAD CONSULTING LTD. 
 
 See [docs/commercial-use-cases.md](docs/commercial-use-cases.md) for practical use cases.
 
