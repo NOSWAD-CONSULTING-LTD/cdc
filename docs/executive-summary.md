@@ -133,27 +133,42 @@ Without this modelling work, the organisation may still be able to build dashboa
 
 Each artifact exists because it answers a different executive, business, architecture, or delivery question. Removing one of them creates a gap.
 
-| Artifact | Why It Matters |
-| --- | --- |
-| Executive summary | Gives sponsors and decision-makers a plain-English view of value, scope, risk, and next steps. |
-| Beginner handbook | Helps new stakeholders understand the domain quickly without needing prior graph, pharma, or AI knowledge. |
-| Domain glossary | Creates a ubiquitous language so teams can agree what terms such as CDE, CPP, CQA, batch, lot, and evidence mean. |
-| Conceptual model | Shows the business process from crystallisation to coated tablet before technology choices dominate the discussion. |
-| Semantic data model | Explains the business meaning of concepts and relationships so the graph is not just connected data, but interpretable knowledge. |
-| Logical data model | Defines entities, identifiers, attributes, and rules so implementation teams know what must be represented consistently. |
-| Canonical data model | Provides common exchange objects so source-system differences do not leak directly into every integration and graph design. |
-| Information architecture model | Clarifies information domains, ownership, stewardship, lifecycle, and navigation so the model can be governed. |
-| Integration model | Explains how MES, LIMS, QMS, ERP, historians, documents, Neo4j, and the agent layer could fit together. |
-| Provenance and evidence model | Shows how values, mappings, decisions, and AI answers can be traced back to supporting evidence. |
-| Ontology and relationship matrix | Formalise meaning as classes, relationships, vocabularies, and constraints so humans and machines use the same interpretation. |
-| Controlled vocabularies | Reduce ambiguity in statuses, classifications, criticality, severity, units, and data domains. |
-| Cypher constraints and seed scripts | Turn the architecture into a working graph that can be inspected, queried, refreshed, and tested. |
-| Query library | Shows the real questions the graph can answer and provides reusable examples for workshops and validation. |
-| RAG manifest | Tells an AI-assisted workflow which documents are retrievable, what they are useful for, and how they should be ranked. |
-| Laravel agent | Demonstrates a constrained agent pattern using approved questions, approved Cypher, graph evidence, and document retrieval. |
-| Validation and integrity checks | Provide confidence that the demo graph remains coherent as the model evolves. |
+| Artifact | Why It Matters | Impact If It Is Not Done |
+| --- | --- | --- |
+| Executive summary | Gives sponsors and decision-makers a plain-English view of value, scope, risk, and next steps. | Senior stakeholders may see only technical activity, not the business reason for the investment. |
+| Beginner handbook | Helps new stakeholders understand the domain quickly without needing prior graph, pharma, or AI knowledge. | Onboarding takes longer and discussions become dependent on a small number of specialists. |
+| Domain glossary | Creates a ubiquitous language so teams can agree what terms such as CDE, CPP, CQA, batch, lot, and evidence mean. | Teams may use the same words differently, causing rework, poor requirements, and inconsistent reporting. |
+| Conceptual model | Shows the business process from crystallisation to coated tablet before technology choices dominate the discussion. | The design may optimise for systems or data structures before agreeing the business process and scope. |
+| Semantic data model | Explains the business meaning of concepts and relationships so the graph is not just connected data, but interpretable knowledge. | The graph may contain links, but users and AI tools may misinterpret what those links mean. |
+| Logical data model | Defines entities, identifiers, attributes, and rules so implementation teams know what must be represented consistently. | Implementations may diverge, duplicate concepts, miss required identifiers, or create weak traceability. |
+| Canonical data model | Provides common exchange objects so source-system differences do not leak directly into every integration and graph design. | Every integration may become point-to-point and source-specific, increasing cost and making reuse difficult. |
+| Information architecture model | Clarifies information domains, ownership, stewardship, lifecycle, and navigation so the model can be governed. | Nobody is clearly accountable for definitions, quality, lifecycle, or information ownership. |
+| Integration model | Explains how MES, LIMS, QMS, ERP, historians, documents, Neo4j, and the agent layer could fit together. | The graph may become an isolated prototype rather than part of an enterprise data architecture. |
+| Provenance and evidence model | Shows how values, mappings, decisions, and AI answers can be traced back to supporting evidence. | Answers may be hard to defend, audit, or trust, especially for quality, regulatory, and AI-assisted use cases. |
+| Ontology and relationship matrix | Formalise meaning as classes, relationships, vocabularies, and constraints so humans and machines use the same interpretation. | Relationship meaning may drift over time, making analytics, governance, and AI interpretation inconsistent. |
+| Controlled vocabularies | Reduce ambiguity in statuses, classifications, criticality, severity, units, and data domains. | Free-text or inconsistent values can break reporting, filtering, validation, and automated reasoning. |
+| Cypher constraints and seed scripts | Turn the architecture into a working graph that can be inspected, queried, refreshed, and tested. | The architecture remains theoretical and cannot be demonstrated, validated, or reused reliably. |
+| Query library | Shows the real questions the graph can answer and provides reusable examples for workshops and validation. | Stakeholders may not see practical value, and teams may test the graph with inconsistent or unsafe queries. |
+| RAG manifest | Tells an AI-assisted workflow which documents are retrievable, what they are useful for, and how they should be ranked. | AI retrieval may become ad hoc, hard to evaluate, and unable to explain why a source was used. |
+| Laravel agent | Demonstrates a constrained agent pattern using approved questions, approved Cypher, graph evidence, and document retrieval. | AI experimentation may jump straight to unconstrained prompting without guardrails, repeatability, or evidence checks. |
+| Validation and integrity checks | Provide confidence that the demo graph remains coherent as the model evolves. | Errors can accumulate silently, reducing trust in demos, workshops, and downstream AI-assisted answers. |
 
 The key point for executives: the artifacts are not separate deliverables competing for attention. They are layers of assurance. Together they help an organisation move from disconnected records to explainable, governed, AI-ready manufacturing knowledge.
+
+## Impact Of Under-Investing In Modelling
+
+The practical risk is not that the organisation has no data. The risk is that the organisation has data that cannot be trusted or reused across boundaries.
+
+If the modelling work is skipped or treated as a low-value technical exercise, typical impacts include:
+
+- **Slower decisions** because teams must manually reconcile systems, documents, and definitions every time a cross-functional question is asked.
+- **Higher delivery cost** because each integration and dashboard recreates its own interpretation of the same business concepts.
+- **Weaker auditability** because facts, decisions, source records, and supporting evidence are not connected in a way that can be inspected.
+- **Poor AI readiness** because AI tools need definitions, context, approved retrieval sources, and evidence paths, not just raw documents or database tables.
+- **Inconsistent governance** because ownership, stewardship, data quality rules, and standards mappings remain implicit or fragmented.
+- **Prototype fragility** because demos may work for one use case but cannot scale into a governed enterprise capability.
+
+The investment in modelling is therefore an investment in reducing ambiguity, integration cost, compliance risk, and AI adoption risk.
 
 ## Strategic Use Cases
 
