@@ -170,6 +170,46 @@ If the modelling work is skipped or treated as a low-value technical exercise, t
 
 The investment in modelling is therefore an investment in reducing ambiguity, integration cost, compliance risk, and AI adoption risk.
 
+## People, Roles, And Skills Required
+
+This type of reference architecture is not delivered by technology roles alone. It needs a cross-functional team because the graph connects manufacturing meaning, data structure, quality evidence, regulatory context, integration, and AI-assisted use.
+
+The exact team size depends on scope, but the capability mix is consistent.
+
+| Role | Why They Are Needed | Key Skills |
+| --- | --- | --- |
+| Executive sponsor | Sets priority, removes organisational blockers, and ensures the work is tied to business outcomes rather than becoming a technical experiment. | Strategic decision-making, investment prioritisation, stakeholder alignment, risk appetite. |
+| Product owner or business lead | Owns the use cases, success criteria, and delivery priorities. | Manufacturing or quality process knowledge, backlog ownership, value definition, stakeholder management. |
+| Manufacturing SME | Explains how the process actually works, including unit operations, equipment, CPPs, material flow, and operational constraints. | CDC process knowledge, batch genealogy, process control, shop-floor reality, deviation context. |
+| Quality SME | Ensures deviations, alarms, batch records, QA disposition, data integrity, and evidence expectations are represented correctly. | GMP, QMS, deviation management, batch review, audit readiness, data integrity. |
+| Regulatory / CMC SME | Connects manufacturing and quality evidence to regulatory expectations and CMC submission structure. | CMC, CTD Module 3, control strategy, validation evidence, regulatory traceability. |
+| Information architect | Shapes the shared language, information domains, ownership model, and how stakeholders navigate the architecture. | Ubiquitous language, information modelling, taxonomy, stewardship, enterprise information design. |
+| Data architect | Defines logical entities, identifiers, relationships, canonical objects, data quality expectations, and integration boundaries. | Data modelling, canonical modelling, source-system mapping, data governance, master/reference/transactional data design. |
+| Ontology or semantic modeller | Formalises meaning so concepts, relationships, vocabularies, and constraints can be understood by both humans and machines. | Ontology design, RDF/OWL concepts, SHACL-style constraints, controlled vocabularies, semantic interoperability. |
+| Graph engineer | Implements the model in Neo4j and designs efficient, readable graph patterns and Cypher queries. | Neo4j, Cypher, constraints, indexes, graph modelling, query performance, graph visualization. |
+| Data engineer or integration engineer | Connects source-system data into canonical objects and graph loading patterns. | ETL/ELT, APIs/events, data pipelines, validation, data contracts, operational monitoring. |
+| AI / RAG engineer | Designs retrieval, approved query patterns, evidence-grounded answers, and evaluation harnesses. | RAG, prompt and retrieval design, agent guardrails, evaluation, secure tool use, evidence citation. |
+| Security and platform engineer | Ensures the platform can be operated safely with appropriate access, secrets, environments, and runtime controls. | IAM, RBAC, secrets management, containerisation, observability, deployment, network/security controls. |
+| Validation / CSV lead | Defines what would be required if the pattern moved from demo to validated regulated use. | CSV, validation planning, test evidence, change control, risk-based validation, GxP documentation. |
+| Delivery lead or architect | Coordinates the work across roles and keeps the architecture coherent as scope expands. | Architecture governance, delivery planning, dependency management, workshop facilitation, decision records. |
+
+For a small proof of concept, several responsibilities may be combined. For example, one senior architect may cover information architecture, data architecture, and graph modelling, while SMEs provide review input. For enterprise rollout, these responsibilities should become explicit so ownership, validation, security, and operational support are not left until the end.
+
+## Role Involvement By Phase
+
+Executives usually need to understand when roles are required, not just which roles exist.
+
+| Phase | Primary Roles | Purpose |
+| --- | --- | --- |
+| 1. Scope the value question | Executive sponsor, product owner, manufacturing SME, quality SME, regulatory/CMC SME, delivery lead. | Agree the business question, decision value, boundaries, and success criteria. |
+| 2. Align language and meaning | Information architect, ontology modeller, data architect, SMEs. | Define shared terms, relationships, CDEs, standards context, and interpretation rules. |
+| 3. Design the architecture | Data architect, integration architect, graph engineer, platform/security engineer, AI/RAG engineer. | Define logical, canonical, integration, provenance, graph, and agent patterns. |
+| 4. Build the proof of concept | Graph engineer, data engineer, AI/RAG engineer, platform engineer, product owner. | Load representative data, implement queries, test evidence paths, and demonstrate value. |
+| 5. Validate and govern | Quality SME, validation/CSV lead, data governance, security, regulatory/CMC SME. | Assess data integrity, evidence quality, controls, validation needs, and governance model. |
+| 6. Scale or industrialise | Executive sponsor, enterprise architecture, platform teams, data governance, operations, quality. | Decide whether to move from proof of concept into a supported enterprise capability. |
+
+The important executive point is that roles change by phase. Heavy SME input is needed early to avoid modelling the wrong reality. Strong engineering and platform input is needed during implementation. Quality, validation, security, and governance become critical before any move toward regulated or operational use.
+
 ## Strategic Use Cases
 
 This reference architecture can support conversations about:
