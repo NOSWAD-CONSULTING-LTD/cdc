@@ -11,7 +11,7 @@ Each line is one retrievable project source. The manifest does not store embeddi
 | `chunk_id` | Stable identifier for this retrievable source. |
 | `path` | Project-relative path to the source file. |
 | `title` | Human-readable title. |
-| `content_type` | Source category, such as documentation, cypher-validation, ontology, or agent-evaluation. |
+| `content_type` | Source category used for filtering or ranking retrieval records. Current examples include `handbook`, `glossary`, `semantic-model`, `logical-model`, `canonical-model`, `information-architecture`, `integration-model`, `provenance-evidence-model`, `ontology`, `controlled-vocabulary`, `machine-readable-ontology`, `conceptual-model`, `catalog`, `cypher`, `cypher-seed`, `cypher-validation`, `cypher-security`, `script`, `diagram`, `diagram-source`, `application-doc`, `agent-registry`, `commercial-guide`, `guide`, `documentation`, and `validation`. |
 | `summary` | Short human-readable summary of the source. |
 | `retrieval_text` | Compact retrieval-oriented text containing likely search terms and answer context. |
 | `answers` | Example questions this source can help answer. |

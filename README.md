@@ -12,25 +12,23 @@ It models a realistic CDC tablet process around `NCL-CDC-Tablet-10mg`: product a
 
 `NCL-CDC-Tablet-10mg` is a fictional safe demo product name. In this project, `NCL` is the NOSWAD CONSULTING LTD reference-architecture prefix, `CDC` means Continuous Direct Compression, `Tablet` is the dosage form, and `10mg` is the strength. It is not intended to identify a real medicine or real commercial product.
 
-## Table Of Contents
+## Table of Contents
 
-- [Reference Architecture for CDC Manufacturing Knowledge Graphs](#reference-architecture-for-cdc-manufacturing-knowledge-graphs)
-  - [Table Of Contents](#table-of-contents)
-  - [Why Neo4j?](#why-neo4j)
-  - [Keywords And Discoverability](#keywords-and-discoverability)
-  - [Start Neo4j](#start-neo4j)
-  - [Load The Graph](#load-the-graph)
-  - [How To Read This Project](#how-to-read-this-project)
-  - [Model Overview](#model-overview)
-  - [Master, Reference, And Transactional Data](#master-reference-and-transactional-data)
-  - [AI-Ready Data Pattern](#ai-ready-data-pattern)
-  - [Labels](#labels)
-  - [Example Questions](#example-questions)
-  - [Demo Data Notes](#demo-data-notes)
-  - [Limitations](#limitations)
-  - [Commercial Use And Services](#commercial-use-and-services)
-  - [Support This Work](#support-this-work)
-  - [Licence And Attribution](#licence-and-attribution)
+- [Why Neo4j?](#why-neo4j)
+- [Keywords And Discoverability](#keywords-and-discoverability)
+- [Start Neo4j](#start-neo4j)
+- [Load The Graph](#load-the-graph)
+- [How To Read This Project](#how-to-read-this-project)
+- [Model Overview](#model-overview)
+- [Master, Reference, And Transactional Data](#master-reference-and-transactional-data)
+- [AI-Ready Data Pattern](#ai-ready-data-pattern)
+- [Labels](#labels)
+- [Example Questions](#example-questions)
+- [Demo Data Notes](#demo-data-notes)
+- [Limitations](#limitations)
+- [Commercial Use And Services](#commercial-use-and-services)
+- [Support This Work](#support-this-work)
+- [Licence And Attribution](#licence-and-attribution)
 
 ## Why Neo4j?
 
@@ -129,6 +127,8 @@ Start with the project in five layers:
 4. **CDE registry**: critical data elements mapped to unit operations, source systems, owners, stewards, data quality rules, standards, and CTD Module 3 sections.
 5. **AI-readiness layer**: CDE value domains, units of measure, representative and time-series CDE values, definition versions, approvals, provenance statements, and validation checks.
 
+If you are new to the project, read the first three documents first. They explain the domain, the terminology, and how the different models fit together.
+
 Recommended reading path:
 
 1. [docs/beginner-handbook.md](docs/beginner-handbook.md) for the beginner-friendly explanation of the domain, graph, ontology, AI-ready data, RAG, Cypher, and the Laravel agent.
@@ -164,7 +164,7 @@ Use the query files this way:
 - `cypher/12_security_agent_user.cypher`: creates the separate `cdc_agent_reader` account used by the Laravel agent.
 - `scripts/refresh-and-test.sh`: full graph refresh and validation script.
 
-Use the ontology files this way:
+Use the architecture and model files this way:
 
 - `docs/semantic-data-model.md`: for information architects, ontology modelers, manufacturing data architects, quality/regulatory stakeholders, and AI/RAG teams who need the business meaning of the graph.
 - `docs/logical-data-model.md`: for data architects, solution architects, ontology modelers, integration engineers, and AI/RAG engineers who need entities, identifiers, relationships, and rules.
@@ -176,6 +176,9 @@ Use the ontology files this way:
 - `docs/model-audience-creator-matrix.mmd`: Mermaid diagram showing typical model creators, model artifacts, and primary users/reviewers.
 - `docs/data-to-evidence-flow.mmd`: Mermaid diagram showing source systems, canonical objects, graph loading, evidence, RAG, and agent answers.
 - `docs/ontology-relationship-flow.mmd`: Mermaid diagram showing semantic model, ontology guide, relationship matrix, controlled vocabularies, RDF/OWL, SHACL, Neo4j, Cypher checks, and agent interpretation.
+
+Use the ontology files this way:
+
 - `docs/ontology/cdc-ontology.md`: human-readable ontology guide.
 - `docs/ontology/cdc-class-hierarchy.mmd`: Mermaid class hierarchy.
 - `docs/ontology/cdc-relationship-matrix.md`: allowed subject-predicate-object relationship patterns.
@@ -183,6 +186,9 @@ Use the ontology files this way:
 - `docs/ontology/relationship-map.json`: machine-readable Neo4j relationship to ontology predicate mapping.
 - `docs/ontology/cdc-ontology.ttl`: RDF/OWL-style ontology.
 - `docs/ontology/cdc-shacl-shapes.ttl`: SHACL-style validation rules for required properties and relationships.
+
+Use the RAG and agent files this way:
+
 - `docs/rag-manifest.jsonl`: stable document chunks and retrieval metadata for RAG or agent evaluation.
 - `docs/rag-manifest-readme.md`: schema and usage notes for the RAG manifest.
 - `laravel-agent/resources/cdc-agent/`: approved Laravel agent questions, expected answers, and Cypher templates.
