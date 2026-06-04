@@ -133,7 +133,7 @@ If you are new to the project, read the executive summary and the first three do
 
 Recommended reading path:
 
-1. [docs/executive-summary.md](docs/executive-summary.md) for the non-technical executive view of purpose, business value, capabilities, and next steps.
+1. [docs/executive-summary.md](docs/executive-summary.md) for the non-technical executive view of purpose, business value, modelling justification, impact of skipping artifacts, roles and skills, capabilities, and next steps.
 2. [docs/beginner-handbook.md](docs/beginner-handbook.md) for the beginner-friendly explanation of the domain, graph, ontology, AI-ready data, RAG, Cypher, and the Laravel agent.
 3. [docs/domain-glossary.md](docs/domain-glossary.md) for the ubiquitous language.
 4. [docs/semantic-data-model.md](docs/semantic-data-model.md) for how the glossary, conceptual model, logical model, canonical model, information architecture, integration model, provenance/evidence model, ontology, Neo4j graph, and RAG/agent layer relate.
