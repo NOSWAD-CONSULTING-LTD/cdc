@@ -210,6 +210,94 @@ Executives usually need to understand when roles are required, not just which ro
 
 The important executive point is that roles change by phase. Heavy SME input is needed early to avoid modelling the wrong reality. Strong engineering and platform input is needed during implementation. Quality, validation, security, and governance become critical before any move toward regulated or operational use.
 
+## Executive Role Questions
+
+Senior stakeholders often ask whether this work belongs to one specialist role. The short answer is: one role may lead parts of it, but no single role can own the whole outcome safely.
+
+### Is This An Information Architect's Role?
+
+Partly, yes. An information architect is central because the work depends on shared meaning, domains, ownership, terminology, and navigation.
+
+The information architect should usually lead or strongly shape:
+
+- the ubiquitous language;
+- the information domains;
+- the semantic model;
+- ownership and stewardship patterns;
+- how different stakeholder groups understand and navigate the model.
+
+But an information architect should not be expected to do everything. They need manufacturing, quality, CMC, data engineering, ontology, graph engineering, security, and validation input. Otherwise, the model may be elegant but disconnected from operational reality, source-system constraints, regulatory expectations, or implementation feasibility.
+
+Executive interpretation: the information architect is a key design authority for meaning and structure, not the only delivery role.
+
+### Is This A Knowledge Graph Engineer's Role?
+
+Partly, yes. A knowledge graph engineer or graph engineer is essential once the model needs to become a working Neo4j graph.
+
+The graph engineer should usually lead or strongly shape:
+
+- Neo4j labels, relationship patterns, constraints, and indexes;
+- Cypher query design;
+- graph loading patterns;
+- graph-friendly visualisation queries;
+- performance and maintainability of the graph implementation.
+
+But a graph engineer should not be asked to invent the business meaning alone. If they build without strong input from information architecture, SMEs, data architecture, quality, and regulatory stakeholders, the result may be technically impressive but semantically weak.
+
+Executive interpretation: the graph engineer turns the model into a working graph, but the business meaning must be co-designed.
+
+### Is This A Data Architect's Role?
+
+Partly, yes. A data architect is needed to ensure the architecture has consistent identifiers, entities, relationships, source-system boundaries, canonical exchange objects, and data quality expectations.
+
+The data architect should usually lead or strongly shape:
+
+- the logical data model;
+- the canonical data model;
+- data contracts and source-system mapping;
+- master, reference, transactional, evidence, and governance data separation;
+- integration boundaries and data quality rules.
+
+But the data architect needs input from the information architect for meaning, the graph engineer for implementation patterns, and SMEs for domain truth.
+
+Executive interpretation: the data architect makes the model structurally reliable and reusable across systems.
+
+### Is This An Ontology Specialist's Role?
+
+Partly, yes, if the organisation wants formal semantic governance or machine-readable meaning.
+
+The ontology specialist should usually lead or strongly shape:
+
+- class hierarchy;
+- relationship semantics;
+- controlled vocabularies;
+- RDF/OWL-style ontology expressions;
+- SHACL-style constraints;
+- semantic alignment between business concepts and machine-readable definitions.
+
+But ontology work must be grounded in real business language and implementation needs. If it is isolated from delivery, it can become too abstract to use.
+
+Executive interpretation: ontology specialists formalise meaning, but they need information architecture, SME, and graph implementation feedback.
+
+### Who Is Accountable Overall?
+
+For a proof of concept, accountability usually sits with a product owner or delivery lead, supported by a senior architect who can integrate the information, data, graph, and AI perspectives.
+
+For enterprise rollout, accountability should be split clearly:
+
+| Accountability | Typical Owner |
+| --- | --- |
+| Business value and prioritisation | Executive sponsor and product owner |
+| Shared meaning and information domains | Information architect |
+| Data structure and integration consistency | Data architect |
+| Formal semantic model and ontology | Ontology or semantic modeller |
+| Neo4j implementation and graph queries | Graph engineer |
+| AI-assisted retrieval and answer behaviour | AI/RAG engineer |
+| Data integrity, QA evidence, and regulated use expectations | Quality, regulatory/CMC, and validation leads |
+| Security, access, runtime operations | Security and platform engineering |
+
+The executive decision is not "which single role owns this?" The better decision is "which role leads each layer, and how do we make sure the layers stay aligned?"
+
 ## Strategic Use Cases
 
 This reference architecture can support conversations about:
