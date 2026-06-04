@@ -1,0 +1,165 @@
+classDiagram
+  class Thing
+
+  class ProductDomain
+  class Product
+  class Formulation
+  class Material
+  class MaterialLot
+  class Supplier
+  class IntermediateProduct
+
+  class ProcessDomain
+  class Recipe
+  class ProcessStep
+  class ProcessSegment
+  class UnitOperation
+  class MaterialTransformation
+  class ControlPoint
+  class SamplingPoint
+
+  class AssetDomain
+  class ManufacturingSite
+  class ManufacturingLine
+  class Room
+  class Equipment
+  class Sensor
+  class DataSourceSystem
+
+  class QualityDomain
+  class CPP
+  class CQA
+  class CriticalMaterialAttribute
+  class Specification
+  class SensorReading
+  class AnalyticalMethod
+  class AnalyticalResult
+  class Alarm
+  class Deviation
+  class QAReleaseDecision
+
+  class ManufacturingExecutionDomain
+  class ManufacturingRun
+  class BatchRecord
+  class CleaningRecord
+  class CalibrationRecord
+  class Operator
+
+  class GovernanceDomain
+  class CMCPackage
+  class RegulatoryFiling
+  class RegulatorySection
+  class ValidationEvidence
+  class EvidenceDocument
+  class ProcessValidation
+  class ControlStrategy
+  class RiskAssessment
+  class ChangeControl
+  class SOP
+  class TrainingRecord
+  class EquipmentQualification
+  class ComputerSystemValidation
+  class AuditTrailEvent
+
+  class DataGovernanceDomain
+  class CriticalDataElement
+  class DataStandard
+  class StandardMapping
+  class DataQualityRule
+  class DataOwner
+  class DataSteward
+  class ValueDomain
+  class UnitOfMeasure
+  class AllowedValue
+  class CDEVersion
+  class CDEDefinitionApproval
+  class CDEValue
+  class ProvenanceStatement
+  class CDEDomain
+  class CriticalityLevel
+  class DecisionStatus
+  class RunStatus
+  class DeviationSeverity
+  class RelationshipDefinition
+
+  Thing <|-- ProductDomain
+  Thing <|-- ProcessDomain
+  Thing <|-- AssetDomain
+  Thing <|-- QualityDomain
+  Thing <|-- ManufacturingExecutionDomain
+  Thing <|-- GovernanceDomain
+  Thing <|-- DataGovernanceDomain
+
+  ProductDomain <|-- Product
+  ProductDomain <|-- Formulation
+  ProductDomain <|-- Material
+  ProductDomain <|-- MaterialLot
+  ProductDomain <|-- Supplier
+  ProductDomain <|-- IntermediateProduct
+
+  ProcessDomain <|-- Recipe
+  ProcessDomain <|-- ProcessStep
+  ProcessDomain <|-- ProcessSegment
+  ProcessDomain <|-- UnitOperation
+  ProcessDomain <|-- MaterialTransformation
+  ProcessDomain <|-- ControlPoint
+  ProcessDomain <|-- SamplingPoint
+
+  AssetDomain <|-- ManufacturingSite
+  AssetDomain <|-- ManufacturingLine
+  AssetDomain <|-- Room
+  AssetDomain <|-- Equipment
+  AssetDomain <|-- Sensor
+  AssetDomain <|-- DataSourceSystem
+
+  QualityDomain <|-- CPP
+  QualityDomain <|-- CQA
+  QualityDomain <|-- CriticalMaterialAttribute
+  QualityDomain <|-- Specification
+  QualityDomain <|-- SensorReading
+  QualityDomain <|-- AnalyticalMethod
+  QualityDomain <|-- AnalyticalResult
+  QualityDomain <|-- Alarm
+  QualityDomain <|-- Deviation
+  QualityDomain <|-- QAReleaseDecision
+
+  ManufacturingExecutionDomain <|-- ManufacturingRun
+  ManufacturingExecutionDomain <|-- BatchRecord
+  ManufacturingExecutionDomain <|-- CleaningRecord
+  ManufacturingExecutionDomain <|-- CalibrationRecord
+  ManufacturingExecutionDomain <|-- Operator
+
+  GovernanceDomain <|-- CMCPackage
+  GovernanceDomain <|-- RegulatoryFiling
+  GovernanceDomain <|-- RegulatorySection
+  GovernanceDomain <|-- ValidationEvidence
+  GovernanceDomain <|-- EvidenceDocument
+  GovernanceDomain <|-- ProcessValidation
+  GovernanceDomain <|-- ControlStrategy
+  GovernanceDomain <|-- RiskAssessment
+  GovernanceDomain <|-- ChangeControl
+  GovernanceDomain <|-- SOP
+  GovernanceDomain <|-- TrainingRecord
+  GovernanceDomain <|-- EquipmentQualification
+  GovernanceDomain <|-- ComputerSystemValidation
+  GovernanceDomain <|-- AuditTrailEvent
+
+  DataGovernanceDomain <|-- CriticalDataElement
+  DataGovernanceDomain <|-- DataStandard
+  DataGovernanceDomain <|-- StandardMapping
+  DataGovernanceDomain <|-- DataQualityRule
+  DataGovernanceDomain <|-- DataOwner
+  DataGovernanceDomain <|-- DataSteward
+  DataGovernanceDomain <|-- ValueDomain
+  DataGovernanceDomain <|-- UnitOfMeasure
+  DataGovernanceDomain <|-- AllowedValue
+  DataGovernanceDomain <|-- CDEVersion
+  DataGovernanceDomain <|-- CDEDefinitionApproval
+  DataGovernanceDomain <|-- CDEValue
+  DataGovernanceDomain <|-- ProvenanceStatement
+  DataGovernanceDomain <|-- CDEDomain
+  DataGovernanceDomain <|-- CriticalityLevel
+  DataGovernanceDomain <|-- DecisionStatus
+  DataGovernanceDomain <|-- RunStatus
+  DataGovernanceDomain <|-- DeviationSeverity
+  DataGovernanceDomain <|-- RelationshipDefinition

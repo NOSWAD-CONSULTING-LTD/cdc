@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDC AI Readiness Evidence Diagram</title>
+  <style>
+    @page { size: A4 landscape; margin: 10mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #17202a;
+      background: #f4f6f7;
+    }
+    .page {
+      width: 277mm;
+      min-height: 190mm;
+      margin: 0 auto;
+      padding: 10mm;
+      background: #ffffff;
+    }
+    h1 {
+      margin: 0 0 3mm;
+      font-size: 20pt;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 0 0 7mm;
+      font-size: 9.5pt;
+      color: #4d5b66;
+      max-width: 235mm;
+      line-height: 1.35;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1.1fr 1.15fr;
+      gap: 5mm;
+      align-items: stretch;
+    }
+    .lane {
+      border: 1px solid #c9d2d8;
+      border-radius: 4px;
+      padding: 4mm;
+      background: #fbfcfd;
+      min-height: 135mm;
+    }
+    .lane h2 {
+      margin: 0 0 4mm;
+      font-size: 12pt;
+      color: #12384a;
+    }
+    .box {
+      border: 1px solid #9fb3bf;
+      border-left: 4px solid #216869;
+      border-radius: 4px;
+      padding: 3mm;
+      margin-bottom: 3mm;
+      background: #ffffff;
+    }
+    .box.alt { border-left-color: #6b4e9b; }
+    .box.warn { border-left-color: #b76e00; }
+    .box.good { border-left-color: #2e7d32; }
+    .title {
+      font-weight: 700;
+      font-size: 9.5pt;
+      margin-bottom: 1mm;
+    }
+    .text {
+      font-size: 8pt;
+      line-height: 1.32;
+      color: #34424c;
+    }
+    .arrow {
+      text-align: center;
+      color: #6c7a84;
+      font-size: 12pt;
+      margin: -1mm 0 1mm;
+    }
+    .footer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+      margin-top: 5mm;
+    }
+    .note {
+      border-top: 2px solid #d5dde3;
+      padding-top: 2mm;
+      font-size: 7.7pt;
+      line-height: 1.28;
+      color: #3b4a54;
+    }
+    code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 7.5pt;
+      background: #eef3f5;
+      padding: 0 1mm;
+      border-radius: 2px;
+    }
+    @media print {
+      body { background: #ffffff; }
+      .page { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>CDC AI Readiness Evidence Pattern</h1>
+    <p class="subtitle">
+      This diagram shows how a user question should move through approved query templates, graph evidence, CDE semantics, document provenance, and answer controls. It is a demo reference architecture, not a validated GxP workflow.
+    </p>
+
+    <section class="grid">
+      <div class="lane">
+        <h2>Question And Retrieval</h2>
+        <div class="box">
+          <div class="title">User Question</div>
+          <div class="text">Example: Which evidence documents support inline NIR blend uniformity?</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box">
+          <div class="title">Approved Template</div>
+          <div class="text"><code>evidence_documents_for_cde</code> binds <code>cdeId</code>. The agent does not invent arbitrary Cypher.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box alt">
+          <div class="title">RAG Manifest</div>
+          <div class="text"><code>docs/rag-manifest.jsonl</code> points the agent to relevant docs: handbook, glossary, ontology, CDE catalog, and query packs.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box warn">
+          <div class="title">Answer Guardrails</div>
+          <div class="text">Expected-answer checks require evidence IDs and reject unsafe claims such as real approval or validated GxP status.</div>
+        </div>
+      </div>
+
+      <div class="lane">
+        <h2>Graph Evidence</h2>
+        <div class="box">
+          <div class="title">CDE Definition</div>
+          <div class="text"><code>CriticalDataElement</code> stores definition, owner, steward, source system, standards, CMC section, and quality rules.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box">
+          <div class="title">Observed Value</div>
+          <div class="text"><code>CDEValue</code> stores a demo observed value and links to <code>ValueDomain</code>, <code>UnitOfMeasure</code>, and <code>ManufacturingRun</code>.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box alt">
+          <div class="title">Execution Evidence</div>
+          <div class="text"><code>SensorReading</code>, <code>Alarm</code>, <code>Deviation</code>, <code>BatchRecord</code>, and <code>QAReleaseDecision</code> show what happened.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box good">
+          <div class="title">Document Evidence</div>
+          <div class="text"><code>EvidenceDocument</code>, <code>ValidationEvidence</code>, and <code>ProvenanceStatement</code> provide citation-style context.</div>
+        </div>
+      </div>
+
+      <div class="lane">
+        <h2>Answer And Audit</h2>
+        <div class="box">
+          <div class="title">Grounded Answer</div>
+          <div class="text">Answer uses rows returned by Neo4j and includes IDs, document titles, statuses, summaries, and limitations.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box alt">
+          <div class="title">Semantic Checks</div>
+          <div class="text">The answer preserves distinctions: CDE definition vs CDE value, process parameter vs quality attribute, release vs reject.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box good">
+          <div class="title">Validation Checks</div>
+          <div class="text"><code>cypher/10_ai_readiness_checks.cypher</code> and <code>cypher/11_graph_integrity_checks.cypher</code> check metadata, evidence, and structure.</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="box warn">
+          <div class="title">Residual Limits</div>
+          <div class="text">Demo data is fictional and incomplete. Neo4j Community does not provide server-enforced read-only RBAC.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="note"><strong>Key graph pattern:</strong><br><code>CDEValue -> CriticalDataElement -> ValueDomain -> UnitOfMeasure</code></div>
+      <div class="note"><strong>Evidence pattern:</strong><br><code>EvidenceDocument -> CDEValue / StandardMapping / QAReleaseDecision</code></div>
+      <div class="note"><strong>Disposition pattern:</strong><br><code>QAReleaseDecision -> RELEASES or REJECTS -> ManufacturingRun</code></div>
+      <div class="note"><strong>Agent pattern:</strong><br><code>Question -> Template -> Rows -> Checked Answer</code></div>
+    </section>
+  </main>
+</body>
+</html>

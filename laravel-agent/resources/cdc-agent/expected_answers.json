@@ -1,0 +1,190 @@
+[
+  {
+    "question_id": "q001_material_genealogy",
+    "must_include": [
+      "LOT-API-AZD-240501-A",
+      "LOT-MCC-260430-17",
+      "LOT-LACTOSE-260415-09",
+      "LOT-CCS-260421-05",
+      "LOT-MGST-260402-02",
+      "DirectComp Excipients Ltd",
+      "Pharma Lubricants GmbH"
+    ],
+    "must_not_claim": [
+      "real commercial product",
+      "validated GxP release"
+    ]
+  },
+  {
+    "question_id": "q002_deviation_cause",
+    "must_include": [
+      "DEV-CDC-20260601-001",
+      "ALM-NIR-BU-20260601-001",
+      "Inline NIR blend uniformity",
+      "Room relative humidity"
+    ],
+    "must_not_claim": [
+      "batch rejected",
+      "patient impact confirmed"
+    ]
+  },
+  {
+    "question_id": "q003_cde_ctd_section",
+    "must_include": [
+      "CTD-3.2.P.3.4",
+      "CDE-CDC-BLEND-NIR",
+      "CDE-CDC-COMPRESSION-FORCE",
+      "ICH Q13"
+    ],
+    "must_not_claim": [
+      "complete regulatory filing",
+      "approved submission"
+    ]
+  },
+  {
+    "question_id": "q004_ai_readiness_gaps",
+    "must_include": [
+      "CDE governance completeness",
+      "CDE semantic grounding",
+      "CDE value metadata coverage",
+      "Standard mapping provenance",
+      "passing"
+    ],
+    "must_not_claim": [
+      "production AI validation",
+      "GxP validated"
+    ]
+  },
+  {
+    "question_id": "q005_cde_value_evidence",
+    "must_include": [
+      "CDE-CDC-BLEND-NIR",
+      "Inline NIR blend uniformity",
+      "%RSD",
+      "RUN-CDC-2026-06-01-001",
+      "READ-NIR-BU-1020"
+    ],
+    "must_not_claim": [
+      "all real sensor history loaded",
+      "validated PAT model"
+    ]
+  },
+  {
+    "question_id": "q006_equipment_sensors_released_run",
+    "must_include": [
+      "Release",
+      "API feeding",
+      "Continuous blending",
+      "Tablet compression",
+      "Tablet press",
+      "Inline NIR blend uniformity"
+    ],
+    "must_not_claim": [
+      "rejected run",
+      "commercial production line"
+    ]
+  },
+  {
+    "question_id": "q007_regulatory_evidence",
+    "must_include": [
+      "AZD-CDC-Tablet-10mg",
+      "REG-FILING-AZD-CDC-DEMO-001",
+      "VAL-PAT-NIR-001",
+      "VAL-PPQ-CDC-001",
+      "fictional"
+    ],
+    "must_not_claim": [
+      "real medicine",
+      "approved product"
+    ]
+  },
+  {
+    "question_id": "q008_process_path",
+    "must_include": [
+      "Crystallisation",
+      "Isolation, filtration, and washing",
+      "Drying",
+      "Milling, micronisation, and sieving",
+      "Semi-continuous powder coating",
+      "Powder coated tablet collection",
+      "QA, CMC, and regulatory evidence review"
+    ],
+    "must_not_claim": [
+      "wet granulation",
+      "process ends at compression"
+    ]
+  },
+  {
+    "question_id": "q009_cde_value_series",
+    "must_include": [
+      "CDE-COAT-WEIGHT-GAIN",
+      "Coating weight gain",
+      "1.2",
+      "2.4",
+      "3.1",
+      "%",
+      "RUN-CDC-2026-06-01-001"
+    ],
+    "must_not_claim": [
+      "real sensor history loaded",
+      "validated coating control strategy"
+    ]
+  },
+  {
+    "question_id": "q010_cde_evidence_documents",
+    "must_include": [
+      "EVDOC-NIR-BU-260601",
+      "Demo NIR blend uniformity trend extract",
+      "PAT trend extract",
+      "CDE-CDC-BLEND-NIR-RUN-CDC-2026-06-01-001",
+      "fictional"
+    ],
+    "must_not_claim": [
+      "validated GxP evidence",
+      "real regulatory document"
+    ]
+  },
+  {
+    "question_id": "q011_run_disposition_comparison",
+    "must_include": [
+      "RUN-CDC-2026-06-01-001",
+      "RUN-CDC-2026-06-02-002",
+      "Release",
+      "Reject",
+      "DEV-CDC-20260602-002",
+      "ALM-NIR-BU-20260602-002"
+    ],
+    "must_not_claim": [
+      "commercial production",
+      "patient impact confirmed"
+    ]
+  },
+  {
+    "question_id": "q012_cde_controlled_vocabulary",
+    "must_include": [
+      "CDE-CDC-BLEND-NIR",
+      "Inline NIR blend uniformity",
+      "CQA",
+      "Critical",
+      "Critical quality attribute data"
+    ],
+    "must_not_claim": [
+      "measured result",
+      "sensor reading value"
+    ]
+  },
+  {
+    "question_id": "q013_relationship_definition",
+    "must_include": [
+      "REJECTS",
+      "rejects",
+      "QAReleaseDecision",
+      "ManufacturingRun",
+      "rejects a manufacturing run"
+    ],
+    "must_not_claim": [
+      "release relationship",
+      "approved product"
+    ]
+  }
+]

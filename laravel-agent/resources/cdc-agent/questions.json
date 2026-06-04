@@ -1,0 +1,202 @@
+[
+  {
+    "id": "q001_material_genealogy",
+    "question": "Which material lots and suppliers contributed to the released run RUN-CDC-2026-06-01-001?",
+    "intent": "trace_material_genealogy",
+    "template_id": "trace_material_genealogy",
+    "parameters": {
+      "runId": "RUN-CDC-2026-06-01-001"
+    },
+    "answer_requirements": [
+      "Return consumed material lots.",
+      "Return material names and roles.",
+      "Return suppliers.",
+      "Mention that this is demo data."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q002_deviation_cause",
+    "question": "Which alarm and readings caused the deviation on RUN-CDC-2026-06-01-001?",
+    "intent": "explain_deviation",
+    "template_id": "deviation_alarm_readings",
+    "parameters": {
+      "runId": "RUN-CDC-2026-06-01-001"
+    },
+    "answer_requirements": [
+      "Return deviation ID and title.",
+      "Return triggering alarm.",
+      "Return triggering sensor reading.",
+      "Include supporting readings considered by the deviation."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q003_cde_ctd_section",
+    "question": "Which CDEs support CTD Module 3 section 3.2.P.3.4?",
+    "intent": "cde_regulatory_traceability",
+    "template_id": "cdes_for_cmc_section",
+    "parameters": {
+      "sectionId": "CTD-3.2.P.3.4"
+    },
+    "answer_requirements": [
+      "Return CDE ID, name, domain, and criticality.",
+      "Return the unit operation.",
+      "Return mapped standards."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q004_ai_readiness_gaps",
+    "question": "Which CDEs are missing AI-ready metadata, value domains, representative values, or provenance?",
+    "intent": "ai_readiness_check",
+    "template_id": "ai_readiness_summary",
+    "parameters": {},
+    "answer_requirements": [
+      "Return each check name.",
+      "Return total and passing counts.",
+      "Return failing examples.",
+      "State whether the current demo graph passes the checks."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q005_cde_value_evidence",
+    "question": "What evidence exists for the CDE value for inline NIR blend uniformity?",
+    "intent": "cde_value_evidence",
+    "template_id": "cde_value_evidence",
+    "parameters": {
+      "cdeId": "CDE-CDC-BLEND-NIR"
+    },
+    "answer_requirements": [
+      "Return the CDE definition.",
+      "Return representative CDE value and unit.",
+      "Return value domain.",
+      "Return manufacturing run.",
+      "Return linked sensor reading if available."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q006_equipment_sensors_released_run",
+    "question": "Which equipment and sensors were involved in the released run RUN-CDC-2026-06-01-001?",
+    "intent": "released_run_asset_traceability",
+    "template_id": "released_run_equipment_sensors",
+    "parameters": {
+      "runId": "RUN-CDC-2026-06-01-001"
+    },
+    "answer_requirements": [
+      "Return QA decision.",
+      "Return process steps in order.",
+      "Return equipment and associated sensors."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q007_regulatory_evidence",
+    "question": "What regulatory evidence is connected to AZD-CDC-Tablet-10mg?",
+    "intent": "regulatory_evidence_traceability",
+    "template_id": "product_regulatory_evidence",
+    "parameters": {
+      "productId": "PROD-AZD-CDC-TAB-10MG"
+    },
+    "answer_requirements": [
+      "Return product and filing.",
+      "Return validation evidence.",
+      "Return CMC package context where available.",
+      "Mention that AZD is fictional demo naming."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q008_process_path",
+    "question": "Show the end-to-end process path from crystallisation to QA/CMC review.",
+    "intent": "end_to_end_process_path",
+    "template_id": "end_to_end_operation_path",
+    "parameters": {
+      "startOperationId": "UO-001-CRYSTALLISATION",
+      "endOperationId": "UO-012-QA-CMC-REVIEW"
+    },
+    "answer_requirements": [
+      "Return unit operations in sequence.",
+      "Return operation order and process mode.",
+      "Do not skip the powder coating and coated collection operations."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q009_cde_value_series",
+    "question": "Show the value series for coating weight gain during RUN-CDC-2026-06-01-001.",
+    "intent": "cde_value_series",
+    "template_id": "cde_value_series",
+    "parameters": {
+      "cdeId": "CDE-COAT-WEIGHT-GAIN"
+    },
+    "answer_requirements": [
+      "Return ordered CDE values and timestamps.",
+      "Return sample points and statuses.",
+      "Return the value domain and unit.",
+      "Return the manufacturing run."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q010_cde_evidence_documents",
+    "question": "Which evidence documents support the inline NIR blend uniformity CDE?",
+    "intent": "evidence_document_traceability",
+    "template_id": "evidence_documents_for_cde",
+    "parameters": {
+      "cdeId": "CDE-CDC-BLEND-NIR"
+    },
+    "answer_requirements": [
+      "Return document IDs, titles, types, and summaries.",
+      "Return supported CDE values or mappings where available.",
+      "Mention that these are fictional demo evidence records."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q011_run_disposition_comparison",
+    "question": "Compare released and rejected CDC demo runs.",
+    "intent": "run_disposition_comparison",
+    "template_id": "run_disposition_comparison",
+    "parameters": {},
+    "answer_requirements": [
+      "Return run IDs, batch numbers, statuses, QA decisions, deviations, alarms, and material lots.",
+      "Clearly distinguish release from reject/quarantine.",
+      "Mention that this is demo data."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q012_cde_controlled_vocabulary",
+    "question": "Which controlled vocabulary values classify the inline NIR blend uniformity CDE?",
+    "intent": "controlled_vocabulary_lookup",
+    "template_id": "controlled_vocabulary_for_cde",
+    "parameters": {
+      "cdeId": "CDE-CDC-BLEND-NIR"
+    },
+    "answer_requirements": [
+      "Return CDE domain and criticality properties.",
+      "Return graph vocabulary nodes and descriptions.",
+      "Do not treat vocabulary nodes as measured values."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  },
+  {
+    "id": "q013_relationship_definition",
+    "question": "What does the REJECTS relationship mean in the ontology mapping?",
+    "intent": "relationship_definition_lookup",
+    "template_id": "relationship_definition_lookup",
+    "parameters": {
+      "neo4jType": "REJECTS"
+    },
+    "answer_requirements": [
+      "Return Neo4j relationship type.",
+      "Return ontology predicate.",
+      "Return subject and object labels.",
+      "Return the description."
+    ],
+    "evidence_policy": "Answer only from Neo4j query results and cite the template_id."
+  }
+]

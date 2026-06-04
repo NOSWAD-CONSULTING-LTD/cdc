@@ -1,0 +1,93 @@
+[
+  {
+    "template_id": "trace_material_genealogy",
+    "description": "Trace a manufacturing run to consumed material lots, material masters, and suppliers.",
+    "params": ["runId"],
+    "result_contract": ["runId", "batchNumber", "lotId", "lotNumber", "materialId", "material", "role", "quantityKg", "supplierId", "supplier", "supplierStatus"],
+    "cypher": "MATCH (run:ManufacturingRun {runId: $runId})\nMATCH (run)-[consumes:CONSUMES]->(lot:MaterialLot)-[:INSTANCE_OF]->(material:Material)\nMATCH (lot)-[:SUPPLIED_BY]->(supplier:Supplier)\nRETURN run.runId AS runId,\n       run.batchNumber AS batchNumber,\n       lot.lotId AS lotId,\n       lot.lotNumber AS lotNumber,\n       material.materialId AS materialId,\n       material.name AS material,\n       material.materialRole AS role,\n       consumes.quantityKg AS quantityKg,\n       supplier.supplierId AS supplierId,\n       supplier.name AS supplier,\n       supplier.qualificationStatus AS supplierStatus\nORDER BY role, lotNumber;"
+  },
+  {
+    "template_id": "deviation_alarm_readings",
+    "description": "Explain the deviation, triggering alarm, triggering reading, and supporting readings for one run.",
+    "params": ["runId"],
+    "result_contract": ["runId", "deviationId", "deviationTitle", "severity", "deviationStatus", "alarmId", "alarmCode", "alarmSeverity", "triggeringReadingId", "triggeringSensor", "supportingReadingId", "supportingSensor", "impactAssessment", "capa"],
+    "cypher": "MATCH (run:ManufacturingRun {runId: $runId})-[:HAS_DEVIATION]->(dev:Deviation)\nOPTIONAL MATCH (dev)-[:INVESTIGATES]->(alarm:Alarm)-[:TRIGGERED_BY]->(triggeringReading:SensorReading)-[:RECORDED_BY]->(triggeringSensor:Sensor)\nOPTIONAL MATCH (dev)-[:CONSIDERS_READING]->(supportingReading:SensorReading)-[:RECORDED_BY]->(supportingSensor:Sensor)\nRETURN run.runId AS runId,\n       dev.deviationId AS deviationId,\n       dev.title AS deviationTitle,\n       dev.severity AS severity,\n       dev.status AS deviationStatus,\n       alarm.alarmId AS alarmId,\n       alarm.alarmCode AS alarmCode,\n       alarm.severity AS alarmSeverity,\n       triggeringReading.readingId AS triggeringReadingId,\n       triggeringReading.timestamp AS triggeringTimestamp,\n       triggeringSensor.name AS triggeringSensor,\n       triggeringReading.value AS triggeringValue,\n       triggeringReading.unit AS triggeringUnit,\n       supportingReading.readingId AS supportingReadingId,\n       supportingSensor.name AS supportingSensor,\n       supportingReading.timestamp AS supportingTimestamp,\n       supportingReading.value AS supportingValue,\n       supportingReading.unit AS supportingUnit,\n       supportingReading.status AS supportingStatus,\n       dev.impactAssessment AS impactAssessment,\n       dev.capa AS capa\nORDER BY supportingReadingId;"
+  },
+  {
+    "template_id": "cdes_for_cmc_section",
+    "description": "Find CDEs supporting a selected CTD Module 3 / CMC section.",
+    "params": ["sectionId"],
+    "result_contract": ["sectionId", "cmcSection", "operationOrder", "unitOperation", "cdeId", "cde", "domain", "criticality", "standards"],
+    "cypher": "MATCH (section:RegulatorySection {sectionId: $sectionId})<-[:SUPPORTS_CMC_SECTION]-(cde:CriticalDataElement)-[:OBSERVED_AT]->(uo:UnitOperation)\nOPTIONAL MATCH (cde)-[:MAPS_TO_STANDARD]->(standard:DataStandard)\nWITH section, uo, cde, collect(DISTINCT standard.name) AS standardNames\nRETURN section.sectionId AS sectionId,\n       section.name AS cmcSection,\n       uo.operationOrder AS operationOrder,\n       uo.name AS unitOperation,\n       cde.cdeId AS cdeId,\n       cde.name AS cde,\n       cde.domain AS domain,\n       cde.criticality AS criticality,\n       reduce(text = '', item IN standardNames | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS standards\nORDER BY operationOrder, cdeId;"
+  },
+  {
+    "template_id": "ai_readiness_summary",
+    "description": "Return core AI-readiness validation checks for CDE governance, grounding, value metadata, and provenance.",
+    "params": [],
+    "result_contract": ["checkName", "total", "passing", "failingExamples"],
+    "cypher": "CALL {\n  MATCH (cde:CriticalDataElement)\n  WITH cde,\n       EXISTS { (cde)-[:OBSERVED_AT]->(:UnitOperation) } AS hasOperation,\n       EXISTS { (cde)-[:SOURCED_FROM]->(:DataSourceSystem) } AS hasSource,\n       EXISTS { (cde)-[:HAS_OWNER]->(:DataOwner) } AS hasOwner,\n       EXISTS { (cde)-[:HAS_STEWARD]->(:DataSteward) } AS hasSteward,\n       EXISTS { (cde)-[:HAS_DATA_QUALITY_RULE]->(:DataQualityRule) } AS hasRule,\n       EXISTS { (cde)-[:MAPS_TO_STANDARD]->(:DataStandard) } AS hasStandard,\n       EXISTS { (cde)-[:SUPPORTS_CMC_SECTION]->(:RegulatorySection) } AS hasCmcSection\n  WITH 'CDE governance completeness' AS checkName, count(cde) AS total, sum(CASE WHEN hasOperation AND hasSource AND hasOwner AND hasSteward AND hasRule AND hasStandard AND hasCmcSection THEN 1 ELSE 0 END) AS passing, collect(CASE WHEN NOT (hasOperation AND hasSource AND hasOwner AND hasSteward AND hasRule AND hasStandard AND hasCmcSection) THEN cde.cdeId END)[0..20] AS failures\n  RETURN checkName, total, passing, reduce(text = '', item IN failures | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS failingExamples\n  UNION ALL\n  MATCH (cde:CriticalDataElement)\n  WITH cde, EXISTS { (cde)-[:DESCRIBES]->() } AS hasGrounding\n  WITH 'CDE semantic grounding' AS checkName, count(cde) AS total, sum(CASE WHEN hasGrounding THEN 1 ELSE 0 END) AS passing, collect(CASE WHEN NOT hasGrounding THEN cde.cdeId END)[0..20] AS failures\n  RETURN checkName, total, passing, reduce(text = '', item IN failures | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS failingExamples\n  UNION ALL\n  MATCH (cde:CriticalDataElement)\n  WITH cde,\n       EXISTS { (cde)-[:HAS_VALUE_DOMAIN]->(:ValueDomain) } AS hasValueDomain,\n       EXISTS { (:CDEValue)-[:VALUE_OF]->(cde) } AS hasRepresentativeValue\n  WITH 'CDE value metadata coverage' AS checkName, count(cde) AS total, sum(CASE WHEN hasValueDomain AND hasRepresentativeValue THEN 1 ELSE 0 END) AS passing, collect(CASE WHEN NOT (hasValueDomain AND hasRepresentativeValue) THEN cde.cdeId END)[0..20] AS failures\n  RETURN checkName, total, passing, reduce(text = '', item IN failures | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS failingExamples\n  UNION ALL\n  MATCH (mapping:StandardMapping)\n  WITH mapping, EXISTS { (mapping)-[:SUPPORTED_BY_PROVENANCE]->(:ProvenanceStatement) } AS hasProvenance\n  WITH 'Standard mapping provenance' AS checkName, count(mapping) AS total, sum(CASE WHEN hasProvenance THEN 1 ELSE 0 END) AS passing, collect(CASE WHEN NOT hasProvenance THEN mapping.mappingId END)[0..20] AS failures\n  RETURN checkName, total, passing, reduce(text = '', item IN failures | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS failingExamples\n}\nRETURN checkName, total, passing, failingExamples\nORDER BY checkName;"
+  },
+  {
+    "template_id": "cde_value_evidence",
+    "description": "Trace one CDE definition to its representative value, value domain, run, reading evidence, and standards.",
+    "params": ["cdeId"],
+    "result_contract": ["cdeId", "cde", "cdeDomain", "criticality", "observedAt", "cdeValueId", "numericValue", "textValue", "valueStatus", "valueDomain", "unit", "runId", "readingId", "sensor", "sensorValue", "sensorUnit", "standards"],
+    "cypher": "MATCH (cde:CriticalDataElement {cdeId: $cdeId})\nOPTIONAL MATCH (value:CDEValue)-[:VALUE_OF]->(cde)\nOPTIONAL MATCH (value)-[:CONFORMS_TO_VALUE_DOMAIN]->(domain:ValueDomain)\nOPTIONAL MATCH (domain)-[:USES_UNIT]->(unit:UnitOfMeasure)\nOPTIONAL MATCH (value)-[:OBSERVED_DURING]->(run:ManufacturingRun)\nOPTIONAL MATCH (value)-[:DERIVED_FROM_READING]->(reading:SensorReading)-[:RECORDED_BY]->(sensor:Sensor)\nOPTIONAL MATCH (cde)-[:OBSERVED_AT]->(uo:UnitOperation)\nOPTIONAL MATCH (cde)-[:MAPS_TO_STANDARD]->(standard:DataStandard)\nWITH cde, value, domain, unit, run, reading, sensor, collect(DISTINCT uo.name) AS operationNames, collect(DISTINCT standard.name) AS standardNames\nRETURN cde.cdeId AS cdeId,\n       cde.name AS cde,\n       cde.domain AS cdeDomain,\n       cde.criticality AS criticality,\n       reduce(text = '', item IN operationNames | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS observedAt,\n       value.cdeValueId AS cdeValueId,\n       value.numericValue AS numericValue,\n       value.textValue AS textValue,\n       value.status AS valueStatus,\n       domain.name AS valueDomain,\n       unit.symbol AS unit,\n       run.runId AS runId,\n       reading.readingId AS readingId,\n       reading.timestamp AS readingTimestamp,\n       sensor.name AS sensor,\n       reading.value AS sensorValue,\n       reading.unit AS sensorUnit,\n       reduce(text = '', item IN standardNames | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS standards;"
+  },
+  {
+    "template_id": "cde_value_series",
+    "description": "Return ordered observed values for one CDE across a manufacturing run, including units, sample points, and evidence type.",
+    "params": ["cdeId"],
+    "result_contract": ["cdeId", "cde", "observedAt", "cdeValueId", "sequence", "timestamp", "numericValue", "textValue", "valueStatus", "samplePoint", "evidenceType", "valueDomain", "unit", "runId"],
+    "cypher": "MATCH (cde:CriticalDataElement {cdeId: $cdeId})\nWITH cde, EXISTS { (:CDEValue {demoSeries: true})-[:VALUE_OF]->(cde) } AS hasSeries\nMATCH (value:CDEValue)-[:VALUE_OF]->(cde)\nWHERE hasSeries = false OR value.demoSeries = true\nOPTIONAL MATCH (value)-[:CONFORMS_TO_VALUE_DOMAIN]->(domain:ValueDomain)\nOPTIONAL MATCH (domain)-[:USES_UNIT]->(unit:UnitOfMeasure)\nOPTIONAL MATCH (value)-[:OBSERVED_DURING]->(run:ManufacturingRun)\nOPTIONAL MATCH (cde)-[:OBSERVED_AT]->(uo:UnitOperation)\nWITH cde, value, domain, unit, run, collect(DISTINCT uo.name) AS operationNames\nRETURN cde.cdeId AS cdeId,\n       cde.name AS cde,\n       reduce(text = '', item IN operationNames | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS observedAt,\n       value.cdeValueId AS cdeValueId,\n       value.sequence AS sequence,\n       value.timestamp AS timestamp,\n       value.numericValue AS numericValue,\n       value.textValue AS textValue,\n       value.status AS valueStatus,\n       value.samplePoint AS samplePoint,\n       value.evidenceType AS evidenceType,\n       domain.name AS valueDomain,\n       unit.symbol AS unit,\n       run.runId AS runId\nORDER BY value.timestamp, value.sequence, value.cdeValueId;"
+  },
+  {
+    "template_id": "released_run_equipment_sensors",
+    "description": "List ordered process steps, equipment, and sensors used in a released manufacturing run.",
+    "params": ["runId"],
+    "result_contract": ["runId", "batchNumber", "qaDecision", "stepOrder", "processStep", "equipmentId", "equipment", "equipmentType", "sensors"],
+    "cypher": "MATCH (decision:QAReleaseDecision)-[:RELEASES]->(run:ManufacturingRun {runId: $runId})\nMATCH (run)-[:EXECUTES]->(:Recipe)-[defines:DEFINES_STEP]->(step:ProcessStep)-[:USES_EQUIPMENT]->(equipment:Equipment)\nOPTIONAL MATCH (equipment)-[:HAS_SENSOR]->(sensor:Sensor)\nWITH run, decision, defines, step, equipment, collect(DISTINCT sensor.name) AS sensorNames\nRETURN run.runId AS runId,\n       run.batchNumber AS batchNumber,\n       decision.decision AS qaDecision,\n       defines.stepOrder AS stepOrder,\n       step.name AS processStep,\n       equipment.equipmentId AS equipmentId,\n       equipment.name AS equipment,\n       equipment.equipmentType AS equipmentType,\n       reduce(text = '', item IN sensorNames | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS sensors\nORDER BY stepOrder, equipment;"
+  },
+  {
+    "template_id": "product_regulatory_evidence",
+    "description": "Trace a product to its regulatory filing, CMC package, and validation evidence.",
+    "params": ["productId"],
+    "result_contract": ["productId", "product", "productDescription", "filingId", "filing", "region", "filingStatus", "cmcPackageId", "cmcPackage", "evidenceId", "evidenceName", "evidenceType", "evidenceStatus", "evidenceSummary"],
+    "cypher": "MATCH (product:Product {productId: $productId})\nOPTIONAL MATCH (filing:RegulatoryFiling)-[:COVERS]->(product)\nOPTIONAL MATCH (filing)-[:SUBMITS]->(cmc:CMCPackage)\nOPTIONAL MATCH (evidence:ValidationEvidence)-[:SUPPORTS]->(filing)\nRETURN product.productId AS productId,\n       product.name AS product,\n       product.description AS productDescription,\n       filing.filingId AS filingId,\n       filing.name AS filing,\n       filing.region AS region,\n       filing.status AS filingStatus,\n       cmc.cmcPackageId AS cmcPackageId,\n       cmc.name AS cmcPackage,\n       evidence.evidenceId AS evidenceId,\n       evidence.name AS evidenceName,\n       evidence.evidenceType AS evidenceType,\n       evidence.status AS evidenceStatus,\n       evidence.summary AS evidenceSummary\nORDER BY evidenceId;"
+  },
+  {
+    "template_id": "end_to_end_operation_path",
+    "description": "Return the ordered end-to-end operation path from a start operation to an end operation.",
+    "params": ["startOperationId", "endOperationId"],
+    "result_contract": ["operationOrder", "unitOperationId", "unitOperation", "operationType", "processMode", "description"],
+    "cypher": "MATCH path = (:UnitOperation {unitOperationId: $startOperationId})-[:NEXT_OPERATION*0..20]->(:UnitOperation {unitOperationId: $endOperationId})\nUNWIND nodes(path) AS operation\nRETURN operation.operationOrder AS operationOrder,\n       operation.unitOperationId AS unitOperationId,\n       operation.name AS unitOperation,\n       operation.operationType AS operationType,\n       operation.processMode AS processMode,\n       operation.description AS description\nORDER BY operationOrder;"
+  },
+  {
+    "template_id": "evidence_documents_for_cde",
+    "description": "Return evidence documents supporting one CDE, its values, and related standard mappings.",
+    "params": ["cdeId"],
+    "result_contract": ["cdeId", "cde", "documentId", "documentTitle", "documentType", "documentStatus", "documentSummary", "supportedValueIds", "supportedMappings"],
+    "cypher": "MATCH (cde:CriticalDataElement {cdeId: $cdeId})\nOPTIONAL MATCH (doc1:EvidenceDocument)-[:EVIDENCES_CDE]->(cde)\nOPTIONAL MATCH (doc2:EvidenceDocument)-[:EVIDENCES_CDE_VALUE]->(value:CDEValue)-[:VALUE_OF]->(cde)\nOPTIONAL MATCH (doc3:EvidenceDocument)-[:SUPPORTS_MAPPING]->(mapping:StandardMapping)-[:MAPS_CDE]->(cde)\nWITH cde, collect(DISTINCT doc1) + collect(DISTINCT doc2) + collect(DISTINCT doc3) AS docs\nUNWIND docs AS doc\nWITH cde, doc WHERE doc IS NOT NULL\nOPTIONAL MATCH (doc)-[:EVIDENCES_CDE_VALUE]->(value:CDEValue)-[:VALUE_OF]->(cde)\nOPTIONAL MATCH (doc)-[:SUPPORTS_MAPPING]->(mapping:StandardMapping)-[:MAPS_CDE]->(cde)\nWITH cde, doc, collect(DISTINCT value.cdeValueId) AS valueIds, collect(DISTINCT mapping.mappingId) AS mappingIds\nRETURN cde.cdeId AS cdeId,\n       cde.name AS cde,\n       doc.documentId AS documentId,\n       doc.title AS documentTitle,\n       doc.documentType AS documentType,\n       doc.status AS documentStatus,\n       doc.summary AS documentSummary,\n       reduce(text = '', item IN valueIds | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS supportedValueIds,\n       reduce(text = '', item IN mappingIds | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS supportedMappings\nORDER BY documentId;"
+  },
+  {
+    "template_id": "run_disposition_comparison",
+    "description": "Compare released and rejected runs with QA decision, deviations, alarms, and consumed material lots.",
+    "params": [],
+    "result_contract": ["runId", "batchNumber", "runStatus", "disposition", "qaDecision", "decisionId", "deviations", "alarms", "materialLots"],
+    "cypher": "MATCH (run:ManufacturingRun)\nOPTIONAL MATCH (decision:QAReleaseDecision)-[:RELEASES|REJECTS]->(run)\nOPTIONAL MATCH (run)-[:HAS_DEVIATION]->(dev:Deviation)-[:INVESTIGATES]->(alarm:Alarm)\nOPTIONAL MATCH (run)-[:CONSUMES]->(lot:MaterialLot)\nWITH run, decision, collect(DISTINCT dev.deviationId) AS deviationIds, collect(DISTINCT alarm.alarmId) AS alarmIds, collect(DISTINCT lot.lotId) AS lotIds\nRETURN run.runId AS runId,\n       run.batchNumber AS batchNumber,\n       run.status AS runStatus,\n       run.disposition AS disposition,\n       decision.decision AS qaDecision,\n       decision.decisionId AS decisionId,\n       reduce(text = '', item IN deviationIds | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS deviations,\n       reduce(text = '', item IN alarmIds | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS alarms,\n       reduce(text = '', item IN lotIds | text + CASE WHEN text = '' THEN '' ELSE '; ' END + item) AS materialLots\nORDER BY run.startTime;"
+  },
+  {
+    "template_id": "controlled_vocabulary_for_cde",
+    "description": "Return CDE controlled vocabulary nodes for domain and criticality.",
+    "params": ["cdeId"],
+    "result_contract": ["cdeId", "cde", "domainProperty", "criticalityProperty", "domainVocabulary", "domainDescription", "criticalityVocabulary", "criticalityDescription"],
+    "cypher": "MATCH (cde:CriticalDataElement {cdeId: $cdeId})\nOPTIONAL MATCH (cde)-[:HAS_CDE_DOMAIN]->(domain:CDEDomain)\nOPTIONAL MATCH (cde)-[:HAS_CRITICALITY_LEVEL]->(criticality:CriticalityLevel)\nRETURN cde.cdeId AS cdeId,\n       cde.name AS cde,\n       cde.domain AS domainProperty,\n       cde.criticality AS criticalityProperty,\n       domain.name AS domainVocabulary,\n       domain.description AS domainDescription,\n       criticality.name AS criticalityVocabulary,\n       criticality.description AS criticalityDescription;"
+  },
+  {
+    "template_id": "relationship_definition_lookup",
+    "description": "Return the ontology predicate and allowed label pattern for a Neo4j relationship type.",
+    "params": ["neo4jType"],
+    "result_contract": ["neo4jType", "ontologyPredicate", "subjectLabel", "objectLabel", "cardinalityNote", "description"],
+    "cypher": "MATCH (rel:RelationshipDefinition {neo4jType: $neo4jType})\nRETURN rel.neo4jType AS neo4jType,\n       rel.ontologyPredicate AS ontologyPredicate,\n       rel.subjectLabel AS subjectLabel,\n       rel.objectLabel AS objectLabel,\n       rel.cardinalityNote AS cardinalityNote,\n       rel.description AS description;"
+  }
+]

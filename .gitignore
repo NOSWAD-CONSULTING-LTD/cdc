@@ -1,0 +1,48 @@
+.DS_Store
+**/.DS_Store
+
+*.log
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime/temp files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# PHP / Laravel
+vendor/
+laravel-agent/storage/*.key
+laravel-agent/storage/app/*
+!laravel-agent/storage/app/.gitignore
+laravel-agent/storage/framework/cache/*
+!laravel-agent/storage/framework/cache/.gitignore
+laravel-agent/storage/framework/sessions/*
+!laravel-agent/storage/framework/sessions/.gitignore
+laravel-agent/storage/framework/testing/*
+!laravel-agent/storage/framework/testing/.gitignore
+laravel-agent/storage/framework/views/*
+!laravel-agent/storage/framework/views/.gitignore
+laravel-agent/storage/logs/*
+!laravel-agent/storage/logs/.gitignore
+laravel-agent/bootstrap/cache/*.php
+
+# JavaScript dependencies/builds, if added later
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/

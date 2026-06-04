@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>End-To-End CDC Conceptual Data Model - A4</title>
+  <style>
+    @page { size: A4 landscape; margin: 10mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #1d2a32; background: #eef2f5; }
+    .page { width: 297mm; min-height: 210mm; margin: 0 auto; padding: 10mm; background: #fff; }
+    h1 { margin: 0 0 2mm; font-size: 18pt; letter-spacing: 0; }
+    .subtitle { margin: 0 0 5mm; color: #51606a; font-size: 9pt; line-height: 1.35; }
+    svg { display: block; width: 100%; height: auto; border: 1px solid #c8d1d8; background: #fbfcfd; }
+    .title { font-size: 14px; font-weight: 700; fill: #23313a; }
+    .node-title { font-size: 11.5px; font-weight: 700; fill: #17242c; }
+    .node-detail { font-size: 9px; fill: #4b5b65; }
+    .rel { font-size: 8px; font-weight: 700; fill: #40525e; }
+    @media print { body { background: #fff; } .page { width: auto; min-height: auto; margin: 0; padding: 0; } }
+  </style>
+</head>
+<body>
+<main class="page">
+  <h1>End-To-End CDC Conceptual Data Model With CDE Registry</h1>
+  <p class="subtitle">From crystallisation to semi-continuous powder coated tablet collection, with critical data elements mapped to source systems, data quality rules, ownership, ISO/ICH/ISA standards, and CMC sections.</p>
+
+  <svg viewBox="0 0 1480 820" role="img" aria-labelledby="title desc">
+    <title id="title">End-to-end CDC conceptual data model</title>
+    <desc id="desc">Conceptual data model showing unit operations and critical data elements from crystallisation to powder coated tablets.</desc>
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#60737d"/></marker>
+      <style>
+        .frame { fill:#fff; stroke:#d3dbe1; stroke-width:1.4; rx:10; }
+        .ds { fill:#e8f2ff; stroke:#4f84bd; stroke-width:1.3; rx:7; }
+        .dp { fill:#fff3df; stroke:#c28a35; stroke-width:1.3; rx:7; }
+        .cde { fill:#eef8ef; stroke:#5a9b64; stroke-width:1.3; rx:7; }
+        .gov { fill:#f0eef9; stroke:#7b69b1; stroke-width:1.3; rx:7; }
+        .line { stroke:#60737d; stroke-width:1.5; fill:none; marker-end:url(#arrow); }
+        .soft { stroke:#98a7af; stroke-width:1.1; fill:none; marker-end:url(#arrow); }
+      </style>
+    </defs>
+
+    <rect class="frame" x="25" y="35" width="1010" height="365"/>
+    <text class="title" x="45" y="65">Process Topology And Material Transformation</text>
+
+    <rect class="ds" x="55" y="105" width="150" height="64"/>
+    <text class="node-title" x="75" y="130">Crystallisation</text>
+    <text class="node-detail" x="75" y="148">solution to slurry</text>
+
+    <rect class="ds" x="235" y="105" width="150" height="64"/>
+    <text class="node-title" x="255" y="130">Isolation / Wash</text>
+    <text class="node-detail" x="255" y="148">slurry to wet cake</text>
+
+    <rect class="ds" x="415" y="105" width="150" height="64"/>
+    <text class="node-title" x="435" y="130">Drying</text>
+    <text class="node-detail" x="435" y="148">wet cake to API</text>
+
+    <rect class="ds" x="595" y="105" width="150" height="64"/>
+    <text class="node-title" x="615" y="130">Milling / Sieving</text>
+    <text class="node-detail" x="615" y="148">engineered API</text>
+
+    <rect class="ds" x="775" y="105" width="210" height="64"/>
+    <text class="node-title" x="795" y="130">API Intermediate Handling</text>
+    <text class="node-detail" x="795" y="148">container, release, hold time</text>
+
+    <rect class="dp" x="55" y="245" width="150" height="64"/>
+    <text class="node-title" x="75" y="270">Feeding</text>
+    <text class="node-detail" x="75" y="288">API + excipients</text>
+
+    <rect class="dp" x="235" y="245" width="150" height="64"/>
+    <text class="node-title" x="255" y="270">Blending</text>
+    <text class="node-detail" x="255" y="288">continuous blend</text>
+
+    <rect class="dp" x="415" y="245" width="150" height="64"/>
+    <text class="node-title" x="435" y="270">Lubrication</text>
+    <text class="node-detail" x="435" y="288">lubricant addition</text>
+
+    <rect class="dp" x="595" y="245" width="150" height="64"/>
+    <text class="node-title" x="615" y="270">Compression</text>
+    <text class="node-detail" x="615" y="288">core tablets</text>
+
+    <rect class="dp" x="775" y="245" width="210" height="64"/>
+    <text class="node-title" x="795" y="270">Powder Coating</text>
+    <text class="node-detail" x="795" y="288">powder coated tablets</text>
+
+    <path class="line" d="M205 137 L235 137"/><path class="line" d="M385 137 L415 137"/>
+    <path class="line" d="M565 137 L595 137"/><path class="line" d="M745 137 L775 137"/>
+    <path class="line" d="M880 169 C880 210 130 210 130 245"/>
+    <path class="line" d="M205 277 L235 277"/><path class="line" d="M385 277 L415 277"/>
+    <path class="line" d="M565 277 L595 277"/><path class="line" d="M745 277 L775 277"/>
+
+    <rect class="cde" x="1080" y="35" width="365" height="365"/>
+    <text class="title" x="1100" y="65">Critical Data Element Registry</text>
+    <rect class="gov" x="1110" y="100" width="300" height="54"/>
+    <text class="node-title" x="1130" y="123">CriticalDataElement</text>
+    <text class="node-detail" x="1130" y="141">metadata for governed process data</text>
+    <rect class="gov" x="1110" y="175" width="300" height="54"/>
+    <text class="node-title" x="1130" y="198">DataSourceSystem</text>
+    <text class="node-detail" x="1130" y="216">DCS, historian, PAT, LIMS, MES, QMS</text>
+    <rect class="gov" x="1110" y="250" width="300" height="54"/>
+    <text class="node-title" x="1130" y="273">DataQualityRule</text>
+    <text class="node-detail" x="1130" y="291">completeness, range, unit, timestamp</text>
+    <rect class="gov" x="1110" y="325" width="300" height="54"/>
+    <text class="node-title" x="1130" y="348">Owner / Steward</text>
+    <text class="node-detail" x="1130" y="366">manufacturing, MSAT, QC, QA, regulatory</text>
+
+    <path class="soft" d="M985 137 C1035 137 1040 127 1110 127"/>
+    <text class="rel" x="1015" y="118">OBSERVED_AT</text>
+    <path class="soft" d="M985 277 C1035 277 1040 127 1110 127"/>
+    <text class="rel" x="1015" y="264">OBSERVED_AT</text>
+
+    <rect class="frame" x="25" y="430" width="670" height="315"/>
+    <text class="title" x="45" y="460">Representative CDEs By Stage</text>
+    <text class="node-detail" x="55" y="500">Crystallisation: solvent composition, supersaturation, seed lot, cooling rate, crystal size, polymorph, impurity profile</text>
+    <text class="node-detail" x="55" y="532">Isolation/drying: wash volume, wet cake mass, residual solvent, drying temperature, LOD endpoint, dried API container</text>
+    <text class="node-detail" x="55" y="564">Milling: mill speed, feed rate, screen size, PSD, bulk density, flowability, API hold time</text>
+    <text class="node-detail" x="55" y="596">CDC: lot IDs, feed rates, blender speed, residence time, NIR uniformity, force, tablet weight, CU, dissolution</text>
+    <text class="node-detail" x="55" y="628">Powder coating: coating powder lot, feed rate, bed temperature, RH, residence time, weight gain, uniformity, appearance</text>
+    <text class="node-detail" x="55" y="680">Each CDE maps to source system, owner, steward, data quality rule, standard, and regulatory section.</text>
+
+    <rect class="frame" x="735" y="430" width="710" height="315"/>
+    <text class="title" x="755" y="460">Standards And CMC Mapping</text>
+    <rect class="gov" x="775" y="495" width="145" height="54"/><text class="node-title" x="795" y="518">ICH Q13</text><text class="node-detail" x="795" y="536">continuous mfg</text>
+    <rect class="gov" x="940" y="495" width="145" height="54"/><text class="node-title" x="960" y="518">CTD Module 3</text><text class="node-detail" x="960" y="536">CMC quality</text>
+    <rect class="gov" x="1105" y="495" width="145" height="54"/><text class="node-title" x="1125" y="518">ISO/IEC 11179</text><text class="node-detail" x="1125" y="536">CDE metadata</text>
+    <rect class="gov" x="1270" y="495" width="145" height="54"/><text class="node-title" x="1290" y="518">ISA-95</text><text class="node-detail" x="1290" y="536">system boundary</text>
+    <rect class="gov" x="775" y="585" width="145" height="54"/><text class="node-title" x="795" y="608">ICH Q8-Q12</text><text class="node-detail" x="795" y="626">risk/lifecycle</text>
+    <rect class="gov" x="940" y="585" width="145" height="54"/><text class="node-title" x="960" y="608">ICH Q14</text><text class="node-detail" x="960" y="626">analytical</text>
+    <rect class="gov" x="1105" y="585" width="145" height="54"/><text class="node-title" x="1125" y="608">ISO 14644</text><text class="node-detail" x="1125" y="626">cleanrooms</text>
+    <rect class="gov" x="1270" y="585" width="145" height="54"/><text class="node-title" x="1290" y="608">ISO 22400</text><text class="node-detail" x="1290" y="626">MOM KPIs</text>
+    <text class="node-detail" x="775" y="700">Traceability pattern: CDE -> UnitOperation -> Concept described -> Source system -> Data quality rule -> Standard -> CMC section.</text>
+  </svg>
+</main>
+</body>
+</html>

@@ -1,0 +1,172 @@
+@prefix cdc: <https://example.com/ontology/cdc#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+cdc: a owl:Ontology ;
+  rdfs:label "CDC Manufacturing Knowledge Graph Ontology" ;
+  rdfs:comment "Reference ontology for a pharmaceutical CDC manufacturing, CMC, QMS, and CDE knowledge graph. Demo use only." .
+
+cdc:ProductDomain a owl:Class .
+cdc:ProcessDomain a owl:Class .
+cdc:AssetDomain a owl:Class .
+cdc:QualityDomain a owl:Class .
+cdc:ManufacturingExecutionDomain a owl:Class .
+cdc:GovernanceDomain a owl:Class .
+cdc:DataGovernanceDomain a owl:Class .
+
+cdc:Product a owl:Class ; rdfs:subClassOf cdc:ProductDomain .
+cdc:Formulation a owl:Class ; rdfs:subClassOf cdc:ProductDomain .
+cdc:Material a owl:Class ; rdfs:subClassOf cdc:ProductDomain .
+cdc:MaterialLot a owl:Class ; rdfs:subClassOf cdc:ProductDomain .
+cdc:Supplier a owl:Class ; rdfs:subClassOf cdc:ProductDomain .
+cdc:IntermediateProduct a owl:Class ; rdfs:subClassOf cdc:ProductDomain .
+
+cdc:Recipe a owl:Class ; rdfs:subClassOf cdc:ProcessDomain .
+cdc:ProcessStep a owl:Class ; rdfs:subClassOf cdc:ProcessDomain .
+cdc:ProcessSegment a owl:Class ; rdfs:subClassOf cdc:ProcessDomain .
+cdc:UnitOperation a owl:Class ; rdfs:subClassOf cdc:ProcessDomain .
+cdc:MaterialTransformation a owl:Class ; rdfs:subClassOf cdc:ProcessDomain .
+cdc:ControlPoint a owl:Class ; rdfs:subClassOf cdc:ProcessDomain .
+cdc:SamplingPoint a owl:Class ; rdfs:subClassOf cdc:ProcessDomain .
+
+cdc:ManufacturingSite a owl:Class ; rdfs:subClassOf cdc:AssetDomain .
+cdc:ManufacturingLine a owl:Class ; rdfs:subClassOf cdc:AssetDomain .
+cdc:Room a owl:Class ; rdfs:subClassOf cdc:AssetDomain .
+cdc:Equipment a owl:Class ; rdfs:subClassOf cdc:AssetDomain .
+cdc:Sensor a owl:Class ; rdfs:subClassOf cdc:AssetDomain .
+cdc:DataSourceSystem a owl:Class ; rdfs:subClassOf cdc:AssetDomain .
+
+cdc:CPP a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:CQA a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:CriticalMaterialAttribute a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:Specification a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:SensorReading a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:AnalyticalMethod a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:AnalyticalResult a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:Alarm a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:Deviation a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+cdc:QAReleaseDecision a owl:Class ; rdfs:subClassOf cdc:QualityDomain .
+
+cdc:ManufacturingRun a owl:Class ; rdfs:subClassOf cdc:ManufacturingExecutionDomain .
+cdc:BatchRecord a owl:Class ; rdfs:subClassOf cdc:ManufacturingExecutionDomain .
+cdc:CleaningRecord a owl:Class ; rdfs:subClassOf cdc:ManufacturingExecutionDomain .
+cdc:CalibrationRecord a owl:Class ; rdfs:subClassOf cdc:ManufacturingExecutionDomain .
+cdc:Operator a owl:Class ; rdfs:subClassOf cdc:ManufacturingExecutionDomain .
+
+cdc:CMCPackage a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:RegulatoryFiling a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:RegulatorySection a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:ValidationEvidence a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:EvidenceDocument a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:ProcessValidation a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:ControlStrategy a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:RiskAssessment a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:ChangeControl a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:SOP a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:TrainingRecord a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:EquipmentQualification a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:ComputerSystemValidation a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+cdc:AuditTrailEvent a owl:Class ; rdfs:subClassOf cdc:GovernanceDomain .
+
+cdc:CriticalDataElement a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:DataStandard a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:StandardMapping a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:DataQualityRule a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:DataOwner a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:DataSteward a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:ValueDomain a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:UnitOfMeasure a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:AllowedValue a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:CDEVersion a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:CDEDefinitionApproval a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:CDEValue a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:ProvenanceStatement a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:CDEDomain a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:CriticalityLevel a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:DecisionStatus a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:RunStatus a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:DeviationSeverity a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+cdc:RelationshipDefinition a owl:Class ; rdfs:subClassOf cdc:DataGovernanceDomain .
+
+cdc:hasFormulation a owl:ObjectProperty ; rdfs:domain cdc:Product ; rdfs:range cdc:Formulation .
+cdc:hasRecipe a owl:ObjectProperty ; rdfs:domain cdc:Product ; rdfs:range cdc:Recipe .
+cdc:hasCMCPackage a owl:ObjectProperty ; rdfs:domain cdc:Product ; rdfs:range cdc:CMCPackage .
+cdc:usesMaterial a owl:ObjectProperty ; rdfs:domain cdc:Formulation ; rdfs:range cdc:Material .
+cdc:instanceOf a owl:ObjectProperty ; rdfs:domain cdc:MaterialLot ; rdfs:range cdc:Material .
+cdc:suppliedBy a owl:ObjectProperty ; rdfs:domain cdc:MaterialLot ; rdfs:range cdc:Supplier .
+cdc:definesStep a owl:ObjectProperty ; rdfs:domain cdc:Recipe ; rdfs:range cdc:ProcessStep .
+cdc:containsOperation a owl:ObjectProperty ; rdfs:domain cdc:ProcessSegment ; rdfs:range cdc:UnitOperation .
+cdc:nextOperation a owl:ObjectProperty ; rdfs:domain cdc:UnitOperation ; rdfs:range cdc:UnitOperation .
+cdc:produces a owl:ObjectProperty ; rdfs:domain cdc:UnitOperation ; rdfs:range cdc:IntermediateProduct .
+cdc:hasTransformation a owl:ObjectProperty ; rdfs:domain cdc:UnitOperation ; rdfs:range cdc:MaterialTransformation .
+cdc:hasSensor a owl:ObjectProperty ; rdfs:domain cdc:Equipment ; rdfs:range cdc:Sensor .
+cdc:measures a owl:ObjectProperty ; rdfs:domain cdc:Sensor .
+cdc:recordedBy a owl:ObjectProperty ; rdfs:domain cdc:SensorReading ; rdfs:range cdc:Sensor .
+cdc:duringRun a owl:ObjectProperty ; rdfs:domain cdc:SensorReading ; rdfs:range cdc:ManufacturingRun .
+cdc:controls a owl:ObjectProperty .
+cdc:impacts a owl:ObjectProperty ; rdfs:domain cdc:CPP ; rdfs:range cdc:CQA .
+cdc:hasSpecification a owl:ObjectProperty ; rdfs:domain cdc:CQA ; rdfs:range cdc:Specification .
+cdc:executes a owl:ObjectProperty ; rdfs:domain cdc:ManufacturingRun ; rdfs:range cdc:Recipe .
+cdc:consumes a owl:ObjectProperty ; rdfs:domain cdc:ManufacturingRun ; rdfs:range cdc:MaterialLot .
+cdc:hasBatchRecord a owl:ObjectProperty ; rdfs:domain cdc:ManufacturingRun ; rdfs:range cdc:BatchRecord .
+cdc:hasDeviation a owl:ObjectProperty ; rdfs:domain cdc:ManufacturingRun ; rdfs:range cdc:Deviation .
+cdc:triggeredBy a owl:ObjectProperty ; rdfs:domain cdc:Alarm ; rdfs:range cdc:SensorReading .
+cdc:investigates a owl:ObjectProperty ; rdfs:domain cdc:Deviation ; rdfs:range cdc:Alarm .
+cdc:reviews a owl:ObjectProperty ; rdfs:domain cdc:QAReleaseDecision ; rdfs:range cdc:BatchRecord .
+cdc:releases a owl:ObjectProperty ; rdfs:domain cdc:QAReleaseDecision ; rdfs:range cdc:ManufacturingRun .
+cdc:rejects a owl:ObjectProperty ; rdfs:domain cdc:QAReleaseDecision ; rdfs:range cdc:ManufacturingRun .
+cdc:submits a owl:ObjectProperty ; rdfs:domain cdc:RegulatoryFiling ; rdfs:range cdc:CMCPackage .
+cdc:includes a owl:ObjectProperty ; rdfs:domain cdc:CMCPackage .
+cdc:protects a owl:ObjectProperty ; rdfs:domain cdc:ControlStrategy ; rdfs:range cdc:CQA .
+cdc:usesCDE a owl:ObjectProperty ; rdfs:domain cdc:ControlStrategy ; rdfs:range cdc:CriticalDataElement .
+cdc:governsCDE a owl:ObjectProperty ; rdfs:domain cdc:CMCPackage ; rdfs:range cdc:CriticalDataElement .
+cdc:referencesStandard a owl:ObjectProperty ; rdfs:domain cdc:CMCPackage ; rdfs:range cdc:DataStandard .
+cdc:referencesCMCSection a owl:ObjectProperty ; rdfs:domain cdc:CMCPackage ; rdfs:range cdc:RegulatorySection .
+cdc:hasDataOwner a owl:ObjectProperty ; rdfs:domain cdc:CMCPackage ; rdfs:range cdc:DataOwner .
+cdc:referencesUnit a owl:ObjectProperty ; rdfs:domain cdc:CMCPackage ; rdfs:range cdc:UnitOfMeasure .
+cdc:observedAt a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:UnitOperation .
+cdc:describes a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement .
+cdc:sourcedFrom a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:DataSourceSystem .
+cdc:hasDataQualityRule a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:DataQualityRule .
+cdc:hasOwner a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:DataOwner .
+cdc:hasSteward a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:DataSteward .
+cdc:mapsToStandard a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:DataStandard .
+cdc:supportsCMCSection a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:RegulatorySection .
+cdc:hasValueDomain a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:ValueDomain .
+cdc:hasCDEDomain a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:CDEDomain .
+cdc:hasCriticalityLevel a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:CriticalityLevel .
+cdc:usesUnit a owl:ObjectProperty ; rdfs:domain cdc:ValueDomain ; rdfs:range cdc:UnitOfMeasure .
+cdc:hasAllowedValue a owl:ObjectProperty ; rdfs:domain cdc:ValueDomain ; rdfs:range cdc:AllowedValue .
+cdc:valueOf a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:CriticalDataElement .
+cdc:conformsToValueDomain a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:ValueDomain .
+cdc:observedDuring a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:ManufacturingRun .
+cdc:derivedFromReading a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:SensorReading .
+cdc:versionOf a owl:ObjectProperty ; rdfs:domain cdc:CDEVersion ; rdfs:range cdc:CriticalDataElement .
+cdc:approves a owl:ObjectProperty ; rdfs:domain cdc:CDEDefinitionApproval ; rdfs:range cdc:CDEVersion .
+cdc:mapsCDE a owl:ObjectProperty ; rdfs:domain cdc:StandardMapping ; rdfs:range cdc:CriticalDataElement .
+cdc:toStandard a owl:ObjectProperty ; rdfs:domain cdc:StandardMapping ; rdfs:range cdc:DataStandard .
+cdc:toRegulatorySection a owl:ObjectProperty ; rdfs:domain cdc:StandardMapping ; rdfs:range cdc:RegulatorySection .
+cdc:supportedByProvenance a owl:ObjectProperty ; rdfs:domain cdc:StandardMapping ; rdfs:range cdc:ProvenanceStatement .
+cdc:evidencesCDE a owl:ObjectProperty ; rdfs:domain cdc:EvidenceDocument ; rdfs:range cdc:CriticalDataElement .
+cdc:evidencesCDEValue a owl:ObjectProperty ; rdfs:domain cdc:EvidenceDocument ; rdfs:range cdc:CDEValue .
+cdc:supportsMapping a owl:ObjectProperty ; rdfs:domain cdc:EvidenceDocument ; rdfs:range cdc:StandardMapping .
+cdc:documentsRun a owl:ObjectProperty ; rdfs:domain cdc:EvidenceDocument ; rdfs:range cdc:ManufacturingRun .
+cdc:hasDecisionStatus a owl:ObjectProperty ; rdfs:domain cdc:QAReleaseDecision ; rdfs:range cdc:DecisionStatus .
+cdc:hasRunStatus a owl:ObjectProperty ; rdfs:domain cdc:ManufacturingRun ; rdfs:range cdc:RunStatus .
+cdc:hasDeviationSeverity a owl:ObjectProperty ; rdfs:domain cdc:Deviation ; rdfs:range cdc:DeviationSeverity .
+cdc:referencesRelationshipDefinition a owl:ObjectProperty ; rdfs:domain cdc:CMCPackage ; rdfs:range cdc:RelationshipDefinition .
+
+cdc:productId a owl:DatatypeProperty ; rdfs:domain cdc:Product ; rdfs:range xsd:string .
+cdc:runId a owl:DatatypeProperty ; rdfs:domain cdc:ManufacturingRun ; rdfs:range xsd:string .
+cdc:cdeId a owl:DatatypeProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range xsd:string .
+cdc:cdeValueId a owl:DatatypeProperty ; rdfs:domain cdc:CDEValue ; rdfs:range xsd:string .
+cdc:valueDomainId a owl:DatatypeProperty ; rdfs:domain cdc:ValueDomain ; rdfs:range xsd:string .
+cdc:provenanceId a owl:DatatypeProperty ; rdfs:domain cdc:ProvenanceStatement ; rdfs:range xsd:string .
+cdc:documentId a owl:DatatypeProperty ; rdfs:domain cdc:EvidenceDocument ; rdfs:range xsd:string .
+cdc:relationshipDefinitionId a owl:DatatypeProperty ; rdfs:domain cdc:RelationshipDefinition ; rdfs:range xsd:string .
+cdc:name a owl:DatatypeProperty ; rdfs:range xsd:string .
+cdc:status a owl:DatatypeProperty ; rdfs:range xsd:string .
+cdc:criticality a owl:DatatypeProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range xsd:string .
+cdc:domain a owl:DatatypeProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range xsd:string .

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDC Data Flow Diagram - A4</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #1d2a32;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef2f5;
+    }
+
+    .page {
+      width: 297mm;
+      min-height: 210mm;
+      margin: 0 auto;
+      padding: 10mm;
+      background: #ffffff;
+    }
+
+    h1 {
+      margin: 0 0 2mm;
+      font-size: 18pt;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0 0 5mm;
+      color: #51606a;
+      font-size: 9pt;
+      line-height: 1.35;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #c8d1d8;
+      background: #fbfcfd;
+    }
+
+    .title {
+      font-size: 15px;
+      font-weight: 700;
+      fill: #23313a;
+    }
+
+    .node-title {
+      font-size: 12px;
+      font-weight: 700;
+      fill: #17242c;
+    }
+
+    .node-detail {
+      font-size: 9.5px;
+      fill: #4b5b65;
+    }
+
+    .flow-label {
+      font-size: 8.5px;
+      font-weight: 700;
+      fill: #40525e;
+    }
+
+    .note {
+      margin-top: 4mm;
+      font-size: 8.5pt;
+      line-height: 1.35;
+      color: #33434d;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>CDC Manufacturing Knowledge Graph Data Flow</h1>
+    <p class="subtitle">
+      A4 landscape view of how product/process master data, manufacturing execution evidence, quality review, and CMC/QMS/regulatory evidence flow through the CDC graph.
+    </p>
+
+    <svg viewBox="0 0 1480 820" role="img" aria-labelledby="title desc">
+      <title id="title">CDC manufacturing knowledge graph data flow diagram</title>
+      <desc id="desc">A four-column data flow diagram for master and reference data, manufacturing execution, quality disposition, and CMC/QMS/regulatory evidence.</desc>
+
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="#60737d"></path>
+        </marker>
+        <style>
+          .frame { fill: #ffffff; stroke: #d3dbe1; stroke-width: 1.5; rx: 10; }
+          .master { fill: #e8f2ff; stroke: #4f84bd; stroke-width: 1.4; rx: 7; }
+          .execution { fill: #fff3df; stroke: #c28a35; stroke-width: 1.4; rx: 7; }
+          .quality { fill: #f8eaf0; stroke: #b26078; stroke-width: 1.4; rx: 7; }
+          .cmc { fill: #f0eef9; stroke: #7b69b1; stroke-width: 1.4; rx: 7; }
+          .line { stroke: #60737d; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+          .line-soft { stroke: #91a0a8; stroke-width: 1.2; fill: none; marker-end: url(#arrow); }
+          .bus { stroke: #2f4652; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+        </style>
+      </defs>
+
+      <!-- Column frames -->
+      <rect class="frame" x="25" y="35" width="330" height="690"></rect>
+      <text class="title" x="45" y="65">1. Master And Reference Data</text>
+
+      <rect class="frame" x="390" y="35" width="330" height="690"></rect>
+      <text class="title" x="410" y="65">2. Manufacturing Execution</text>
+
+      <rect class="frame" x="755" y="35" width="330" height="690"></rect>
+      <text class="title" x="775" y="65">3. Quality Review And Disposition</text>
+
+      <rect class="frame" x="1120" y="35" width="335" height="690"></rect>
+      <text class="title" x="1140" y="65">4. CMC / QMS / Regulatory Evidence</text>
+
+      <!-- Master/reference nodes -->
+      <rect class="master" x="65" y="100" width="250" height="56"></rect>
+      <text class="node-title" x="86" y="124">Product + Formulation</text>
+      <text class="node-detail" x="86" y="142">Product definition and composition</text>
+
+      <rect class="master" x="65" y="190" width="250" height="56"></rect>
+      <text class="node-title" x="86" y="214">Recipe + Process Steps</text>
+      <text class="node-detail" x="86" y="232">Ordered CDC process definition</text>
+
+      <rect class="master" x="65" y="280" width="250" height="56"></rect>
+      <text class="node-title" x="86" y="304">Material + Supplier Master</text>
+      <text class="node-detail" x="86" y="322">API, excipients, lubricant, sources</text>
+
+      <rect class="master" x="65" y="370" width="250" height="56"></rect>
+      <text class="node-title" x="86" y="394">Line / Room / Equipment</text>
+      <text class="node-detail" x="86" y="412">CDC assets and locations</text>
+
+      <rect class="master" x="65" y="460" width="250" height="56"></rect>
+      <text class="node-title" x="86" y="484">Sensors + Historian Tags</text>
+      <text class="node-detail" x="86" y="502">PAT, feeder, press, RH readings</text>
+
+      <rect class="master" x="65" y="550" width="250" height="56"></rect>
+      <text class="node-title" x="86" y="574">CPP / CQA / Specification</text>
+      <text class="node-detail" x="86" y="592">Parameters, quality attributes, limits</text>
+
+      <!-- Execution nodes -->
+      <rect class="execution" x="430" y="145" width="250" height="56"></rect>
+      <text class="node-title" x="451" y="169">Material Lots</text>
+      <text class="node-detail" x="451" y="187">Released lots consumed by run</text>
+
+      <rect class="execution" x="430" y="270" width="250" height="64"></rect>
+      <text class="node-title" x="451" y="295">Manufacturing Run</text>
+      <text class="node-detail" x="451" y="313">RUN-CDC-2026-06-01-001</text>
+
+      <rect class="execution" x="430" y="405" width="250" height="56"></rect>
+      <text class="node-title" x="451" y="429">Sensor Readings</text>
+      <text class="node-detail" x="451" y="447">12 time-stamped process values</text>
+
+      <rect class="execution" x="430" y="535" width="250" height="56"></rect>
+      <text class="node-title" x="451" y="559">Batch Record</text>
+      <text class="node-detail" x="451" y="577">Execution and review summary</text>
+
+      <!-- Quality nodes -->
+      <rect class="quality" x="795" y="145" width="250" height="56"></rect>
+      <text class="node-title" x="816" y="169">Alarm</text>
+      <text class="node-detail" x="816" y="187">NIR blend uniformity high</text>
+
+      <rect class="quality" x="795" y="270" width="250" height="64"></rect>
+      <text class="node-title" x="816" y="295">Deviation</text>
+      <text class="node-detail" x="816" y="313">Impact assessment and CAPA text</text>
+
+      <rect class="quality" x="795" y="405" width="250" height="56"></rect>
+      <text class="node-title" x="816" y="429">QA Release Decision</text>
+      <text class="node-detail" x="816" y="447">Batch released after review</text>
+
+      <rect class="quality" x="795" y="535" width="250" height="56"></rect>
+      <text class="node-title" x="816" y="559">Audit Trail Events</text>
+      <text class="node-detail" x="816" y="577">Documents reading, alarm, deviation, QA</text>
+
+      <!-- CMC nodes -->
+      <rect class="cmc" x="1160" y="95" width="255" height="56"></rect>
+      <text class="node-title" x="1181" y="119">CMC Package + Filing</text>
+      <text class="node-detail" x="1181" y="137">Product regulatory knowledge package</text>
+
+      <rect class="cmc" x="1160" y="185" width="255" height="56"></rect>
+      <text class="node-title" x="1181" y="209">Control Strategy + Risk</text>
+      <text class="node-detail" x="1181" y="227">Controls CMAs, CPPs, CQAs</text>
+
+      <rect class="cmc" x="1160" y="275" width="255" height="56"></rect>
+      <text class="node-title" x="1181" y="299">Methods + Stability</text>
+      <text class="node-detail" x="1181" y="317">Analytical and ongoing quality evidence</text>
+
+      <rect class="cmc" x="1160" y="365" width="255" height="56"></rect>
+      <text class="node-title" x="1181" y="389">SOPs + Training</text>
+      <text class="node-detail" x="1181" y="407">QMS governance and competence</text>
+
+      <rect class="cmc" x="1160" y="455" width="255" height="56"></rect>
+      <text class="node-title" x="1181" y="479">Qualification + CSV</text>
+      <text class="node-detail" x="1181" y="497">Equipment and data source validation</text>
+
+      <rect class="cmc" x="1160" y="545" width="255" height="56"></rect>
+      <text class="node-title" x="1181" y="569">Validation Evidence</text>
+      <text class="node-detail" x="1181" y="587">PPQ, PAT model, control strategy, DI</text>
+
+      <!-- Main data flow bus -->
+      <path class="bus" d="M315 302 L430 302"></path>
+      <text class="flow-label" x="338" y="286">defines run context</text>
+
+      <path class="bus" d="M680 302 L795 302"></path>
+      <text class="flow-label" x="700" y="286">exceptions reviewed</text>
+
+      <path class="bus" d="M1045 302 L1160 302"></path>
+      <text class="flow-label" x="1066" y="286">evidence supports</text>
+
+      <!-- Master to execution supporting flows -->
+      <path class="line" d="M315 218 C360 218 370 173 430 173"></path>
+      <text class="flow-label" x="333" y="204">recipe executes</text>
+
+      <path class="line" d="M315 308 L430 173"></path>
+      <text class="flow-label" x="330" y="259">lots instantiate materials</text>
+
+      <path class="line" d="M315 398 C365 398 370 302 430 302"></path>
+      <text class="flow-label" x="333" y="380">assets used by run</text>
+
+      <path class="line" d="M315 488 L430 433"></path>
+      <text class="flow-label" x="332" y="475">sensors record</text>
+
+      <path class="line" d="M315 578 C370 578 370 433 430 433"></path>
+      <text class="flow-label" x="332" y="543">limits interpret readings</text>
+
+      <!-- Execution internal flows -->
+      <path class="line" d="M555 201 L555 270"></path>
+      <text class="flow-label" x="567" y="239">CONSUMES</text>
+
+      <path class="line" d="M555 334 L555 405"></path>
+      <text class="flow-label" x="567" y="374">DURING_RUN</text>
+
+      <path class="line" d="M555 461 L555 535"></path>
+      <text class="flow-label" x="567" y="503">summarised in</text>
+
+      <!-- Quality flows -->
+      <path class="line" d="M680 433 C735 433 740 173 795 173"></path>
+      <text class="flow-label" x="700" y="165">out-of-spec triggers</text>
+
+      <path class="line" d="M920 201 L920 270"></path>
+      <text class="flow-label" x="932" y="239">INVESTIGATES</text>
+
+      <path class="line" d="M680 563 C735 563 740 433 795 433"></path>
+      <text class="flow-label" x="700" y="552">reviewed for</text>
+
+      <path class="line" d="M920 461 L920 535"></path>
+      <text class="flow-label" x="932" y="503">documented by</text>
+
+      <path class="line-soft" d="M795 563 C735 630 625 630 555 591"></path>
+      <text class="flow-label" x="632" y="650">audit trail attached to batch record</text>
+
+      <!-- CMC flows -->
+      <path class="line" d="M1045 433 C1100 433 1105 123 1160 123"></path>
+      <text class="flow-label" x="1070" y="417">QA evidence feeds CMC</text>
+
+      <path class="line" d="M1045 302 L1160 213"></path>
+      <text class="flow-label" x="1066" y="251">control strategy</text>
+
+      <path class="line" d="M1045 563 C1105 563 1105 573 1160 573"></path>
+      <text class="flow-label" x="1068" y="548">data integrity evidence</text>
+
+      <path class="line-soft" d="M315 578 C770 745 950 625 1160 573"></path>
+      <text class="flow-label" x="615" y="733">specifications, CPPs, CQAs support validation evidence</text>
+
+      <path class="line-soft" d="M315 398 C740 730 930 520 1160 483"></path>
+      <text class="flow-label" x="620" y="704">equipment and sensors linked to qualification / CSV</text>
+
+      <path class="line-soft" d="M315 128 C785 10 980 85 1160 123"></path>
+      <text class="flow-label" x="610" y="39">product is covered by CMC package and filing</text>
+
+      <!-- Footer -->
+      <rect x="45" y="755" width="1390" height="42" fill="#f5f7f9" stroke="#d3dbe1" rx="7"></rect>
+      <text class="node-detail" x="65" y="779">Key traceability pattern: SensorReading -> Sensor -> CPP/CQA -> Specification -> ControlStrategy -> CMCPackage -> RegulatoryFiling.</text>
+      <text class="node-detail" x="840" y="779">Demo/reference architecture only; not a validated GxP system.</text>
+    </svg>
+
+    <section class="note">
+      <div><strong>How to read it:</strong> left-to-right shows the primary flow from governed context, to execution evidence, to quality disposition, to CMC/QMS/regulatory evidence.</div>
+      <div><strong>Why it matters:</strong> the graph lets a stakeholder trace a manufacturing fact back to its source context and forward to the evidence package used for QA and regulatory discussion.</div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,193 @@
+@prefix cdc: <https://example.com/ontology/cdc#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+cdc:ProductShape a sh:NodeShape ;
+  sh:targetClass cdc:Product ;
+  sh:property [
+    sh:path cdc:productId ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path cdc:hasFormulation ;
+    sh:minCount 1 ;
+    sh:class cdc:Formulation ;
+  ] ;
+  sh:property [
+    sh:path cdc:hasRecipe ;
+    sh:minCount 1 ;
+    sh:class cdc:Recipe ;
+  ] .
+
+cdc:ManufacturingRunShape a sh:NodeShape ;
+  sh:targetClass cdc:ManufacturingRun ;
+  sh:property [
+    sh:path cdc:runId ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path cdc:executes ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:Recipe ;
+  ] ;
+  sh:property [
+    sh:path cdc:hasBatchRecord ;
+    sh:minCount 1 ;
+    sh:class cdc:BatchRecord ;
+  ] .
+
+cdc:MaterialLotShape a sh:NodeShape ;
+  sh:targetClass cdc:MaterialLot ;
+  sh:property [
+    sh:path cdc:instanceOf ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:Material ;
+  ] ;
+  sh:property [
+    sh:path cdc:suppliedBy ;
+    sh:minCount 1 ;
+    sh:class cdc:Supplier ;
+  ] .
+
+cdc:SensorReadingShape a sh:NodeShape ;
+  sh:targetClass cdc:SensorReading ;
+  sh:property [
+    sh:path cdc:recordedBy ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:Sensor ;
+  ] ;
+  sh:property [
+    sh:path cdc:duringRun ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:ManufacturingRun ;
+  ] .
+
+cdc:CQAShape a sh:NodeShape ;
+  sh:targetClass cdc:CQA ;
+  sh:property [
+    sh:path cdc:hasSpecification ;
+    sh:minCount 1 ;
+    sh:class cdc:Specification ;
+  ] .
+
+cdc:CriticalDataElementShape a sh:NodeShape ;
+  sh:targetClass cdc:CriticalDataElement ;
+  sh:property [
+    sh:path cdc:cdeId ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path cdc:criticality ;
+    sh:minCount 1 ;
+    sh:in ("Critical" "Important") ;
+  ] ;
+  sh:property [
+    sh:path cdc:observedAt ;
+    sh:minCount 1 ;
+    sh:class cdc:UnitOperation ;
+  ] ;
+  sh:property [
+    sh:path cdc:sourcedFrom ;
+    sh:minCount 1 ;
+    sh:class cdc:DataSourceSystem ;
+  ] ;
+  sh:property [
+    sh:path cdc:hasOwner ;
+    sh:minCount 1 ;
+    sh:class cdc:DataOwner ;
+  ] ;
+  sh:property [
+    sh:path cdc:hasSteward ;
+    sh:minCount 1 ;
+    sh:class cdc:DataSteward ;
+  ] ;
+  sh:property [
+    sh:path cdc:hasDataQualityRule ;
+    sh:minCount 1 ;
+    sh:class cdc:DataQualityRule ;
+  ] ;
+  sh:property [
+    sh:path cdc:mapsToStandard ;
+    sh:minCount 1 ;
+    sh:class cdc:DataStandard ;
+  ] ;
+  sh:property [
+    sh:path cdc:hasValueDomain ;
+    sh:minCount 1 ;
+    sh:class cdc:ValueDomain ;
+  ] .
+
+cdc:CDEValueShape a sh:NodeShape ;
+  sh:targetClass cdc:CDEValue ;
+  sh:property [
+    sh:path cdc:cdeValueId ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] ;
+  sh:property [
+    sh:path cdc:valueOf ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:CriticalDataElement ;
+  ] ;
+  sh:property [
+    sh:path cdc:conformsToValueDomain ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:ValueDomain ;
+  ] ;
+  sh:property [
+    sh:path cdc:observedDuring ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:ManufacturingRun ;
+  ] .
+
+cdc:StandardMappingShape a sh:NodeShape ;
+  sh:targetClass cdc:StandardMapping ;
+  sh:property [
+    sh:path cdc:mapsCDE ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:CriticalDataElement ;
+  ] ;
+  sh:property [
+    sh:path cdc:toStandard ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class cdc:DataStandard ;
+  ] ;
+  sh:property [
+    sh:path cdc:supportedByProvenance ;
+    sh:minCount 1 ;
+    sh:class cdc:ProvenanceStatement ;
+  ] .
+
+cdc:EvidenceDocumentShape a sh:NodeShape ;
+  sh:targetClass cdc:EvidenceDocument ;
+  sh:property [
+    sh:path cdc:documentId ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] .
+
+cdc:RelationshipDefinitionShape a sh:NodeShape ;
+  sh:targetClass cdc:RelationshipDefinition ;
+  sh:property [
+    sh:path cdc:relationshipDefinitionId ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+  ] .

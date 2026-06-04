@@ -1,0 +1,122 @@
+[
+  {
+    "neo4j_type": "HAS_FORMULATION",
+    "ontology_predicate": "hasFormulation",
+    "subject_labels": ["Product"],
+    "object_labels": ["Formulation"],
+    "cardinality_note": "A product may have one or more governed formulations.",
+    "description": "Connects a product master to its formulation definition."
+  },
+  {
+    "neo4j_type": "USES_MATERIAL",
+    "ontology_predicate": "usesMaterial",
+    "subject_labels": ["Formulation"],
+    "object_labels": ["Material"],
+    "cardinality_note": "A formulation uses many material masters.",
+    "description": "Connects a formulation to API, excipient, and lubricant material masters."
+  },
+  {
+    "neo4j_type": "DEFINES_STEP",
+    "ontology_predicate": "definesStep",
+    "subject_labels": ["Recipe"],
+    "object_labels": ["ProcessStep"],
+    "cardinality_note": "A recipe defines many ordered process steps.",
+    "description": "Connects the recipe to CDC process steps."
+  },
+  {
+    "neo4j_type": "EXECUTES",
+    "ontology_predicate": "executes",
+    "subject_labels": ["ManufacturingRun"],
+    "object_labels": ["Recipe"],
+    "cardinality_note": "A run executes one recipe in this demo.",
+    "description": "Connects execution evidence to the recipe definition."
+  },
+  {
+    "neo4j_type": "CONSUMES",
+    "ontology_predicate": "consumes",
+    "subject_labels": ["ManufacturingRun"],
+    "object_labels": ["MaterialLot"],
+    "cardinality_note": "A run consumes one or more material lots.",
+    "description": "Supports batch genealogy from run to input lots."
+  },
+  {
+    "neo4j_type": "INSTANCE_OF",
+    "ontology_predicate": "instanceOf",
+    "subject_labels": ["MaterialLot"],
+    "object_labels": ["Material"],
+    "cardinality_note": "A material lot instantiates one material master.",
+    "description": "Separates lot-specific evidence from material master data."
+  },
+  {
+    "neo4j_type": "RECORDED_BY",
+    "ontology_predicate": "recordedBy",
+    "subject_labels": ["SensorReading"],
+    "object_labels": ["Sensor"],
+    "cardinality_note": "A reading should be recorded by one sensor.",
+    "description": "Links readings to their instrument context."
+  },
+  {
+    "neo4j_type": "DURING_RUN",
+    "ontology_predicate": "duringRun",
+    "subject_labels": ["SensorReading"],
+    "object_labels": ["ManufacturingRun"],
+    "cardinality_note": "A reading belongs to one run context in this demo.",
+    "description": "Places process evidence in an execution window."
+  },
+  {
+    "neo4j_type": "RELEASES",
+    "ontology_predicate": "releases",
+    "subject_labels": ["QAReleaseDecision"],
+    "object_labels": ["ManufacturingRun"],
+    "cardinality_note": "A QA release decision may release a run.",
+    "description": "Represents positive QA disposition."
+  },
+  {
+    "neo4j_type": "REJECTS",
+    "ontology_predicate": "rejects",
+    "subject_labels": ["QAReleaseDecision"],
+    "object_labels": ["ManufacturingRun"],
+    "cardinality_note": "A QA rejection decision may reject a run.",
+    "description": "Represents rejected or quarantined disposition."
+  },
+  {
+    "neo4j_type": "VALUE_OF",
+    "ontology_predicate": "valueOf",
+    "subject_labels": ["CDEValue"],
+    "object_labels": ["CriticalDataElement"],
+    "cardinality_note": "A CDE value should instantiate one CDE definition.",
+    "description": "Separates observed values from governed definitions."
+  },
+  {
+    "neo4j_type": "CONFORMS_TO_VALUE_DOMAIN",
+    "ontology_predicate": "conformsToValueDomain",
+    "subject_labels": ["CDEValue"],
+    "object_labels": ["ValueDomain"],
+    "cardinality_note": "A CDE value should have one interpretation domain.",
+    "description": "Links values to units, type expectations, and allowed values."
+  },
+  {
+    "neo4j_type": "SUPPORTED_BY_PROVENANCE",
+    "ontology_predicate": "supportedByProvenance",
+    "subject_labels": ["StandardMapping"],
+    "object_labels": ["ProvenanceStatement"],
+    "cardinality_note": "A standard mapping should have at least one provenance statement.",
+    "description": "Supports standards traceability for AI grounding."
+  },
+  {
+    "neo4j_type": "SUPPORTS_MAPPING",
+    "ontology_predicate": "supportsMapping",
+    "subject_labels": ["EvidenceDocument"],
+    "object_labels": ["StandardMapping"],
+    "cardinality_note": "An evidence document may support many mappings.",
+    "description": "Links document-style evidence to standard mapping records."
+  },
+  {
+    "neo4j_type": "EVIDENCES_CDE_VALUE",
+    "ontology_predicate": "evidencesCDEValue",
+    "subject_labels": ["EvidenceDocument"],
+    "object_labels": ["CDEValue"],
+    "cardinality_note": "An evidence document may support many CDE values.",
+    "description": "Links document-style evidence to observed CDE values."
+  }
+]

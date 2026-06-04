@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDC Manufacturing Knowledge Graph - A4 Diagram</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #1d2a32;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef2f5;
+    }
+
+    .page {
+      width: 297mm;
+      min-height: 210mm;
+      margin: 0 auto;
+      padding: 10mm;
+      background: #ffffff;
+    }
+
+    h1 {
+      margin: 0 0 2mm;
+      font-size: 18pt;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0 0 5mm;
+      color: #51606a;
+      font-size: 9pt;
+      line-height: 1.35;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #c8d1d8;
+      background: #fbfcfd;
+    }
+
+    .domain-title {
+      font-size: 14px;
+      font-weight: 700;
+      fill: #23313a;
+    }
+
+    .node-title {
+      font-size: 12px;
+      font-weight: 700;
+      fill: #17242c;
+    }
+
+    .node-detail {
+      font-size: 9.5px;
+      fill: #4b5b65;
+    }
+
+    .rel {
+      font-size: 8.5px;
+      fill: #40525e;
+      font-weight: 700;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+      margin-top: 4mm;
+      font-size: 8.5pt;
+      color: #33434d;
+    }
+
+    .legend strong {
+      display: block;
+      margin-bottom: 1mm;
+      color: #1f2e36;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 0;
+      }
+
+      svg {
+        border-color: #aeb9c1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Continuous Direct Compression Manufacturing Knowledge Graph</h1>
+    <p class="subtitle">
+      A4 printable reference diagram for AZD-CDC-Tablet-10mg. The model separates master/reference data from execution evidence while preserving lineage from product definition through manufacturing run, quality review, and regulatory evidence.
+    </p>
+
+    <svg viewBox="0 0 1480 860" role="img" aria-labelledby="title desc">
+      <title id="title">CDC manufacturing knowledge graph architecture diagram</title>
+      <desc id="desc">A printable diagram of product, formulation, recipe, material, equipment, sensor, process, run, quality, QA, and regulatory evidence relationships.</desc>
+
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="#61737d"></path>
+        </marker>
+
+        <style>
+          .box { stroke-width: 1.4; rx: 7; }
+          .master { fill: #e8f2ff; stroke: #4f84bd; }
+          .reference { fill: #eef8ef; stroke: #5a9b64; }
+          .transaction { fill: #fff3df; stroke: #c28a35; }
+          .quality { fill: #f8eaf0; stroke: #b26078; }
+          .regulatory { fill: #f0eef9; stroke: #7b69b1; }
+          .line { stroke: #61737d; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+          .line-light { stroke: #92a0a8; stroke-width: 1.2; fill: none; marker-end: url(#arrow); }
+          .domain { fill: #ffffff; stroke: #d3dbe1; stroke-width: 1.4; rx: 10; }
+        </style>
+      </defs>
+
+      <!-- Domain frames -->
+      <rect class="domain" x="20" y="30" width="350" height="360"></rect>
+      <text class="domain-title" x="38" y="58">Product, Formulation, Recipe</text>
+
+      <rect class="domain" x="395" y="30" width="500" height="360"></rect>
+      <text class="domain-title" x="413" y="58">Assets, Process Steps, Control Strategy</text>
+
+      <rect class="domain" x="920" y="30" width="540" height="360"></rect>
+      <text class="domain-title" x="938" y="58">Manufacturing Execution And Genealogy</text>
+
+      <rect class="domain" x="20" y="425" width="710" height="345"></rect>
+      <text class="domain-title" x="38" y="453">Quality Events And Disposition</text>
+
+      <rect class="domain" x="760" y="425" width="700" height="345"></rect>
+      <text class="domain-title" x="778" y="453">Regulatory Evidence And Architecture Concepts</text>
+
+      <!-- Product and formulation -->
+      <rect class="box master" x="55" y="90" width="250" height="58"></rect>
+      <text class="node-title" x="78" y="115">Product</text>
+      <text class="node-detail" x="78" y="133">AZD-CDC-Tablet-10mg</text>
+
+      <rect class="box master" x="55" y="185" width="250" height="58"></rect>
+      <text class="node-title" x="78" y="210">Formulation</text>
+      <text class="node-detail" x="78" y="228">10 mg direct compression F001</text>
+
+      <rect class="box master" x="55" y="280" width="250" height="58"></rect>
+      <text class="node-title" x="78" y="305">Recipe</text>
+      <text class="node-detail" x="78" y="323">Direct compression tablet process</text>
+
+      <path class="line" d="M180 148 L180 185"></path>
+      <text class="rel" x="191" y="171">HAS_FORMULATION</text>
+      <path class="line" d="M305 119 C345 119 345 309 305 309"></path>
+      <text class="rel" x="310" y="216">HAS_RECIPE</text>
+
+      <!-- Assets and process -->
+      <rect class="box master" x="430" y="90" width="190" height="58"></rect>
+      <text class="node-title" x="454" y="115">ProcessStep</text>
+      <text class="node-detail" x="454" y="133">7 ordered CDC steps</text>
+
+      <rect class="box master" x="430" y="185" width="190" height="58"></rect>
+      <text class="node-title" x="454" y="210">Equipment</text>
+      <text class="node-detail" x="454" y="228">Feeders, blender, press, PAT</text>
+
+      <rect class="box master" x="430" y="280" width="190" height="58"></rect>
+      <text class="node-title" x="454" y="305">Room / Line / Site</text>
+      <text class="node-detail" x="454" y="323">CDC line and manufacturing rooms</text>
+
+      <rect class="box master" x="675" y="185" width="180" height="58"></rect>
+      <text class="node-title" x="699" y="210">Sensor</text>
+      <text class="node-detail" x="699" y="228">Historian and PAT tags</text>
+
+      <rect class="box reference" x="675" y="90" width="180" height="58"></rect>
+      <text class="node-title" x="699" y="115">CPP</text>
+      <text class="node-detail" x="699" y="133">Feed rate, speed, force, RH</text>
+
+      <rect class="box reference" x="675" y="280" width="180" height="58"></rect>
+      <text class="node-title" x="699" y="305">CQA + Specification</text>
+      <text class="node-detail" x="699" y="323">Uniformity, weight, dissolution</text>
+
+      <path class="line" d="M305 309 C360 309 360 119 430 119"></path>
+      <text class="rel" x="322" y="95">DEFINES_STEP</text>
+      <path class="line" d="M525 148 L525 185"></path>
+      <text class="rel" x="536" y="171">USES_EQUIPMENT</text>
+      <path class="line" d="M525 243 L525 280"></path>
+      <text class="rel" x="536" y="266">LOCATED_IN</text>
+      <path class="line" d="M620 214 L675 214"></path>
+      <text class="rel" x="627" y="202">HAS_SENSOR</text>
+      <path class="line" d="M765 185 L765 148"></path>
+      <text class="rel" x="777" y="171">MEASURES</text>
+      <path class="line" d="M765 243 L765 280"></path>
+      <text class="rel" x="777" y="266">MEASURES</text>
+      <path class="line-light" d="M675 119 C640 119 640 119 620 119"></path>
+      <text class="rel" x="618" y="104">CONTROLS</text>
+      <path class="line" d="M765 148 L765 280"></path>
+      <text class="rel" x="779" y="219">IMPACTS</text>
+
+      <!-- Execution and genealogy -->
+      <rect class="box transaction" x="955" y="90" width="210" height="58"></rect>
+      <text class="node-title" x="979" y="115">ManufacturingRun</text>
+      <text class="node-detail" x="979" y="133">RUN-CDC-2026-06-01-001</text>
+
+      <rect class="box transaction" x="955" y="185" width="210" height="58"></rect>
+      <text class="node-title" x="979" y="210">MaterialLot</text>
+      <text class="node-detail" x="979" y="228">API and excipient lots</text>
+
+      <rect class="box master" x="955" y="280" width="210" height="58"></rect>
+      <text class="node-title" x="979" y="305">Material + Supplier</text>
+      <text class="node-detail" x="979" y="323">Material master and source</text>
+
+      <rect class="box transaction" x="1230" y="90" width="190" height="58"></rect>
+      <text class="node-title" x="1254" y="115">SensorReading</text>
+      <text class="node-detail" x="1254" y="133">12 time-stamped readings</text>
+
+      <rect class="box transaction" x="1230" y="185" width="190" height="58"></rect>
+      <text class="node-title" x="1254" y="210">BatchRecord</text>
+      <text class="node-detail" x="1254" y="228">Electronic batch review</text>
+
+      <rect class="box transaction" x="1230" y="280" width="190" height="58"></rect>
+      <text class="node-title" x="1254" y="305">Cleaning / Calibration</text>
+      <text class="node-detail" x="1254" y="323">Line and instrument evidence</text>
+
+      <path class="line" d="M855 214 C910 214 910 119 955 119"></path>
+      <text class="rel" x="875" y="105">EXECUTES / USES_LINE</text>
+      <path class="line" d="M1060 148 L1060 185"></path>
+      <text class="rel" x="1071" y="171">CONSUMES</text>
+      <path class="line" d="M1060 243 L1060 280"></path>
+      <text class="rel" x="1071" y="266">INSTANCE_OF / SUPPLIED_BY</text>
+      <path class="line" d="M1230 119 L1165 119"></path>
+      <text class="rel" x="1173" y="104">DURING_RUN</text>
+      <path class="line-light" d="M1230 119 C1185 119 1185 214 855 214"></path>
+      <text class="rel" x="1045" y="83">RECORDED_BY SENSOR</text>
+      <path class="line" d="M1165 119 C1205 119 1205 214 1230 214"></path>
+      <text class="rel" x="1178" y="174">HAS_BATCH_RECORD</text>
+      <path class="line" d="M1165 119 C1210 119 1210 309 1230 309"></path>
+      <text class="rel" x="1172" y="282">USES_CALIBRATION</text>
+
+      <!-- Quality -->
+      <rect class="box quality" x="55" y="490" width="210" height="58"></rect>
+      <text class="node-title" x="79" y="515">Alarm</text>
+      <text class="node-detail" x="79" y="533">NIR blend uniformity high</text>
+
+      <rect class="box quality" x="305" y="490" width="230" height="58"></rect>
+      <text class="node-title" x="329" y="515">Deviation</text>
+      <text class="node-detail" x="329" y="533">Humidity drift and PAT excursion</text>
+
+      <rect class="box quality" x="560" y="490" width="130" height="58"></rect>
+      <text class="node-title" x="584" y="515">Operator</text>
+      <text class="node-detail" x="584" y="533">QA approval</text>
+
+      <rect class="box quality" x="305" y="630" width="230" height="58"></rect>
+      <text class="node-title" x="329" y="655">QAReleaseDecision</text>
+      <text class="node-detail" x="329" y="673">Release after review</text>
+
+      <path class="line" d="M265 519 L305 519"></path>
+      <text class="rel" x="269" y="504">INVESTIGATES</text>
+      <path class="line" d="M535 519 L560 519"></path>
+      <text class="rel" x="526" y="504">APPROVED_BY</text>
+      <path class="line" d="M420 548 L420 630"></path>
+      <text class="rel" x="432" y="593">SUPPORTS DISPOSITION</text>
+      <path class="line-light" d="M1230 119 C985 119 940 519 265 519"></path>
+      <text class="rel" x="610" y="471">ALARM TRIGGERED_BY OUT-OF-SPEC READING</text>
+      <path class="line-light" d="M535 659 C735 659 845 214 1230 214"></path>
+      <text class="rel" x="652" y="642">REVIEWS BATCH_RECORD</text>
+      <path class="line-light" d="M535 659 C730 659 780 119 955 119"></path>
+      <text class="rel" x="620" y="690">RELEASES RUN</text>
+
+      <!-- Regulatory -->
+      <rect class="box regulatory" x="795" y="490" width="220" height="58"></rect>
+      <text class="node-title" x="819" y="515">RegulatoryFiling</text>
+      <text class="node-detail" x="819" y="533">CMC continuous manufacturing package</text>
+
+      <rect class="box regulatory" x="795" y="630" width="220" height="58"></rect>
+      <text class="node-title" x="819" y="655">ValidationEvidence</text>
+      <text class="node-detail" x="819" y="673">PPQ, PAT, control strategy, DI</text>
+
+      <rect class="box reference" x="1080" y="490" width="330" height="198"></rect>
+      <text class="node-title" x="1104" y="518">Data Architecture Concepts</text>
+      <text class="node-detail" x="1104" y="545">Master data: product, recipe, material, equipment, sensor</text>
+      <text class="node-detail" x="1104" y="570">Reference data: roles, types, statuses, limits, severities</text>
+      <text class="node-detail" x="1104" y="595">Transactional data: runs, lots, readings, alarms, deviations</text>
+      <text class="node-detail" x="1104" y="620">Evidence trail: batch record, QA decision, validation support</text>
+      <text class="node-detail" x="1104" y="645">Stable IDs and constraints support entity resolution</text>
+      <text class="node-detail" x="1104" y="670">MERGE-based seeds support repeatable demo loading</text>
+
+      <path class="line" d="M905 630 L905 548"></path>
+      <text class="rel" x="917" y="593">SUPPORTS</text>
+      <path class="line-light" d="M795 519 C610 430 400 119 305 119"></path>
+      <text class="rel" x="546" y="394">COVERS PRODUCT</text>
+      <path class="line-light" d="M1015 519 L1080 519"></path>
+      <text class="rel" x="1025" y="504">INTERPRETED BY</text>
+
+      <!-- Footer note -->
+      <text class="node-detail" x="36" y="825">Demo/reference architecture only. Not a validated GxP system. Relationship names mirror the Neo4j project seed files and query examples.</text>
+    </svg>
+
+    <section class="legend" aria-label="Legend">
+      <div><strong>Blue: master data</strong>Stable governed entities such as product, recipe, material, equipment, and sensor.</div>
+      <div><strong>Green: reference data</strong>Controlled terms and interpretation context such as CPPs, CQAs, specs, and statuses.</div>
+      <div><strong>Amber: transactional data</strong>Execution evidence such as runs, lots, readings, batch records, cleaning, and calibration.</div>
+      <div><strong>Rose/Purple: quality and regulatory</strong>Deviation, QA disposition, filing, and validation evidence connections.</div>
+    </section>
+  </main>
+</body>
+</html>
