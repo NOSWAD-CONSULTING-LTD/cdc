@@ -246,8 +246,8 @@ CDEValue valueOf CriticalDataElement
 CDEValue conformsToValueDomain ValueDomain
 CDEValue observedDuring ManufacturingRun
 CDEValue derivedFromReading SensorReading
-CDEVersion versionOf CriticalDataElement
-CDEDefinitionApproval approves CDEVersion
+CriticalDataElement hasVersion CDEVersion
+CDEVersion approvedBy CDEDefinitionApproval
 StandardMapping mapsCDE CriticalDataElement
 StandardMapping toStandard DataStandard
 StandardMapping toRegulatorySection RegulatorySection

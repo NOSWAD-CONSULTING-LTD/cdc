@@ -143,8 +143,8 @@ cdc:valueOf a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:Cri
 cdc:conformsToValueDomain a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:ValueDomain .
 cdc:observedDuring a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:ManufacturingRun .
 cdc:derivedFromReading a owl:ObjectProperty ; rdfs:domain cdc:CDEValue ; rdfs:range cdc:SensorReading .
-cdc:versionOf a owl:ObjectProperty ; rdfs:domain cdc:CDEVersion ; rdfs:range cdc:CriticalDataElement .
-cdc:approves a owl:ObjectProperty ; rdfs:domain cdc:CDEDefinitionApproval ; rdfs:range cdc:CDEVersion .
+cdc:hasVersion a owl:ObjectProperty ; rdfs:domain cdc:CriticalDataElement ; rdfs:range cdc:CDEVersion .
+cdc:approvedBy a owl:ObjectProperty ; rdfs:domain cdc:CDEVersion ; rdfs:range cdc:CDEDefinitionApproval .
 cdc:mapsCDE a owl:ObjectProperty ; rdfs:domain cdc:StandardMapping ; rdfs:range cdc:CriticalDataElement .
 cdc:toStandard a owl:ObjectProperty ; rdfs:domain cdc:StandardMapping ; rdfs:range cdc:DataStandard .
 cdc:toRegulatorySection a owl:ObjectProperty ; rdfs:domain cdc:StandardMapping ; rdfs:range cdc:RegulatorySection .

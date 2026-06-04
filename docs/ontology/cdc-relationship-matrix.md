@@ -85,8 +85,8 @@ The machine-readable subset used by the demo agent and relationship-definition n
 | CDEValue | conformsToValueDomain | ValueDomain | `CONFORMS_TO_VALUE_DOMAIN` | Value is interpreted against the CDE value domain. |
 | CDEValue | observedDuring | ManufacturingRun | `OBSERVED_DURING` | Value belongs to a manufacturing run context. |
 | CDEValue | derivedFromReading | SensorReading | `DERIVED_FROM_READING` | Value is derived from or supported by a process or PAT reading. |
-| CDEVersion | versionOf | CriticalDataElement | `VERSION_OF` | Versioned definition belongs to a CDE. |
-| CDEDefinitionApproval | approves | CDEVersion | `APPROVES` | Approval records governance of a CDE definition version. |
+| CriticalDataElement | hasVersion | CDEVersion | `HAS_VERSION` | CDE definition has a governed version record. |
+| CDEVersion | approvedBy | CDEDefinitionApproval | `APPROVED_BY` | Versioned CDE definition is approved by an approval record. |
 | StandardMapping | mapsCDE | CriticalDataElement | `MAPS_CDE` | Mapping references CDE. |
 | StandardMapping | toStandard | DataStandard | `TO_STANDARD` | Mapping references standard. |
 | StandardMapping | toRegulatorySection | RegulatorySection | `TO_REGULATORY_SECTION` | Mapping references regulatory section. |
