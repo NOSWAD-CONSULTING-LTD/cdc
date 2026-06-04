@@ -143,8 +143,6 @@ Recommended reading path:
 10. [docs/how-to-read-graph-answers.md](docs/how-to-read-graph-answers.md) for interpreting Neo4j Browser and agent answers.
 11. [docs/ontology/cdc-ontology.md](docs/ontology/cdc-ontology.md) for the formal semantic model, class hierarchy, relationship matrix, controlled vocabularies, RDF/OWL Turtle, SHACL validation shapes, and relationship map.
 12. [laravel-agent/README.md](laravel-agent/README.md) for the constrained Laravel agent CLI and API.
-13. [docs/final-audit.md](docs/final-audit.md) for final graph counts, validation evidence, completed improvements, and residual limitations.
-14. [docs/improvement-backlog.md](docs/improvement-backlog.md) for completed improvements and future implementation ideas.
 
 Use the query files this way:
 
