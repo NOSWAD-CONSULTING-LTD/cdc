@@ -90,17 +90,12 @@ The project can support short training sessions for:
 
 ## Services NOSWAD CONSULTING LTD Can Provide
 
-[NOSWAD CONSULTING LTD](https://noswad.co.uk) can use this reference architecture as a baseline for:
+[NOSWAD CONSULTING LTD](https://noswad.co.uk) 
 
-- executive briefings;
-- architecture workshops;
-- AI-readiness assessments;
-- CDE catalog design;
-- ontology and ubiquitous-language facilitation;
-- Neo4j proof-of-concept delivery;
-- Laravel/agent proof-of-concept delivery;
-- client-specific graph model extensions;
-- training materials and hands-on labs.
+Contact:
+
+- Email: [admin@noswad.co.uk](mailto:admin@noswad.co.uk)
+- LinkedIn: [Simon Dawson](https://www.linkedin.com/in/simon-dawson-70517931/)
 
 ## Demo Boundary
 
